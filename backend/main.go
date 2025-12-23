@@ -101,21 +101,33 @@ func main() {
 	r.GET("/frontend/materials.html", func(c *gin.Context) {
 		c.File("../frontend/materials.html")
 	})
-
 	r.GET("/frontend/quiz.html", func(c *gin.Context) {
 		c.File("../frontend/quiz.html")
 	})
-
 	r.GET("/frontend/simulation.html", func(c *gin.Context) {
 		c.File("../frontend/simulation.html")
 	})
-
 	r.GET("/frontend/profile.html", func(c *gin.Context) {
 		c.File("../frontend/profile.html")
 	})
-
 	r.GET("/frontend/settings.html", func(c *gin.Context) {
 		c.File("../frontend/settings.html")
+	})
+	r.GET("/frontend/tips.html", func(c *gin.Context) {
+		c.File("../frontend/tips.html")
+	})
+	r.GET("/frontend/material-detail.html", func(c *gin.Context) {
+		c.File("../frontend/material-detail.html")
+	})
+
+	// fallback: serve any html file in /frontend if exists
+	r.GET("/frontend/:file", func(c *gin.Context) {
+		file := c.Param("file")
+		if len(file) > 5 && file[len(file)-5:] == ".html" {
+			c.File("../frontend/" + file)
+			return
+		}
+		c.Status(404)
 	})
 
 	r.GET("/frontend", func(c *gin.Context) {
