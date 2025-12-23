@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengaturan - CyberCare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
+            min-height: 100vh;
+        }
+
+        .app-nav {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(201, 160, 85, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.625rem 1rem;
+            color: #cbd5e1;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(201, 160, 85, 0.1);
+            color: #c9a055;
+        }
+
+        .main-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, #c9a055 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-subtitle {
+            font-size: 1.125rem;
+            color: #94a3b8;
+        }
+
+        .settings-section {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.6), rgba(51, 65, 85, 0.6));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(201, 160, 85, 0.2);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            margin-bottom: 0.5rem;
+        }
+
+        .setting-item:hover {
+            background: rgba(201, 160, 85, 0.05);
+        }
+
+        .setting-info {
+            flex: 1;
+        }
+
+        .setting-label {
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 0.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .setting-description {
+            color: #94a3b8;
+            font-size: 0.875rem;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 26px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #334155;
+            transition: 0.4s;
+            border-radius: 34px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: #c9a055;
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(24px);
+        }
+
+        .btn-primary {
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #c9a055 0%, #d4af37 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 16px rgba(201, 160, 85, 0.3);
+        }
+
+        .btn-danger {
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-danger:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 16px rgba(239, 68, 68, 0.3);
+        }
+
+        .danger-zone {
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+
+        .danger-zone .section-title {
+            color: #fca5a5;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="app-nav">
+        <div class="nav-container">
+            <a href="dashboard.html" class="logo">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c9a055" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <span>CyberCare</span>
+            </a>
+            <a href="dashboard.html" class="back-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                <span>Kembali ke Dashboard</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">⚙️ Pengaturan</h1>
+            <p class="page-subtitle">Kelola preferensi dan pengaturan akun Anda</p>
+        </div>
+
+        <!-- Account Settings -->
+        <div class="settings-section">
+            <h2 class="section-title">👤 Akun</h2>
+            <div class="setting-item">
+                <div class="setting-info">
+                    <div class="setting-label">📧 Email</div>
+                    <div class="setting-description" id="settingsEmail">loading...</div>
+                </div>
+                <button class="btn-primary" onclick="alert('Fitur ubah email akan segera hadir! ✉️')">
+                    Ubah
+                </button>
+            </div>
+            <div class="setting-item">
+                <div class="setting-info">
+                    <div class="setting-label">🔒 Password</div>
+                    <div class="setting-description">Terakhir diubah 30 hari yang lalu</div>
+                </div>
+                <button class="btn-primary" onclick="alert('Fitur ubah password akan segera hadir! 🔐')">
+                    Ubah
+                </button>
+            </div>
+            <div class="setting-item">
+                <div class="setting-info">
+                    <div class="setting-label">🏢 Nama Bisnis</div>
+                    <div class="setting-description" id="settingsBusiness">loading...</div>
+                </div>
+                <button class="btn-primary" onclick="alert('Fitur ubah nama bisnis akan segera hadir! 🏢')">
+                    Ubah
+                </button>
+            </div>
+        </div>
+
+        <!-- Notification Settings -->
+        <div class="settings-section">
+            <h2 class="section-title">🔔 Notifikasi</h2>
+            <div class="setting-item">
+                <div class="setting-info">
+                    <div class="setting-label">📧 Email Notifikasi</div>
+                    <div class="setting-description">Terima update dan pengingat via email</div>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" checked>
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+            <div class="setting-item">
+                <div class="setting-info">
+                    <div class="setting-label">🎯 Pengingat Kuis</div>
+                    <div class="setting-description">Pengingat harian untuk menyelesaikan kuis</div>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" checked>
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+            <div class="setting-item">
+                <div class="setting-info">
+                    <div class="setting-label">⭐ Update Badge</div>
+                    <div class="setting-description">Notifikasi saat mendapatkan badge baru</div>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" checked>
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Privacy Settings -->
+        <div class="settings-section">
+            <h2 class="section-title">🔐 Privasi & Keamanan</h2>
+            <div class="setting-item">
+                <div class="setting-info">
+                    <div class="setting-label">👁️ Profil Publik</div>
+                    <div class="setting-description">Tampilkan profil Anda ke pengguna lain</div>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+            <div class="setting-item">
+                <div class="setting-info">
+                    <div class="setting-label">🔐 Autentikasi Dua Faktor</div>
+                    <div class="setting-description">Tambahkan lapisan keamanan ekstra</div>
+                </div>
+                <button class="btn-primary" onclick="alert('Fitur 2FA akan segera hadir! 🔐')">
+                    Aktifkan
+                </button>
+            </div>
+            <div class="setting-item">
+                <div class="setting-info">
+                    <div class="setting-label">📊 Berbagi Data Analitik</div>
+                    <div class="setting-description">Bantu kami meningkatkan layanan</div>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" checked>
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Appearance Settings -->
+        <div class="settings-section">
+            <h2 class="section-title">🎨 Tampilan</h2>
+            <div class="setting-item">
+                <div class="setting-info">
+                    <div class="setting-label">🌙 Mode Gelap</div>
+                    <div class="setting-description">Tema gelap untuk mata yang lebih nyaman</div>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" checked>
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+            <div class="setting-item">
+                <div class="setting-info">
+                    <div class="setting-label">🔤 Ukuran Font</div>
+                    <div class="setting-description">Atur ukuran teks yang nyaman untuk Anda</div>
+                </div>
+                <select style="padding: 0.5rem; border-radius: 8px; background: rgba(15, 23, 42, 0.8); color: #cbd5e1; border: 1px solid rgba(201, 160, 85, 0.2);">
+                    <option>Kecil</option>
+                    <option selected>Normal</option>
+                    <option>Besar</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Language Settings -->
+        <div class="settings-section">
+            <h2 class="section-title">🌍 Bahasa & Wilayah</h2>
+            <div class="setting-item">
+                <div class="setting-info">
+                    <div class="setting-label">🗣️ Bahasa</div>
+                    <div class="setting-description">Pilih bahasa tampilan</div>
+                </div>
+                <select style="padding: 0.5rem; border-radius: 8px; background: rgba(15, 23, 42, 0.8); color: #cbd5e1; border: 1px solid rgba(201, 160, 85, 0.2);">
+                    <option selected>🇮🇩 Bahasa Indonesia</option>
+                    <option>🇬🇧 English</option>
+                </select>
+            </div>
+            <div class="setting-item">
+                <div class="setting-info">
+                    <div class="setting-label">⏰ Zona Waktu</div>
+                    <div class="setting-description">Asia/Jakarta (WIB)</div>
+                </div>
+                <button class="btn-primary" onclick="alert('Fitur ubah zona waktu akan segera hadir! ⏰')">
+                    Ubah
+                </button>
+            </div>
+        </div>
+
+        <!-- Danger Zone -->
+        <div class="settings-section danger-zone">
+            <h2 class="section-title">⚠️ Zona Berbahaya</h2>
+            <div class="setting-item">
+                <div class="setting-info">
+                    <div class="setting-label">🗑️ Hapus Akun</div>
+                    <div class="setting-description">Hapus akun dan semua data secara permanen</div>
+                </div>
+                <button class="btn-danger" onclick="if(confirm('Apakah Anda yakin ingin menghapus akun? Tindakan ini tidak dapat dibatalkan!')) { alert('Fitur hapus akun akan segera hadir! 🗑️') }">
+                    Hapus Akun
+                </button>
+            </div>
+            <div class="setting-item">
+                <div class="setting-info">
+                    <div class="setting-label">🔄 Reset Progress</div>
+                    <div class="setting-description">Reset semua progress pembelajaran</div>
+                </div>
+                <button class="btn-danger" onclick="if(confirm('Apakah Anda yakin ingin reset progress? Semua XP, badge, dan kemajuan akan hilang!')) { alert('Fitur reset progress akan segera hadir! 🔄') }">
+                    Reset Progress
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script>
+        // Load settings data
+        (async function() {
+            const user = getCurrentUser();
+            
+            if (!user) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Update settings info
+            document.getElementById('settingsEmail').textContent = user.email;
+            document.getElementById('settingsBusiness').textContent = user.businessName || 'Bisnis Saya';
+        })();
+    </script>
+</body>
+</html>

@@ -98,6 +98,26 @@ func main() {
 		c.File("../frontend/clear-session.html")
 	})
 
+	r.GET("/frontend/materials.html", func(c *gin.Context) {
+		c.File("../frontend/materials.html")
+	})
+
+	r.GET("/frontend/quiz.html", func(c *gin.Context) {
+		c.File("../frontend/quiz.html")
+	})
+
+	r.GET("/frontend/simulation.html", func(c *gin.Context) {
+		c.File("../frontend/simulation.html")
+	})
+
+	r.GET("/frontend/profile.html", func(c *gin.Context) {
+		c.File("../frontend/profile.html")
+	})
+
+	r.GET("/frontend/settings.html", func(c *gin.Context) {
+		c.File("../frontend/settings.html")
+	})
+
 	r.GET("/frontend", func(c *gin.Context) {
 		c.Redirect(302, "/frontend/index.html")
 	})
