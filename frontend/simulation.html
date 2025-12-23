@@ -9,246 +9,74 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            color: #e2e8f0;
-            min-height: 100vh;
-        }
-
-        .app-nav {
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(201, 160, 85, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #ffffff;
-            text-decoration: none;
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .nav-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.625rem 1rem;
-            color: #cbd5e1;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .nav-item:hover {
-            background: rgba(201, 160, 85, 0.1);
-            color: #c9a055;
-        }
-
-        .nav-item.active {
-            background: linear-gradient(135deg, rgba(201, 160, 85, 0.15), rgba(212, 175, 55, 0.15));
-            color: #c9a055;
-            border: 1px solid rgba(201, 160, 85, 0.2);
-        }
-
-        .main-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        .page-header {
-            margin-bottom: 2rem;
-        }
-
-        .page-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(135deg, #ffffff 0%, #c9a055 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .page-subtitle {
-            font-size: 1.125rem;
-            color: #94a3b8;
-        }
-
-        .warning-banner {
-            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(220, 38, 38, 0.1));
-            border: 2px solid rgba(239, 68, 68, 0.3);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            display: flex;
-            gap: 1rem;
-            align-items: start;
-        }
-
-        .warning-icon {
-            font-size: 2rem;
-            flex-shrink: 0;
-        }
-
-        .warning-content h3 {
-            color: #fca5a5;
-            font-size: 1.25rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .warning-content p {
-            color: #cbd5e1;
-            line-height: 1.6;
-        }
-
-        .simulation-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .simulation-card {
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.6), rgba(51, 65, 85, 0.6));
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(201, 160, 85, 0.2);
-            border-radius: 16px;
-            padding: 1.5rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .simulation-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(201, 160, 85, 0.2);
-            border-color: rgba(201, 160, 85, 0.4);
-        }
-
-        .simulation-icon {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
-        }
-
-        .simulation-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: #ffffff;
-        }
-
-        .simulation-description {
-            color: #cbd5e1;
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-
-        .simulation-features {
-            margin: 1rem 0;
-            padding: 1rem;
-            background: rgba(15, 23, 42, 0.5);
-            border-radius: 8px;
-        }
-
-        .simulation-features ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .simulation-features li {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 0;
-            color: #cbd5e1;
-        }
-
-        .simulation-features li::before {
-            content: '✓';
-            color: #22c55e;
-            font-weight: 700;
-            font-size: 1.2rem;
-        }
-
-        .simulation-risk {
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            display: inline-block;
-            margin-top: 1rem;
-        }
-
-        .risk-low {
-            background: rgba(34, 197, 94, 0.2);
-            color: #22c55e;
-        }
-
-        .risk-medium {
-            background: rgba(251, 191, 36, 0.2);
-            color: #fbbf24;
-        }
-
-        .risk-high {
-            background: rgba(239, 68, 68, 0.2);
-            color: #ef4444;
-        }
-
-        .start-simulation-btn {
-            width: 100%;
-            padding: 0.75rem;
-            margin-top: 1rem;
-            background: linear-gradient(135deg, #c9a055 0%, #d4af37 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-
-        .start-simulation-btn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 8px 16px rgba(201, 160, 85, 0.3);
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #e2e8f0; min-height: 100vh; }
+        .app-nav { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(201, 160, 85, 0.1); position: sticky; top: 0; z-index: 1000; }
+        .nav-container { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; font-size: 1.5rem; font-weight: 700; color: #ffffff; text-decoration: none; }
+        .nav-menu { display: flex; gap: 0.5rem; }
+        .nav-item { display: flex; align-items: center; gap: 0.5rem; padding: 0.625rem 1rem; color: #cbd5e1; text-decoration: none; border-radius: 8px; font-weight: 500; transition: all 0.3s ease; }
+        .nav-item:hover { background: rgba(201, 160, 85, 0.1); color: #c9a055; }
+        .nav-item.active { background: linear-gradient(135deg, rgba(201, 160, 85, 0.15), rgba(212, 175, 55, 0.15)); color: #c9a055; border: 1px solid rgba(201, 160, 85, 0.2); }
+        .main-container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+        .page-header { margin-bottom: 2rem; }
+        .page-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; background: linear-gradient(135deg, #ffffff 0%, #c9a055 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .page-subtitle { font-size: 1.125rem; color: #94a3b8; }
+        .warning-banner { background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(220, 38, 38, 0.1)); border: 2px solid rgba(239, 68, 68, 0.3); border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; display: flex; gap: 1rem; align-items: start; }
+        .warning-icon { font-size: 2rem; flex-shrink: 0; }
+        .warning-content h3 { color: #fca5a5; font-size: 1.25rem; margin-bottom: 0.5rem; }
+        .warning-content p { color: #cbd5e1; line-height: 1.6; }
+        .threats-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .threat-card { background: linear-gradient(135deg, rgba(30, 41, 59, 0.6), rgba(51, 65, 85, 0.6)); backdrop-filter: blur(20px); border: 1px solid rgba(201, 160, 85, 0.2); border-radius: 16px; padding: 1.5rem; transition: all 0.3s ease; cursor: pointer; }
+        .threat-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(201, 160, 85, 0.2); border-color: rgba(201, 160, 85, 0.4); }
+        .threat-icon { font-size: 3rem; margin-bottom: 1rem; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3)); }
+        .threat-type { display: inline-block; padding: 0.25rem 0.75rem; background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 20px; font-size: 0.75rem; font-weight: 600; color: #fca5a5; margin-bottom: 0.75rem; text-transform: uppercase; }
+        .threat-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem; color: #ffffff; }
+        .threat-description { color: #cbd5e1; line-height: 1.6; font-size: 0.9375rem; margin-bottom: 1rem; }
+        .start-btn { width: 100%; padding: 0.75rem; background: linear-gradient(135deg, #c9a055 0%, #d4af37 100%); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; }
+        .start-btn:hover { transform: scale(1.02); box-shadow: 0 8px 16px rgba(201, 160, 85, 0.3); }
+        .threat-detail { max-width: 900px; margin: 0 auto; }
+        .detail-card { background: linear-gradient(135deg, rgba(30, 41, 59, 0.6), rgba(51, 65, 85, 0.6)); border: 1px solid rgba(201, 160, 85, 0.2); border-radius: 16px; padding: 2rem; margin-bottom: 2rem; }
+        .detail-header { display: flex; align-items: start; gap: 1rem; margin-bottom: 2rem; }
+        .detail-icon { font-size: 4rem; }
+        .detail-title { font-size: 2rem; font-weight: 700; color: #ffffff; margin-bottom: 0.5rem; }
+        .detail-from { color: #94a3b8; font-size: 0.875rem; margin-bottom: 0.5rem; }
+        .detail-subject { color: #c9a055; font-weight: 600; font-size: 1.1rem; }
+        .content-box { background: rgba(15, 23, 42, 0.5); padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; color: #cbd5e1; line-height: 1.8; white-space: pre-wrap; }
+        .red-flags-section { margin: 2rem 0; }
+        .red-flags-title { font-size: 1.25rem; font-weight: 700; color: #fca5a5; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .red-flags-list { list-style: none; padding: 0; }
+        .red-flags-list li { padding: 0.75rem 1rem; background: rgba(239, 68, 68, 0.1); border-left: 4px solid #ef4444; border-radius: 8px; margin-bottom: 0.75rem; color: #cbd5e1; }
+        .explanation-section { background: rgba(201, 160, 85, 0.1); border: 2px solid rgba(201, 160, 85, 0.2); border-radius: 12px; padding: 1.5rem; margin: 2rem 0; }
+        .explanation-title { font-size: 1.25rem; font-weight: 700; color: #c9a055; margin-bottom: 1rem; }
+        .explanation-text { color: #cbd5e1; line-height: 1.6; }
+        .choice-section { margin: 2rem 0; }
+        .choice-title { font-size: 1.5rem; font-weight: 700; color: #ffffff; margin-bottom: 1.5rem; text-align: center; }
+        .choices { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+        .choice-btn { padding: 2rem 1.5rem; background: rgba(30, 41, 59, 0.5); border: 2px solid rgba(201, 160, 85, 0.2); border-radius: 12px; cursor: pointer; transition: all 0.3s ease; text-align: center; color: #cbd5e1; font-size: 1.1rem; font-weight: 600; }
+        .choice-btn:hover { background: rgba(201, 160, 85, 0.1); border-color: rgba(201, 160, 85, 0.4); transform: scale(1.02); }
+        .choice-btn.threat { border-color: rgba(239, 68, 68, 0.3); }
+        .choice-btn.safe { border-color: rgba(34, 197, 94, 0.3); }
+        .choice-btn.threat:hover { background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.5); }
+        .choice-btn.safe:hover { background: rgba(34, 197, 94, 0.1); border-color: rgba(34, 197, 94, 0.5); }
+        .result-box { padding: 2rem; border-radius: 12px; margin: 2rem 0; text-align: center; }
+        .result-box.correct { background: rgba(34, 197, 94, 0.2); border: 2px solid rgba(34, 197, 94, 0.5); }
+        .result-box.incorrect { background: rgba(239, 68, 68, 0.2); border: 2px solid rgba(239, 68, 68, 0.5); }
+        .result-icon { font-size: 4rem; margin-bottom: 1rem; }
+        .result-title { font-size: 2rem; font-weight: 700; margin-bottom: 1rem; }
+        .result-box.correct .result-title { color: #86efac; }
+        .result-box.incorrect .result-title { color: #fca5a5; }
+        .result-message { color: #cbd5e1; font-size: 1.1rem; line-height: 1.6; }
+        .actions { display: flex; gap: 1rem; justify-content: center; margin-top: 2rem; }
+        .btn { padding: 0.875rem 2rem; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; }
+        .btn-primary { background: linear-gradient(135deg, #c9a055, #d4af37); color: #0f172a; }
+        .btn-secondary { background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(201, 160, 85, 0.2); color: #cbd5e1; }
+        .btn:hover { transform: scale(1.02); }
+        .loading-state { text-align: center; padding: 3rem; color: #94a3b8; }
+        .hidden { display: none; }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav class="app-nav">
         <div class="nav-container">
             <a href="dashboard.html" class="logo">
@@ -275,178 +103,207 @@
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="12" cy="12" r="10"></circle>
                         <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
                     </svg>
                     <span>Kuis</span>
                 </a>
                 <a href="simulation.html" class="nav-item active">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
                     </svg>
                     <span>Simulasi</span>
+                </a>
+                <a href="tips.html" class="nav-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M12 16v-4"></path>
+                        <path d="M12 8h.01"></path>
+                    </svg>
+                    <span>Tips</span>
                 </a>
             </div>
         </div>
     </nav>
 
-    <!-- Main Container -->
     <div class="main-container">
-        <div class="page-header">
-            <h1 class="page-title">🎮 Simulasi Serangan Siber</h1>
-            <p class="page-subtitle">Latih kemampuan Anda menangani serangan cyber dalam lingkungan yang aman</p>
-        </div>
+        <!-- List View -->
+        <div id="listView">
+            <div class="page-header">
+                <h1 class="page-title">⚡ Simulasi Serangan Siber</h1>
+                <p class="page-subtitle">
+                    Latih kemampuan Anda mengenali dan merespons ancaman siber dalam skenario realistis
+                </p>
+            </div>
 
-        <div class="warning-banner">
-            <div class="warning-icon">⚠️</div>
-            <div class="warning-content">
-                <h3>Perhatian: Lingkungan Simulasi</h3>
-                <p>Semua simulasi di sini dilakukan dalam lingkungan yang terisolasi dan aman. Tidak ada sistem atau data nyata yang terpengaruh. Gunakan kesempatan ini untuk belajar tanpa risiko!</p>
+            <div class="warning-banner">
+                <div class="warning-icon">⚠️</div>
+                <div class="warning-content">
+                    <h3>Peringatan: Lingkungan Simulasi</h3>
+                    <p>
+                        Ini adalah simulasi untuk tujuan pembelajaran. Jangan mencoba teknik ini di dunia nyata tanpa izin.
+                        Fokus pada identifikasi tanda-tanda bahaya dan cara merespons dengan benar.
+                    </p>
+                </div>
+            </div>
+
+            <div class="threats-grid" id="threatsGrid">
+                <div class="loading-state"><p>Memuat simulasi...</p></div>
             </div>
         </div>
 
-        <div class="simulation-grid">
-            <!-- Simulation 1 -->
-            <div class="simulation-card">
-                <div class="simulation-icon">📧</div>
-                <h3 class="simulation-title">Phishing Email Detection</h3>
-                <p class="simulation-description">
-                    Identifikasi email phishing dari kumpulan email yang mencurigakan. Pelajari tanda-tanda email palsu dan cara melindungi organisasi Anda.
-                </p>
-                <div class="simulation-features">
-                    <ul>
-                        <li>10 skenario email berbeda</li>
-                        <li>Feedback real-time</li>
-                        <li>Tips identifikasi phishing</li>
-                        <li>Skor dan statistik</li>
-                    </ul>
-                </div>
-                <span class="simulation-risk risk-low">🟢 Resiko Rendah</span>
-                <button class="start-simulation-btn" onclick="alert('Simulasi akan segera hadir! 🎮')">
-                    <span>Mulai Simulasi</span>
-                    <span>→</span>
-                </button>
-            </div>
+        <!-- Detail View -->
+        <div id="detailView" class="hidden">
+            <div class="threat-detail">
+                <div class="detail-card">
+                    <div class="detail-header">
+                        <div class="detail-icon" id="detailIcon">📧</div>
+                        <div style="flex: 1;">
+                            <div class="detail-title" id="detailTitle"></div>
+                            <div class="detail-from" id="detailFrom"></div>
+                            <div class="detail-subject" id="detailSubject"></div>
+                        </div>
+                    </div>
 
-            <!-- Simulation 2 -->
-            <div class="simulation-card">
-                <div class="simulation-icon">🔒</div>
-                <h3 class="simulation-title">Password Cracking Demo</h3>
-                <p class="simulation-description">
-                    Saksikan bagaimana password lemah dapat di-crack dengan mudah. Pelajari pentingnya password yang kuat.
-                </p>
-                <div class="simulation-features">
-                    <ul>
-                        <li>Demo brute force attack</li>
-                        <li>Dictionary attack simulation</li>
-                        <li>Password strength analyzer</li>
-                        <li>Best practices guide</li>
-                    </ul>
-                </div>
-                <span class="simulation-risk risk-low">🟢 Resiko Rendah</span>
-                <button class="start-simulation-btn" onclick="alert('Simulasi akan segera hadir! 🎮')">
-                    <span>Mulai Simulasi</span>
-                    <span>→</span>
-                </button>
-            </div>
+                    <div class="content-box" id="detailContent"></div>
 
-            <!-- Simulation 3 -->
-            <div class="simulation-card">
-                <div class="simulation-icon">🦠</div>
-                <h3 class="simulation-title">Malware Incident Response</h3>
-                <p class="simulation-description">
-                    Tangani serangan malware dalam skenario realistis. Pelajari langkah-langkah proper incident response.
-                </p>
-                <div class="simulation-features">
-                    <ul>
-                        <li>Skenario serangan realistis</li>
-                        <li>Decision-based gameplay</li>
-                        <li>Multiple outcomes</li>
-                        <li>Incident response checklist</li>
-                    </ul>
-                </div>
-                <span class="simulation-risk risk-medium">🟡 Resiko Sedang</span>
-                <button class="start-simulation-btn" onclick="alert('Simulasi akan segera hadir! 🎮')">
-                    <span>Mulai Simulasi</span>
-                    <span>→</span>
-                </button>
-            </div>
+                    <div class="red-flags-section">
+                        <div class="red-flags-title">
+                            🚩 Tanda-Tanda Bahaya:
+                        </div>
+                        <ul class="red-flags-list" id="redFlagsList"></ul>
+                    </div>
 
-            <!-- Simulation 4 -->
-            <div class="simulation-card">
-                <div class="simulation-icon">💰</div>
-                <h3 class="simulation-title">Ransomware Attack</h3>
-                <p class="simulation-description">
-                    Alami skenario serangan ransomware dan pelajari cara mencegah dan mengatasinya dengan efektif.
-                </p>
-                <div class="simulation-features">
-                    <ul>
-                        <li>Simulasi ransomware realistis</li>
-                        <li>Backup & recovery practice</li>
-                        <li>Negotiation scenarios</li>
-                        <li>Prevention strategies</li>
-                    </ul>
-                </div>
-                <span class="simulation-risk risk-high">🔴 Resiko Tinggi</span>
-                <button class="start-simulation-btn" onclick="alert('Simulasi akan segera hadir! 🎮')">
-                    <span>Mulai Simulasi</span>
-                    <span>→</span>
-                </button>
-            </div>
+                    <div class="choice-section" id="choiceSection">
+                        <div class="choice-title">Menurut Anda, ini ancaman atau aman?</div>
+                        <div class="choices">
+                            <button class="choice-btn threat" onclick="makeChoice('threat')">
+                                🚨<br>Ini Ancaman!
+                            </button>
+                            <button class="choice-btn safe" onclick="makeChoice('safe')">
+                                ✅<br>Ini Aman
+                            </button>
+                        </div>
+                    </div>
 
-            <!-- Simulation 5 -->
-            <div class="simulation-card">
-                <div class="simulation-icon">🕵️</div>
-                <h3 class="simulation-title">Social Engineering Test</h3>
-                <p class="simulation-description">
-                    Uji kemampuan Anda mendeteksi dan menangani serangan social engineering dari berbagai vektor.
-                </p>
-                <div class="simulation-features">
-                    <ul>
-                        <li>Phone call scenarios</li>
-                        <li>Physical security tests</li>
-                        <li>Impersonation detection</li>
-                        <li>Response guidelines</li>
-                    </ul>
-                </div>
-                <span class="simulation-risk risk-medium">🟡 Resiko Sedang</span>
-                <button class="start-simulation-btn" onclick="alert('Simulasi akan segera hadir! 🎮')">
-                    <span>Mulai Simulasi</span>
-                    <span>→</span>
-                </button>
-            </div>
+                    <div id="resultSection" class="hidden"></div>
 
-            <!-- Simulation 6 -->
-            <div class="simulation-card">
-                <div class="simulation-icon">🌐</div>
-                <h3 class="simulation-title">Network Attack Scenario</h3>
-                <p class="simulation-description">
-                    Hadapi serangan jaringan seperti DDoS, man-in-the-middle, dan pelajari cara mempertahankan infrastruktur.
-                </p>
-                <div class="simulation-features">
-                    <ul>
-                        <li>DDoS mitigation practice</li>
-                        <li>Network monitoring tools</li>
-                        <li>Firewall configuration</li>
-                        <li>Advanced threat detection</li>
-                    </ul>
+                    <div class="explanation-section" id="explanationSection" style="display: none;">
+                        <div class="explanation-title">💡 Penjelasan:</div>
+                        <div class="explanation-text" id="explanationText"></div>
+                    </div>
+
+                    <div class="actions">
+                        <button class="btn btn-secondary" onclick="backToList()">Kembali ke Daftar</button>
+                        <button class="btn btn-primary" onclick="nextThreat()">Simulasi Berikutnya →</button>
+                    </div>
                 </div>
-                <span class="simulation-risk risk-high">🔴 Resiko Tinggi</span>
-                <button class="start-simulation-btn" onclick="alert('Simulasi akan segera hadir! 🎮')">
-                    <span>Mulai Simulasi</span>
-                    <span>→</span>
-                </button>
             </div>
         </div>
     </div>
 
     <script src="js/auth.js"></script>
     <script>
-        // Check authentication
+        let allThreats = [];
+        let currentThreat = null;
+        let currentIndex = 0;
+
         (async function() {
             const isAuth = await isAuthenticated();
             if (!isAuth && !isGuestMode()) {
                 window.location.href = 'login.html';
             }
         })();
+
+        async function loadThreats() {
+            try {
+                const response = await fetch('data/threats.json');
+                if (!response.ok) throw new Error('Failed to load threats');
+                allThreats = await response.json();
+                displayThreats();
+            } catch (error) {
+                console.error('Error loading threats:', error);
+                document.getElementById('threatsGrid').innerHTML = 
+                    '<div class="loading-state"><p>❌ Gagal memuat simulasi</p></div>';
+            }
+        }
+
+        function displayThreats() {
+            const grid = document.getElementById('threatsGrid');
+            const icons = { email: '📧', whatsapp: '💬', website: '🌐', sms: '📱', call: '📞' };
+            
+            grid.innerHTML = allThreats.map((threat, index) => `
+                <div class="threat-card" onclick="viewThreat(${index})">
+                    <div class="threat-icon">${icons[threat.type] || '⚠️'}</div>
+                    <div class="threat-type">${threat.type}</div>
+                    <h3 class="threat-title">${threat.title}</h3>
+                    <p class="threat-description">
+                        Uji kemampuan Anda mendeteksi ancaman ${threat.type === 'email' ? 'email' : 
+                        threat.type === 'whatsapp' ? 'pesan WhatsApp' : 
+                        threat.type === 'website' ? 'website palsu' : 'pesan'}  yang mencurigakan.
+                    </p>
+                    <button class="start-btn">Mulai Simulasi →</button>
+                </div>
+            `).join('');
+        }
+
+        function viewThreat(index) {
+            currentIndex = index;
+            currentThreat = allThreats[index];
+            
+            document.getElementById('listView').classList.add('hidden');
+            document.getElementById('detailView').classList.remove('hidden');
+            
+            const icons = { email: '📧', whatsapp: '💬', website: '🌐', sms: '📱', call: '📞' };
+            document.getElementById('detailIcon').textContent = icons[currentThreat.type] || '⚠️';
+            document.getElementById('detailTitle').textContent = currentThreat.title;
+            document.getElementById('detailFrom').textContent = 'Dari: ' + (currentThreat.from || currentThreat.sender || currentThreat.url || 'Unknown');
+            document.getElementById('detailSubject').textContent = currentThreat.subject || '';
+            document.getElementById('detailContent').textContent = currentThreat.content || 
+                JSON.stringify(currentThreat.details, null, 2);
+            
+            const flagsList = document.getElementById('redFlagsList');
+            flagsList.innerHTML = currentThreat.redFlags.map(flag => `<li>${flag}</li>`).join('');
+            
+            document.getElementById('choiceSection').style.display = 'block';
+            document.getElementById('resultSection').innerHTML = '';
+            document.getElementById('resultSection').classList.add('hidden');
+            document.getElementById('explanationSection').style.display = 'none';
+        }
+
+        function makeChoice(choice) {
+            const correct = choice === currentThreat.correctAnswer;
+            
+            document.getElementById('choiceSection').style.display = 'none';
+            
+            const resultSection = document.getElementById('resultSection');
+            resultSection.innerHTML = `
+                <div class="result-box ${correct ? 'correct' : 'incorrect'}">
+                    <div class="result-icon">${correct ? '🎉' : '😔'}</div>
+                    <div class="result-title">${correct ? 'Benar!' : 'Kurang Tepat'}</div>
+                    <div class="result-message">
+                        ${correct ? 
+                            'Selamat! Anda berhasil mengidentifikasi ancaman dengan benar. Terus tingkatkan kewaspadaan Anda!' : 
+                            'Jangan khawatir! Belajar dari kesalahan adalah bagian dari proses. Mari pelajari mengapa ini adalah ancaman.'}
+                    </div>
+                </div>
+            `;
+            resultSection.classList.remove('hidden');
+            
+            document.getElementById('explanationText').textContent = currentThreat.explanation;
+            document.getElementById('explanationSection').style.display = 'block';
+        }
+
+        function backToList() {
+            document.getElementById('listView').classList.remove('hidden');
+            document.getElementById('detailView').classList.add('hidden');
+        }
+
+        function nextThreat() {
+            const nextIndex = (currentIndex + 1) % allThreats.length;
+            viewThreat(nextIndex);
+        }
+
+        loadThreats();
     </script>
 </body>
 </html>

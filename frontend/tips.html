@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tips Keamanan - CyberCare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
+            min-height: 100vh;
+        }
+
+        .app-nav {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(201, 160, 85, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.625rem 1rem;
+            color: #cbd5e1;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item:hover {
+            background: rgba(201, 160, 85, 0.1);
+            color: #c9a055;
+        }
+
+        .nav-item.active {
+            background: linear-gradient(135deg, rgba(201, 160, 85, 0.15), rgba(212, 175, 55, 0.15));
+            color: #c9a055;
+            border: 1px solid rgba(201, 160, 85, 0.2);
+        }
+
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, #c9a055 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-subtitle {
+            font-size: 1.125rem;
+            color: #94a3b8;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            padding: 0.625rem 1.25rem;
+            border-radius: 10px;
+            border: 1px solid rgba(201, 160, 85, 0.2);
+            background: rgba(30, 41, 59, 0.5);
+            color: #cbd5e1;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-tab:hover {
+            background: rgba(201, 160, 85, 0.1);
+            border-color: rgba(201, 160, 85, 0.3);
+        }
+
+        .filter-tab.active {
+            background: linear-gradient(135deg, rgba(201, 160, 85, 0.2), rgba(212, 175, 55, 0.2));
+            border-color: rgba(201, 160, 85, 0.4);
+            color: #c9a055;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tip-card {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.6), rgba(51, 65, 85, 0.6));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(201, 160, 85, 0.2);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .tip-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(201, 160, 85, 0.2);
+            border-color: rgba(201, 160, 85, 0.4);
+        }
+
+        .tip-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+
+        .tip-category {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(201, 160, 85, 0.1);
+            border: 1px solid rgba(201, 160, 85, 0.2);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #c9a055;
+            margin-bottom: 0.75rem;
+        }
+
+        .tip-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .tip-description {
+            color: #cbd5e1;
+            line-height: 1.6;
+            font-size: 0.9375rem;
+        }
+
+        .loading-state {
+            text-align: center;
+            padding: 3rem;
+            color: #94a3b8;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #94a3b8;
+        }
+
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="app-nav">
+        <div class="nav-container">
+            <a href="dashboard.html" class="logo">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c9a055" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <span>CyberCare</span>
+            </a>
+            <div class="nav-menu">
+                <a href="dashboard.html" class="nav-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    </svg>
+                    <span>Dashboard</span>
+                </a>
+                <a href="materials.html" class="nav-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                    </svg>
+                    <span>Materi</span>
+                </a>
+                <a href="quiz.html" class="nav-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                    <span>Kuis</span>
+                </a>
+                <a href="simulation.html" class="nav-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                    </svg>
+                    <span>Simulasi</span>
+                </a>
+                <a href="tips.html" class="nav-item active">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M12 16v-4"></path>
+                        <path d="M12 8h.01"></path>
+                    </svg>
+                    <span>Tips</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">💡 Tips Keamanan Siber</h1>
+            <p class="page-subtitle">
+                Kumpulan tips praktis untuk meningkatkan keamanan bisnis UMKM Anda
+            </p>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="filter-tabs" id="filterTabs">
+            <div class="filter-tab active" data-category="all">Semua Tips</div>
+        </div>
+
+        <!-- Tips Grid -->
+        <div class="tips-grid" id="tipsGrid">
+            <div class="loading-state">
+                <p>Memuat tips keamanan...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script>
+        let allTips = [];
+        let currentFilter = 'all';
+
+        // Check authentication
+        (async function() {
+            const isAuth = await isAuthenticated();
+            if (!isAuth && !isGuestMode()) {
+                window.location.href = 'login.html';
+            }
+        })();
+
+        // Load tips
+        async function loadTips() {
+            try {
+                const response = await fetch('data/tips.json');
+                if (!response.ok) throw new Error('Failed to load tips');
+                
+                allTips = await response.json();
+                
+                // Create category filters
+                const categories = ['all', ...new Set(allTips.map(tip => tip.category))];
+                const filterTabs = document.getElementById('filterTabs');
+                filterTabs.innerHTML = categories.map(cat => `
+                    <div class="filter-tab ${cat === 'all' ? 'active' : ''}" 
+                         data-category="${cat}"
+                         onclick="filterTips('${cat}')">
+                        ${cat === 'all' ? 'Semua Tips' : cat}
+                    </div>
+                `).join('');
+                
+                displayTips();
+            } catch (error) {
+                console.error('Error loading tips:', error);
+                document.getElementById('tipsGrid').innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">❌</div>
+                        <h3>Gagal memuat tips</h3>
+                        <p>Terjadi kesalahan saat memuat data tips.</p>
+                    </div>
+                `;
+            }
+        }
+
+        function filterTips(category) {
+            currentFilter = category;
+            
+            // Update active filter tab
+            document.querySelectorAll('.filter-tab').forEach(tab => {
+                tab.classList.toggle('active', tab.dataset.category === category);
+            });
+            
+            displayTips();
+        }
+
+        function displayTips() {
+            const tipsGrid = document.getElementById('tipsGrid');
+            
+            const filteredTips = currentFilter === 'all' 
+                ? allTips 
+                : allTips.filter(tip => tip.category === currentFilter);
+            
+            if (filteredTips.length === 0) {
+                tipsGrid.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📭</div>
+                        <h3>Tidak ada tips</h3>
+                        <p>Tidak ada tips untuk kategori ini.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            tipsGrid.innerHTML = filteredTips.map(tip => `
+                <div class="tip-card">
+                    <div class="tip-icon">${tip.icon}</div>
+                    <div class="tip-category">${tip.category}</div>
+                    <h3 class="tip-title">${tip.title}</h3>
+                    <p class="tip-description">${tip.description}</p>
+                </div>
+            `).join('');
+        }
+
+        // Load tips on page load
+        loadTips();
+    </script>
+</body>
+</html>
