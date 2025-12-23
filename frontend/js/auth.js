@@ -1,539 +1,228 @@
-// CyberCare - Authentication System
-// Backend API Integration with Enhanced Security
-
 // ============================================
-// AUTHENTICATION SYSTEM
+// CyberCare - Clean JWT Authentication System
 // ============================================
 
-// Store current user in memory
-let currentUserData = null;
-let authToken = null;
-let sessionExpiry = null;
-
-// API Base URL - Points to Go backend server
-// Use relative path to avoid CORS/Origin issues
 const API_BASE_URL = '/api';
+const TOKEN_KEY = 'cybercare_token';
+const USER_KEY = 'cybercare_user';
 
-// Session timeout duration (30 minutes)
-const SESSION_TIMEOUT = 30 * 60 * 1000;
+// ============================================
+// TOKEN MANAGEMENT
+// ============================================
 
-// Initialize authentication on page load
-function initAuth() {
-    console.log('🔄 Initializing authentication...');
-    
-    // Check for existing session
-    const storedUser = localStorage.getItem('currentUser');
-    const storedToken = localStorage.getItem('authToken');
-    const storedExpiry = localStorage.getItem('sessionExpiry');
-    
-    console.log('📦 LocalStorage check:', {
-        hasUser: !!storedUser,
-        hasToken: !!storedToken,
-        hasExpiry: !!storedExpiry
-    });
-    
-    if (storedUser && storedToken && storedExpiry) {
-        const expiryTime = parseInt(storedExpiry);
-        const now = Date.now();
-        
-        console.log('⏰ Session timing:', {
-            expiry: new Date(expiryTime).toLocaleString(),
-            now: new Date(now).toLocaleString(),
-            isValid: now < expiryTime
-        });
-        
-        if (now < expiryTime) {
-            // Session still valid
-            currentUserData = JSON.parse(storedUser);
-            authToken = storedToken;
-            sessionExpiry = expiryTime;
-            
-            console.log('✅ Session restored:', {
-                user: currentUserData?.name,
-                email: currentUserData?.email
-            });
-            
-            // Reset session timeout
-            resetSessionTimeout();
-            return true;
-        } else {
-            // Session expired, clear data
-            console.warn('❌ Session expired, clearing data');
-            clearAuthData();
-        }
-    } else {
-        console.log('ℹ️ No stored session found');
-    }
-    return false;
+// Store auth token
+function setToken(token) {
+    localStorage.setItem(TOKEN_KEY, token);
 }
 
-// Clear authentication data
-function clearAuthData() {
-    currentUserData = null;
-    authToken = null;
-    sessionExpiry = null;
-    localStorage.removeItem('currentUser');
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('sessionExpiry');
-    localStorage.removeItem('rememberMe');
+// Get auth token
+function getToken() {
+    return localStorage.getItem(TOKEN_KEY);
 }
 
-// Reset session timeout
-function resetSessionTimeout() {
-    const newExpiry = Date.now() + SESSION_TIMEOUT;
-    sessionExpiry = newExpiry;
-    localStorage.setItem('sessionExpiry', newExpiry.toString());
+// Remove auth token
+function removeToken() {
+    localStorage.removeItem(TOKEN_KEY);
 }
 
-// Get authentication headers
-function getAuthHeaders() {
-    const headers = {
-        'Content-Type': 'application/json'
-    };
-    
-    if (authToken) {
-        headers['Authorization'] = `Bearer ${authToken}`;
-    }
-    
-    return headers;
+// Store user data
+function setUser(user) {
+    localStorage.setItem(USER_KEY, JSON.stringify(user));
 }
 
-// Register new user
-async function handleRegister(userData) {
+// Get user data
+function getUser() {
+    const userStr = localStorage.getItem(USER_KEY);
+    return userStr ? JSON.parse(userStr) : null;
+}
+
+// Remove user data
+function removeUser() {
+    localStorage.removeItem(USER_KEY);
+}
+
+// Clear all auth data
+function clearAuth() {
+    removeToken();
+    removeUser();
+    localStorage.removeItem('guestMode');
+}
+
+// ============================================
+// API CALLS
+// ============================================
+
+// Login
+async function login(email, password) {
     try {
-        const response = await fetch(`${API_BASE_URL}/register`, {
-            method: 'POST',
-            headers: getAuthHeaders(),
-            credentials: 'include',
-            body: JSON.stringify(userData)
-        });
-
-        const result = await response.json();
-
-        if (result.success) {
-            currentUserData = result.data.user;
-            
-            // Store authentication token if provided
-            if (result.data.token) {
-                authToken = result.data.token;
-                localStorage.setItem('authToken', authToken);
-            }
-            
-            // Set session expiry
-            resetSessionTimeout();
-            
-            // Store user data
-            localStorage.setItem('currentUser', JSON.stringify(currentUserData));
-            
-            return {
-                success: true,
-                user: currentUserData
-            };
-        } else {
-            return {
-                success: false,
-                message: result.message || 'Registrasi gagal'
-            };
-        }
-    } catch (error) {
-        console.error('Registration error:', error);
-        return {
-            success: false,
-            message: 'Terjadi kesalahan saat mendaftar. Silakan coba lagi.'
-        };
-    }
-}
-
-// Login user
-async function handleLogin(email, password, rememberMe = false) {
-    try {
+        console.log('🔐 Login: Making API call to', `${API_BASE_URL}/login`);
+        
         const response = await fetch(`${API_BASE_URL}/login`, {
-            method: 'POST',
-            headers: getAuthHeaders(),
-            credentials: 'include',
-            body: JSON.stringify({ email, password })
-        });
-
-        const result = await response.json();
-
-        if (result.success) {
-            currentUserData = result.data.user;
-            
-            // Store authentication token
-            if (result.data.token) {
-                authToken = result.data.token;
-                localStorage.setItem('authToken', authToken);
-            }
-            
-            // Set session expiry
-            resetSessionTimeout();
-            
-            // Store user data
-            localStorage.setItem('currentUser', JSON.stringify(currentUserData));
-            
-            if (rememberMe) {
-                localStorage.setItem('rememberMe', 'true');
-            }
-            
-            // Log successful login for security audit
-            console.log('Login successful:', {
-                user: currentUserData.name,
-                email: currentUserData.email,
-                timestamp: new Date().toISOString()
-            });
-            
-            return {
-                success: true,
-                user: currentUserData
-            };
-        } else {
-            // Log failed login attempt
-            console.warn('Login failed:', {
-                email: email,
-                timestamp: new Date().toISOString()
-            });
-            
-            return {
-                success: false,
-                message: result.message || 'Email atau password salah'
-            };
-        }
-    } catch (error) {
-        console.error('Login error:', error);
-        return {
-            success: false,
-            message: 'Terjadi kesalahan saat login. Silakan coba lagi.'
-        };
-    }
-}
-
-// Logout user
-async function handleLogout() {
-    try {
-        // Notify backend of logout
-        await fetch(`${API_BASE_URL}/logout`, { 
-            method: 'POST',
-            headers: getAuthHeaders(),
-            credentials: 'include'
-        });
-        
-        // Log logout for security audit
-        console.log('User logged out:', {
-            user: currentUserData?.name,
-            timestamp: new Date().toISOString()
-        });
-    } catch (error) {
-        console.error('Logout error:', error);
-    }
-    
-    // Clear all authentication data
-    clearAuthData();
-    
-    // Redirect to login page
-    window.location.href = 'login.html';
-}
-
-// Check if user is logged in (async)
-async function isLoggedIn() {
-    // Check local session first
-    const localValid = initAuth();
-    
-    try {
-        // Verify session with backend
-        const response = await fetch(`${API_BASE_URL}/check_session`, {
-            method: 'GET',
-            headers: getAuthHeaders(),
-            credentials: 'include'
-        });
-        
-        const result = await response.json();
-        
-        if (result.success && result.data && result.data.isLoggedIn) {
-            // Update user data from backend
-            if (result.data.user) {
-                currentUserData = result.data.user;
-                localStorage.setItem('currentUser', JSON.stringify(currentUserData));
-                
-                // Ensure we have a token marker for initAuth
-                if (!localStorage.getItem('authToken')) {
-                    localStorage.setItem('authToken', 'cookie-session');
-                }
-                
-                resetSessionTimeout();
-            }
-            
-            return true;
-        }
-        
-        // Session invalid, clear data
-        if (localValid) {
-            clearAuthData();
-        }
-        return false;
-    } catch (error) {
-        console.error('Session check error:', error);
-        // On error, trust local session if not expired
-        if (localValid) {
-            return true;
-        }
-        return false;
-    }
-}
-
-// Get user profile
-function getUserProfile(userId) {
-    return currentUserData;
-}
-
-// Get current user (from memory, set by isLoggedIn)
-function getCurrentUser() {
-    return currentUserData;
-}
-
-// Validate email format
-function validateEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-}
-
-// Validate password strength
-function validatePassword(password) {
-    // At least 8 characters
-    if (password.length < 8) {
-        return { valid: false, message: 'Password minimal 8 karakter' };
-    }
-    
-    // Contains letters and numbers
-    const hasLetters = /[a-zA-Z]/.test(password);
-    const hasNumbers = /\d/.test(password);
-    
-    if (!hasLetters || !hasNumbers) {
-        return { valid: false, message: 'Password harus mengandung huruf dan angka' };
-    }
-    
-    return { valid: true, message: 'Password valid' };
-}
-
-// Check session timeout and refresh if needed
-function checkSessionTimeout() {
-    console.log('🕐 Checking session timeout...');
-    console.log('📅 Session expiry:', sessionExpiry ? new Date(sessionExpiry).toLocaleString() : 'Not set');
-    
-    if (!sessionExpiry) {
-        console.warn('⚠️ No session expiry found');
-        return false;
-    }
-    
-    const now = Date.now();
-    const timeLeft = sessionExpiry - now;
-    
-    console.log('⏱️ Time left:', Math.floor(timeLeft / 1000), 'seconds');
-    
-    // If less than 5 minutes left, warn user
-    if (timeLeft > 0 && timeLeft < 5 * 60 * 1000) {
-        console.warn('⚠️ Session will expire soon. Time left:', Math.floor(timeLeft / 1000), 'seconds');
-    }
-    
-    // If expired, return false (don't auto-logout here, let caller handle it)
-    if (timeLeft <= 0) {
-        console.warn('❌ Session expired');
-        return false;
-    }
-    
-    console.log('✅ Session is valid');
-    return true;
-}
-
-// Initialize authentication check on page load
-if (typeof window !== 'undefined') {
-    // Check session timeout every minute
-    setInterval(checkSessionTimeout, 60000);
-    
-    // Reset session timeout on user activity
-    ['click', 'keypress', 'scroll', 'mousemove'].forEach(event => {
-        document.addEventListener(event, () => {
-            if (currentUserData && sessionExpiry) {
-                resetSessionTimeout();
-            }
-        }, { passive: true, once: false });
-    });
-}
-
-// Expose functions to window
-window.handleLogin = handleLogin;
-window.handleRegister = handleRegister;
-window.handleLogout = handleLogout;
-window.isLoggedIn = isLoggedIn;
-window.getCurrentUser = getCurrentUser;
-window.awardPoints = awardPoints;
-window.awardBadge = awardBadge;
-window.getLevelInfo = getLevelInfo;
-window.updateUserData = updateUserData;
-window.validateEmail = validateEmail;
-window.validatePassword = validatePassword;
-window.initAuth = initAuth;
-window.checkSessionTimeout = checkSessionTimeout;
-
-// Generate simple token
-function generateToken() {
-    return Math.random().toString(36).substring(2) + Date.now().toString(36);
-}
-
-// Generate avatar (first letter of name)
-function generateAvatar(name) {
-    return name.charAt(0).toUpperCase();
-}
-
-// ============================================
-// GAMIFICATION SYSTEM
-// ============================================
-
-// XP and Level System
-const LEVEL_CONFIG = {
-    1: { xpRequired: 0, title: 'Pemula' },
-    2: { xpRequired: 100, title: 'Pelajar' },
-    3: { xpRequired: 250, title: 'Praktisi' },
-    4: { xpRequired: 500, title: 'Ahli' },
-    5: { xpRequired: 1000, title: 'Master' },
-    6: { xpRequired: 2000, title: 'Guardian' },
-    7: { xpRequired: 4000, title: 'Legend' }
-};
-
-// Points for actions
-const POINTS_CONFIG = {
-    completeMaterial: 50,
-    passQuiz: 75,
-    perfectQuiz: 100,
-    completeSimulation: 30,
-    readTip: 5,
-    dailyLogin: 10,
-    weekStreak: 50,
-    monthStreak: 200
-};
-
-// Award points and XP
-async function awardPoints(action, extraPoints = 0) {
-    try {
-        const response = await fetch(`${API_BASE_URL}/award_points`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ action, extraPoints })
+            body: JSON.stringify({ email, password })
         });
+
+        console.log('📡 Login: Response status:', response.status);
         
         const result = await response.json();
-        if (result.success) {
-            // Update local user data
-            if (currentUserData) {
-                currentUserData.xp = result.data.newXP;
-                currentUserData.level = result.data.newLevel;
-                localStorage.setItem('currentUser', JSON.stringify(currentUserData));
-            }
-            
-            if (window.CyberCareUI && window.CyberCareUI.Toast) {
-                CyberCareUI.Toast.show(`+${result.data.points} XP! Total: ${result.data.newXP} XP`, 'success');
-            }
-            return result.data;
+        console.log('📦 Login: Response data:', result);
+
+        if (result.success && result.data) {
+            console.log('✅ Login: Setting token and user data');
+            setToken(result.data.token);
+            setUser(result.data.user);
+            console.log('✅ Login: Token and user saved');
+            return { success: true, user: result.data.user };
         }
+
+        console.warn('❌ Login: Failed -', result.message);
+        return { success: false, message: result.message || 'Login gagal' };
     } catch (error) {
-        console.error('Error awarding points:', error);
+        console.error('💥 Login: Exception caught:', error);
+        return { success: false, message: 'Terjadi kesalahan saat login' };
     }
-    return null;
 }
 
-// Award badge (Stub - Backend handles this usually, or we need an endpoint)
-function awardBadge(badgeId, badgeName) {
-    // This should ideally be handled by the backend when conditions are met
-    console.log('Award badge called:', badgeId, badgeName);
-}
-
-// Get badge icon
-function getBadgeIcon(badgeId) {
-    const icons = {
-        'first_material': '📚',
-        'all_materials': '🎓',
-        'first_quiz': '✅',
-        'quiz_master': '🏅',
-        'perfect_score': '💯',
-        'week_streak': '🔥',
-        'month_streak': '⭐',
-        'early_adopter': '🌟',
-        'security_champion': '🛡️'
-    };
-    
-    if (badgeId.startsWith('level_')) {
-        return '🏆';
-    }
-    
-    return icons[badgeId] || '🎖️';
-}
-
-// Update daily streak
-async function updateDailyStreak() {
+// Register
+async function register(name, email, password, businessName) {
     try {
-        const response = await fetch(`${API_BASE_URL}/update_streak`, {
-            method: 'POST'
+        const response = await fetch(`${API_BASE_URL}/register`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name, email, password, businessName })
         });
-        
+
         const result = await response.json();
-        if (result.success && currentUserData) {
-            currentUserData.dailyStreak = result.data.streak;
-            localStorage.setItem('currentUser', JSON.stringify(currentUserData));
-            return {
-                newStreak: result.data.streak,
-                streakContinued: true 
-            };
+
+        if (result.success && result.data) {
+            setToken(result.data.token);
+            setUser(result.data.user);
+            return { success: true, user: result.data.user };
+        }
+
+        return { success: false, message: result.message || 'Registrasi gagal' };
+    } catch (error) {
+        console.error('Register error:', error);
+        return { success: false, message: 'Terjadi kesalahan saat mendaftar' };
+    }
+}
+
+// Logout
+async function logout() {
+    try {
+        const token = getToken();
+        if (token) {
+            await fetch(`${API_BASE_URL}/logout`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
         }
     } catch (error) {
-        console.error('Error updating streak:', error);
+        console.error('Logout error:', error);
+    } finally {
+        clearAuth();
+        window.location.href = '/frontend/login.html';
     }
-    return null;
 }
 
-// Check and award achievements
-function checkAchievements() {
-    // This can be expanded to check various achievements
-    console.log('Checking achievements...');
+// Check if user is authenticated
+async function checkAuth() {
+    const token = getToken();
+    
+    if (!token) {
+        return { isLoggedIn: false };
+    }
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/check_auth`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        const result = await response.json();
+
+        if (result.success && result.data && result.data.isLoggedIn) {
+            setUser(result.data.user);
+            return { isLoggedIn: true, user: result.data.user };
+        }
+
+        // Token invalid, clear auth
+        clearAuth();
+        return { isLoggedIn: false };
+    } catch (error) {
+        console.error('Check auth error:', error);
+        return { isLoggedIn: false };
+    }
 }
 
-// Get level info
-function getLevelInfo(user) {
-    const currentLevel = user.level;
-    const nextLevel = currentLevel + 1;
-    
-    const currentLevelXP = LEVEL_CONFIG[currentLevel]?.xpRequired || 0;
-    const nextLevelXP = LEVEL_CONFIG[nextLevel]?.xpRequired || currentLevelXP;
-    
-    const xpInCurrentLevel = user.xp - currentLevelXP;
-    const xpNeededForNext = nextLevelXP - currentLevelXP;
-    const progress = xpNeededForNext > 0 ? (xpInCurrentLevel / xpNeededForNext) * 100 : 100;
-    
-    return {
-        currentLevel,
-        nextLevel,
-        currentLevelTitle: LEVEL_CONFIG[currentLevel]?.title || 'Pemula',
-        nextLevelTitle: LEVEL_CONFIG[nextLevel]?.title || 'Max',
-        currentXP: user.xp,
-        xpNeededForNext: nextLevelXP,
-        xpInCurrentLevel,
-        xpToNextLevel: nextLevelXP - user.xp,
-        progress: Math.min(progress, 100)
+// Alias for backward compatibility
+async function isAuthenticated() {
+    console.log('🔍 isAuthenticated: Checking authentication status...');
+    const authResult = await checkAuth();
+    console.log('🔍 isAuthenticated: Result:', authResult);
+    return authResult.isLoggedIn;
+}
+
+// ============================================
+// GUEST MODE
+// ============================================
+
+function enableGuestMode() {
+    const guestUser = {
+        id: 0,
+        name: "Pengunjung Tamu",
+        email: "tamu@cybercare.com",
+        businessName: "Bisnis Tamu",
+        role: "user",
+        xp: 0,
+        level: 1,
+        dailyStreak: 0,
+        badges: [],
+        completedMaterials: [],
+        quizScores: []
     };
+    
+    setUser(guestUser);
+    localStorage.setItem('guestMode', 'true');
+    return guestUser;
 }
 
-// Update user data (sync with localStorage)
-function updateUserData(updates) {
-    if (!currentUserData) return null;
-    
-    // Update local copy
-    currentUserData = { ...currentUserData, ...updates };
-    
-    // Update in localStorage
-    localStorage.setItem('currentUser', JSON.stringify(currentUserData));
-    
-    return currentUserData;
+function isGuestMode() {
+    return localStorage.getItem('guestMode') === 'true';
 }
 
-// Note: Each page now handles its own authentication check
-// This prevents race conditions and ensures proper async handling
+// ============================================
+// HELPER FUNCTIONS
+// ============================================
+
+// Get current user (from localStorage)
+function getCurrentUser() {
+    return getUser();
+}
+
+// Check if logged in (quick check without API call)
+function isLoggedIn() {
+    return !!getToken() || isGuestMode();
+}
+
+// Export functions for use in other scripts
+if (typeof window !== 'undefined') {
+    window.login = login;
+    window.register = register;
+    window.logout = logout;
+    window.checkAuth = checkAuth;
+    window.isAuthenticated = isAuthenticated;
+    window.getCurrentUser = getCurrentUser;
+    window.isLoggedIn = isLoggedIn;
+    window.enableGuestMode = enableGuestMode;
+    window.isGuestMode = isGuestMode;
+    window.clearAuth = clearAuth;
+}

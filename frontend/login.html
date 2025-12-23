@@ -636,7 +636,7 @@
             </div>
 
             <!-- Login Form -->
-            <form id="loginForm">
+            <form id="loginForm" onsubmit="return false;">
                 <!-- Email Field -->
                 <div class="form-group">
                     <label class="form-label" for="email">
@@ -715,6 +715,15 @@
                         <polyline points="12 5 19 12 12 19"></polyline>
                     </svg>
                 </button>
+                
+                <!-- Guest Access Button -->
+                <button type="button" class="btn btn-secondary" id="guestBtn" onclick="continueAsGuest()" style="margin-top: 1rem; background: rgba(148, 163, 184, 0.1); border: 1px solid rgba(148, 163, 184, 0.3); color: #cbd5e1;">
+                    <span class="btn-text">Lanjutkan sebagai Tamu</span>
+                    <svg class="btn-icon" viewBox="0 0 24 24">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </button>
             </form>
 
             <!-- Divider -->
@@ -733,24 +742,33 @@
 
     <script src="js/auth.js"></script>
     <script>
+        // Global alert function
+        let alertElement, alertMessageElement;
+        
+        function showAlert(message, type = 'error') {
+            if (!alertElement) {
+                alertElement = document.getElementById('alert');
+                alertMessageElement = document.getElementById('alertMessage');
+            }
+            alertElement.className = `alert alert-${type}`;
+            alertMessageElement.textContent = message;
+            alertElement.style.display = 'flex';
+            
+            setTimeout(() => {
+                alertElement.style.display = 'none';
+            }, 5000);
+        }
+        
         // ============================================
         // CHECK IF ALREADY LOGGED IN
         // ============================================
         (async function checkIfAlreadyLoggedIn() {
-            // Check if user is already logged in with backend
-            try {
-                const response = await fetch('/api/check_session', {
-                    credentials: 'include'
-                });
-                const result = await response.json();
-                
-                if (result.success && result.data.isLoggedIn) {
-                    console.log('User already logged in, redirecting to dashboard...');
-                    window.location.replace('dashboard.html');
-                    return;
-                }
-            } catch (e) {
-                console.log('Session check error:', e);
+            const isAuth = await isAuthenticated();
+            
+            if (isAuth) {
+                console.log('User already logged in, redirecting to dashboard...');
+                window.location.replace('dashboard.html');
+                return;
             }
             
             // User not logged in, initialize login page
@@ -784,8 +802,6 @@
             const form = document.getElementById('loginForm');
             const emailInput = document.getElementById('email');
             const passwordInput = document.getElementById('password');
-            const alert = document.getElementById('alert');
-            const alertMessage = document.getElementById('alertMessage');
 
             // Real-time validation
             emailInput.addEventListener('blur', function() {
@@ -802,17 +818,6 @@
                 }
             });
 
-            // Show alert function
-            function showAlert(message, type = 'error') {
-                alert.className = `alert alert-${type}`;
-                alertMessage.textContent = message;
-                alert.style.display = 'flex';
-                
-                setTimeout(() => {
-                    alert.style.display = 'none';
-                }, 5000);
-            }
-
             // Handle form submission
             form.addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -823,7 +828,6 @@
             
             const email = emailInput.value;
             const password = passwordInput.value;
-            const rememberMe = document.getElementById('rememberMe').checked;
             
             // Validate inputs
             if (!email || !password) {
@@ -837,19 +841,16 @@
             btnIcon.style.display = 'none';
             
             try {
-                // Check if handleLogin is available
-                if (typeof window.handleLogin !== 'function') {
-                    showAlert('Error: Sistem autentikasi belum siap. Silakan refresh halaman.', 'error');
-                    loginBtn.disabled = false;
-                    btnText.textContent = 'Masuk';
-                    btnIcon.style.display = 'block';
-                    return;
-                }
-
+                console.log('🔐 Attempting login...');
+                
                 // Attempt login
-                const result = await window.handleLogin(email, password, rememberMe);
+                const result = await login(email, password);
+                
+                console.log('📬 Login result:', result);
                 
                 if (result.success) {
+                    console.log('✅ Login successful, redirecting to dashboard...');
+                    
                     // Show success message
                     showAlert('Login berhasil! Mengalihkan...', 'success');
                     
@@ -858,6 +859,8 @@
                         window.location.href = 'dashboard.html';
                     }, 800);
                 } else {
+                    console.warn('❌ Login failed:', result.message);
+                    
                     // Show error message
                     showAlert(result.message || 'Login gagal. Silakan coba lagi.', 'error');
                     
@@ -867,7 +870,7 @@
                     btnIcon.style.display = 'block';
                 }
             } catch (error) {
-                console.error('Login error:', error);
+                console.error('💥 Login error:', error);
                 showAlert('Terjadi kesalahan sistem. Silakan coba lagi.', 'error');
                 
                 // Re-enable button
@@ -888,6 +891,41 @@
                     this.parentElement.style.transform = 'translateY(0)';
                 });
             });
+        }
+        
+        // ============================================
+        // GUEST ACCESS FUNCTION
+        // ============================================
+        function continueAsGuest() {
+            console.log('🚪 Continuing as guest...');
+            
+            // Set guest mode flag
+            localStorage.setItem('guestMode', 'true');
+            
+            // Create guest user
+            const guestUser = {
+                id: 0,
+                name: "Pengunjung Tamu",
+                email: "tamu@cybercare.com",
+                businessName: "Bisnis Tamu",
+                role: "user",
+                xp: 0,
+                level: 1,
+                dailyStreak: 0,
+                badges: [],
+                completedMaterials: [],
+                quizScores: []
+            };
+            
+            localStorage.setItem('currentUser', JSON.stringify(guestUser));
+            
+            // Show message
+            showAlert('Melanjutkan sebagai tamu...', 'success');
+            
+            // Redirect to dashboard
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 500);
         }
     </script>
 </body>

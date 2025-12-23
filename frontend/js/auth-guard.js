@@ -22,15 +22,16 @@
         if (sessionValid) {
             console.log('✅ Authentication Guard: Access granted (local session valid)');
             
+            // NO LONGER REDIRECTING - Allow guest access
             // Optionally verify with backend in background (non-blocking)
             isLoggedIn().then(backendValid => {
                 if (!backendValid) {
-                    console.warn('⚠️ Backend session invalid, redirecting to login...');
-                    alert('Sesi Anda telah berakhir. Silakan login kembali.');
-                    window.location.replace('login.html');
+                    console.warn('⚠️ Backend session invalid, but allowing guest access');
+                    // REMOVED: alert('Sesi Anda telah berakhir. Silakan login kembali.');
+                    // REMOVED: window.location.replace('login.html');
                 }
             }).catch(err => {
-                console.warn('⚠️ Backend check failed:', err);
+                console.warn('⚠️ Backend check failed, allowing guest access:', err);
             });
             
             return; // Allow access

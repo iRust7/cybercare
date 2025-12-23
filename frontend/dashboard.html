@@ -864,58 +864,11 @@
         (async function checkAuthentication() {
             console.log('🔐 Starting authentication check...');
             
-            try {
-                // Always check with backend first for dashboard access
-                const response = await fetch('/api/check_session', {
-                    credentials: 'include'
-                });
-                
-                const result = await response.json();
-                
-                if (result.success && result.data.isLoggedIn) {
-                    console.log('✅ Backend session valid');
-                    
-                    // Update localStorage with backend data
-                    if (result.data.user) {
-                        localStorage.setItem('currentUser', JSON.stringify(result.data.user));
-                        localStorage.setItem('authToken', 'cookie-session');
-                        
-                        const expiry = Date.now() + (30 * 60 * 1000); // 30 minutes
-                        localStorage.setItem('sessionExpiry', expiry.toString());
-                        
-                        // Re-initialize auth with synced data
-                        initAuth();
-                    }
-                    
-                    // Load dashboard
-                    loadDashboard();
-                } else {
-                    // Not authenticated - BUT USER WANTS TO REMOVE AUTH
-                    console.warn('❌ Not authenticated, but allowing access as Demo User');
-                    
-                    // Create dummy user for display
-                    const demoUser = {
-                        id: 0,
-                        name: "Pengunjung Tamu",
-                        email: "tamu@cybercare.com",
-                        businessName: "Bisnis Tamu",
-                        role: "user",
-                        xp: 0,
-                        level: 1,
-                        dailyStreak: 0,
-                        badges: [],
-                        completedMaterials: [],
-                        quizScores: []
-                    };
-                    
-                    localStorage.setItem('currentUser', JSON.stringify(demoUser));
-                    initAuth();
-                    loadDashboard();
-                }
-            } catch (error) {
-                console.error('❌ Authentication check failed:', error);
-                // Allow access anyway
-                const demoUser = {
+            const guestMode = localStorage.getItem('guestMode');
+            
+            if (guestMode === 'true') {
+                console.log('✅ Guest mode enabled');
+                const guestUser = {
                     id: 0,
                     name: "Pengunjung Tamu",
                     email: "tamu@cybercare.com",
@@ -928,9 +881,20 @@
                     completedMaterials: [],
                     quizScores: []
                 };
-                localStorage.setItem('currentUser', JSON.stringify(demoUser));
-                initAuth();
+                localStorage.setItem('currentUser', JSON.stringify(guestUser));
                 loadDashboard();
+                return;
+            }
+            
+            // Check if user is authenticated
+            const isAuth = await isAuthenticated();
+            
+            if (isAuth) {
+                console.log('✅ User authenticated');
+                loadDashboard();
+            } else {
+                console.warn('❌ Not authenticated - redirecting to login');
+                window.location.href = 'login.html';
             }
         })();
         

@@ -3,13 +3,14 @@ package handlers
 import (
 	"crypto/sha256"
 	"cybercare-backend/config"
+	"cybercare-backend/middleware"
 	"cybercare-backend/models"
 	"encoding/hex"
 	"math"
 	"net/http"
+	"strings"
 	"time"
 
-	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 )
 
@@ -19,7 +20,7 @@ func hashPassword(password string) string {
 	return hex.EncodeToString(hash[:])
 }
 
-// Login handles user login
+// Login handles user login with JWT
 func Login(c *gin.Context) {
 	var req models.LoginRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -48,10 +49,11 @@ func Login(c *gin.Context) {
 	now := time.Now()
 	config.DB.Model(&user).Update("last_login", now)
 
-	// Calculate and update streak
+	// Get gamification data
 	var gamification models.UserGamification
 	config.DB.Where("user_id = ?", user.ID).First(&gamification)
 
+	// Update streak
 	today := time.Now().Format("2006-01-02")
 	var lastLoginDate string
 	if user.LastLogin != nil {
@@ -74,7 +76,6 @@ func Login(c *gin.Context) {
 	// Get user's badges
 	var userBadges []models.UserBadge
 	config.DB.Preload("Badge").Where("user_id = ?", user.ID).Find(&userBadges)
-
 	badges := []map[string]interface{}{}
 	for _, ub := range userBadges {
 		badges = append(badges, map[string]interface{}{
@@ -94,10 +95,6 @@ func Login(c *gin.Context) {
 		completedMaterialIDs = append(completedMaterialIDs, m.MaterialID)
 	}
 
-	// Get in-progress materials
-	var inProgressMaterials []models.UserMaterial
-	config.DB.Where("user_id = ? AND status = ?", user.ID, "in_progress").Find(&inProgressMaterials)
-
 	// Get quiz scores
 	var quizResults []models.QuizResult
 	config.DB.Where("user_id = ?", user.ID).Order("completed_at DESC").Limit(5).Find(&quizResults)
@@ -111,40 +108,43 @@ func Login(c *gin.Context) {
 		})
 	}
 
-	// Create session
-	session := sessions.Default(c)
-	session.Set("user_id", user.ID)
-	session.Set("user_email", user.Email)
-	session.Set("user_role", user.Role)
-	session.Save()
+	// Generate JWT token
+	token, err := middleware.GenerateJWT(user.ID, user.Email, user.Role)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, models.Response{
+			Success: false,
+			Message: "Failed to generate authentication token",
+		})
+		return
+	}
 
 	// Prepare response
 	userData := map[string]interface{}{
-		"id":                  user.ID,
-		"name":                user.Name,
-		"email":               user.Email,
-		"businessName":        user.BusinessName,
-		"role":                user.Role,
-		"xp":                  gamification.TotalXP,
-		"level":               gamification.Level,
-		"dailyStreak":         newStreak,
-		"badges":              badges,
-		"completedMaterials":  completedMaterialIDs,
-		"inProgressMaterials": inProgressMaterials,
-		"quizScores":          quizScores,
-		"lastActiveDate":      today,
+		"id":                 user.ID,
+		"name":               user.Name,
+		"email":              user.Email,
+		"businessName":       user.BusinessName,
+		"role":               user.Role,
+		"xp":                 gamification.TotalXP,
+		"level":              gamification.Level,
+		"dailyStreak":        newStreak,
+		"badges":             badges,
+		"completedMaterials": completedMaterialIDs,
+		"quizScores":         quizScores,
+		"lastActiveDate":     today,
 	}
 
 	c.JSON(http.StatusOK, models.Response{
 		Success: true,
 		Message: "Login berhasil",
 		Data: map[string]interface{}{
-			"user": userData,
+			"user":  userData,
+			"token": token,
 		},
 	})
 }
 
-// Register handles user registration
+// Register handles user registration with JWT
 func Register(c *gin.Context) {
 	var req models.RegisterRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -194,57 +194,80 @@ func Register(c *gin.Context) {
 	}
 	config.DB.Create(&gamification)
 
-	// Create session
-	session := sessions.Default(c)
-	session.Set("user_id", user.ID)
-	session.Set("user_email", user.Email)
-	session.Set("user_role", user.Role)
-	session.Save()
+	// Generate JWT token
+	token, err := middleware.GenerateJWT(user.ID, user.Email, user.Role)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, models.Response{
+			Success: false,
+			Message: "Failed to generate authentication token",
+		})
+		return
+	}
 
 	// Prepare response
 	userData := map[string]interface{}{
-		"id":                  user.ID,
-		"name":                user.Name,
-		"email":               user.Email,
-		"businessName":        user.BusinessName,
-		"role":                user.Role,
-		"xp":                  0,
-		"level":               1,
-		"dailyStreak":         0,
-		"badges":              []interface{}{},
-		"completedMaterials":  []interface{}{},
-		"inProgressMaterials": []interface{}{},
-		"quizScores":          []interface{}{},
-		"lastActiveDate":      time.Now().Format("2006-01-02"),
+		"id":                 user.ID,
+		"name":               user.Name,
+		"email":              user.Email,
+		"businessName":       user.BusinessName,
+		"role":               user.Role,
+		"xp":                 0,
+		"level":              1,
+		"dailyStreak":        0,
+		"badges":             []interface{}{},
+		"completedMaterials": []interface{}{},
+		"quizScores":         []interface{}{},
+		"lastActiveDate":     time.Now().Format("2006-01-02"),
 	}
 
 	c.JSON(http.StatusOK, models.Response{
 		Success: true,
 		Message: "Registrasi berhasil",
 		Data: map[string]interface{}{
-			"user": userData,
+			"user":  userData,
+			"token": token,
 		},
 	})
 }
 
-// Logout handles user logout
+// Logout handles user logout (client-side token removal)
 func Logout(c *gin.Context) {
-	session := sessions.Default(c)
-	session.Clear()
-	session.Save()
-
 	c.JSON(http.StatusOK, models.Response{
 		Success: true,
 		Message: "Logout berhasil",
 	})
 }
 
-// CheckSession checks if user is logged in
-func CheckSession(c *gin.Context) {
-	session := sessions.Default(c)
-	userID := session.Get("user_id")
+// CheckAuth verifies JWT token and returns user data
+func CheckAuth(c *gin.Context) {
+	authHeader := c.GetHeader("Authorization")
 
-	if userID == nil {
+	// No token = not authenticated
+	if authHeader == "" {
+		c.JSON(http.StatusOK, models.Response{
+			Success: true,
+			Data: map[string]interface{}{
+				"isLoggedIn": false,
+			},
+		})
+		return
+	}
+
+	// Parse token
+	tokenParts := strings.Split(authHeader, " ")
+	if len(tokenParts) != 2 || tokenParts[0] != "Bearer" {
+		c.JSON(http.StatusOK, models.Response{
+			Success: true,
+			Data: map[string]interface{}{
+				"isLoggedIn": false,
+			},
+		})
+		return
+	}
+
+	// Validate token
+	claims, err := middleware.ValidateJWT(tokenParts[1])
+	if err != nil {
 		c.JSON(http.StatusOK, models.Response{
 			Success: true,
 			Data: map[string]interface{}{
@@ -256,7 +279,7 @@ func CheckSession(c *gin.Context) {
 
 	// Get user data
 	var user models.User
-	if err := config.DB.First(&user, userID).Error; err != nil {
+	if err := config.DB.First(&user, claims.UserID).Error; err != nil {
 		c.JSON(http.StatusOK, models.Response{
 			Success: true,
 			Data: map[string]interface{}{
@@ -372,10 +395,8 @@ func AwardPoints(c *gin.Context) {
 		config.DB.Where("requirement_type = ? AND requirement_value <= ?", "level", newLevel).Find(&badges)
 
 		for _, badge := range badges {
-			// Check if user already has this badge
 			var existingBadge models.UserBadge
 			if err := config.DB.Where("user_id = ? AND badge_id = ?", userID, badge.ID).First(&existingBadge).Error; err != nil {
-				// Award new badge
 				userBadge := models.UserBadge{
 					UserID:  userID,
 					BadgeID: badge.ID,
@@ -409,7 +430,6 @@ func AwardPoints(c *gin.Context) {
 func UpdateStreak(c *gin.Context) {
 	userID := c.GetUint("user_id")
 
-	// Get user and gamification data
 	var user models.User
 	config.DB.First(&user, userID)
 
@@ -438,33 +458,9 @@ func UpdateStreak(c *gin.Context) {
 			streakContinued = true
 		}
 
-		// Update streak and last login
 		config.DB.Model(&gamification).Update("daily_streak", newStreak)
 		now := time.Now()
 		config.DB.Model(&user).Update("last_login", now)
-	}
-
-	// Check for streak-based badges
-	newBadges := []map[string]interface{}{}
-	var badges []models.Badge
-	config.DB.Where("requirement_type = ? AND requirement_value <= ?", "streak", newStreak).Find(&badges)
-
-	for _, badge := range badges {
-		var existingBadge models.UserBadge
-		if err := config.DB.Where("user_id = ? AND badge_id = ?", userID, badge.ID).First(&existingBadge).Error; err != nil {
-			userBadge := models.UserBadge{
-				UserID:  userID,
-				BadgeID: badge.ID,
-			}
-			config.DB.Create(&userBadge)
-
-			newBadges = append(newBadges, map[string]interface{}{
-				"id":          badge.ID,
-				"name":        badge.Name,
-				"description": badge.Description,
-				"icon":        badge.Icon,
-			})
-		}
 	}
 
 	c.JSON(http.StatusOK, models.Response{
@@ -474,7 +470,6 @@ func UpdateStreak(c *gin.Context) {
 			"oldStreak":       oldStreak,
 			"newStreak":       newStreak,
 			"streakContinued": streakContinued,
-			"newBadges":       newBadges,
 		},
 	})
 }
@@ -483,15 +478,12 @@ func UpdateStreak(c *gin.Context) {
 func GetProgress(c *gin.Context) {
 	userID := c.GetUint("user_id")
 
-	// Get gamification data
 	var gamification models.UserGamification
 	config.DB.Where("user_id = ?", userID).First(&gamification)
 
-	// Get badge count
 	var badgeCount int64
 	config.DB.Model(&models.UserBadge{}).Where("user_id = ?", userID).Count(&badgeCount)
 
-	// Get badges
 	var userBadges []models.UserBadge
 	config.DB.Preload("Badge").Where("user_id = ?", userID).Order("earned_at DESC").Find(&userBadges)
 	badges := []map[string]interface{}{}
@@ -505,30 +497,14 @@ func GetProgress(c *gin.Context) {
 		})
 	}
 
-	// Get completed materials count
 	var completedMaterials int64
 	config.DB.Model(&models.UserMaterial{}).Where("user_id = ? AND status = ?", userID, "completed").Count(&completedMaterials)
 
-	// Get quiz attempts
 	var quizAttempts int64
 	config.DB.Model(&models.QuizResult{}).Where("user_id = ?", userID).Count(&quizAttempts)
 
-	// Get average quiz score
 	var avgScore float64
 	config.DB.Model(&models.QuizResult{}).Where("user_id = ?", userID).Select("AVG(score)").Scan(&avgScore)
-
-	// Get recent quizzes
-	var quizResults []models.QuizResult
-	config.DB.Preload("Quiz").Where("user_id = ?", userID).Order("completed_at DESC").Limit(10).Find(&quizResults)
-	recentQuizzes := []map[string]interface{}{}
-	for _, qr := range quizResults {
-		recentQuizzes = append(recentQuizzes, map[string]interface{}{
-			"id":          qr.Quiz.ID,
-			"title":       qr.Quiz.Title,
-			"score":       qr.Score,
-			"completedAt": qr.CompletedAt,
-		})
-	}
 
 	c.JSON(http.StatusOK, models.Response{
 		Success: true,
@@ -542,7 +518,6 @@ func GetProgress(c *gin.Context) {
 			"quizAttempts":       quizAttempts,
 			"avgQuizScore":       math.Round(avgScore*100) / 100,
 			"badges":             badges,
-			"recentQuizzes":      recentQuizzes,
 		},
 	})
 }
