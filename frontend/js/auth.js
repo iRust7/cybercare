@@ -103,6 +103,7 @@ async function handleRegister(userData) {
         const response = await fetch(`${API_BASE_URL}/register`, {
             method: 'POST',
             headers: getAuthHeaders(),
+            credentials: 'include',
             body: JSON.stringify(userData)
         });
 
@@ -148,6 +149,7 @@ async function handleLogin(email, password, rememberMe = false) {
         const response = await fetch(`${API_BASE_URL}/login`, {
             method: 'POST',
             headers: getAuthHeaders(),
+            credentials: 'include',
             body: JSON.stringify({ email, password })
         });
 
@@ -210,7 +212,8 @@ async function handleLogout() {
         // Notify backend of logout
         await fetch(`${API_BASE_URL}/logout`, { 
             method: 'POST',
-            headers: getAuthHeaders()
+            headers: getAuthHeaders(),
+            credentials: 'include'
         });
         
         // Log logout for security audit

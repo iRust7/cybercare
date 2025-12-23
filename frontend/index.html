@@ -3,12 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CyberCare - Platform Edukasi Keamanan Siber untuk UMKM Indonesia</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/animations.css">
+    <title>CyberCare - Platform Keamanan Siber UMKM Indonesia</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -16,88 +14,119 @@
             box-sizing: border-box;
         }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
-            color: #e2e8f0;
-            overflow-x: hidden;
-            position: relative;
-            min-height: 100vh;
+        :root {
+            --primary: #0A0E27;
+            --secondary: #1A1F3A;
+            --accent: #FFB800;
+            --accent-glow: #FFA500;
+            --text: #E4E7EB;
+            --text-dim: #9CA3AF;
+            --card-bg: rgba(26, 31, 58, 0.6);
+            --glass: rgba(255, 255, 255, 0.05);
         }
 
-        /* Background Animation */
-        .bg-shapes {
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Modern Gradient Mesh Background */
+        .gradient-bg {
             position: fixed;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
+            top: 0;
+            left: 0;
             z-index: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(255, 184, 0, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 20%, rgba(168, 85, 247, 0.08) 0%, transparent 50%),
+                        linear-gradient(135deg, #0A0E27 0%, #1A1F3A 100%);
+        }
+
+        .gradient-orbs {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
             overflow: hidden;
             pointer-events: none;
         }
 
-        .bg-shape {
+        .orb {
             position: absolute;
             border-radius: 50%;
-            opacity: 0.03;
+            filter: blur(80px);
+            opacity: 0.4;
             animation: float 20s infinite ease-in-out;
         }
 
-        .bg-shape:nth-child(1) {
-            width: 400px;
-            height: 400px;
-            background: linear-gradient(135deg, #c9a055, #d4af37);
-            top: -100px;
-            left: -100px;
-            animation-delay: 0s;
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 184, 0, 0.3), transparent);
+            top: -200px;
+            right: -200px;
+            animation-duration: 25s;
         }
 
-        .bg-shape:nth-child(2) {
-            width: 300px;
-            height: 300px;
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
-            bottom: -50px;
-            right: -50px;
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.3), transparent);
+            bottom: -150px;
+            left: -150px;
+            animation-duration: 20s;
             animation-delay: 5s;
         }
 
-        .bg-shape:nth-child(3) {
-            width: 200px;
-            height: 200px;
-            background: linear-gradient(135deg, #c9a055, #d4af37);
-            top: 50%;
-            right: 10%;
+        .orb-3 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.3), transparent);
+            top: 40%;
+            left: 50%;
+            animation-duration: 30s;
             animation-delay: 10s;
         }
 
         @keyframes float {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            25% { transform: translate(20px, -20px) rotate(90deg); }
-            50% { transform: translate(0, -40px) rotate(180deg); }
-            75% { transform: translate(-20px, -20px) rotate(270deg); }
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+            66% {
+                transform: translate(-30px, 30px) scale(0.9);
+            }
         }
 
         /* Navigation */
-        .landing-nav {
+        nav {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(201, 160, 85, 0.1);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            background: rgba(10, 14, 39, 0.8);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .landing-nav.scrolled {
-            background: rgba(15, 23, 42, 0.95);
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+        nav.scrolled {
+            background: rgba(10, 14, 39, 0.95);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
         }
 
         .nav-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 1.25rem 2rem;
             display: flex;
@@ -108,28 +137,41 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 12px;
+            font-family: 'Space Grotesk', sans-serif;
             font-size: 1.5rem;
             font-weight: 700;
-            color: #ffffff;
+            color: #fff;
             text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: translateY(-2px);
         }
 
         .logo-icon {
-            font-size: 2rem;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-glow));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(255, 184, 0, 0.3);
         }
 
         .nav-links {
             display: flex;
-            align-items: center;
             gap: 2rem;
+            align-items: center;
         }
 
         .nav-link {
-            color: #cbd5e1;
+            color: var(--text-dim);
             text-decoration: none;
             font-weight: 500;
-            font-size: 0.95rem;
+            font-size: 0.938rem;
             transition: color 0.3s ease;
             position: relative;
         }
@@ -141,291 +183,342 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: linear-gradient(90deg, #c9a055, #d4af37);
-            transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            background: var(--accent);
+            transition: width 0.3s ease;
         }
 
         .nav-link:hover {
-            color: #c9a055;
+            color: var(--text);
         }
 
         .nav-link:hover::after {
             width: 100%;
         }
 
-        .btn-nav-primary {
-            padding: 0.625rem 1.5rem;
-            background: linear-gradient(135deg, #c9a055, #d4af37);
-            color: #0f172a;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        .cta-btn {
+            padding: 0.75rem 1.75rem;
+            background: linear-gradient(135deg, var(--accent), var(--accent-glow));
+            color: var(--primary);
             text-decoration: none;
-            display: inline-block;
+            font-weight: 600;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 20px rgba(255, 184, 0, 0.3);
         }
 
-        .btn-nav-primary:hover {
+        .cta-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(201, 160, 85, 0.4);
+            box-shadow: 0 8px 30px rgba(255, 184, 0, 0.5);
         }
 
         /* Hero Section */
         .hero {
             position: relative;
-            padding: 140px 2rem 100px;
+            z-index: 10;
             min-height: 100vh;
             display: flex;
             align-items: center;
-            z-index: 1;
+            padding: 6rem 2rem 4rem;
         }
 
         .hero-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1.1fr 0.9fr;
             gap: 4rem;
             align-items: center;
         }
 
         .hero-content {
-            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .hero-badge {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 8px;
             padding: 0.5rem 1rem;
-            background: rgba(201, 160, 85, 0.1);
-            border: 1px solid rgba(201, 160, 85, 0.2);
+            background: rgba(255, 184, 0, 0.1);
+            border: 1px solid rgba(255, 184, 0, 0.2);
             border-radius: 50px;
-            color: #c9a055;
+            color: var(--accent);
             font-size: 0.875rem;
             font-weight: 500;
             margin-bottom: 1.5rem;
         }
 
-        .badge-icon svg {
-            width: 16px;
-            height: 16px;
-            stroke: currentColor;
+        .badge-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
         }
 
-        .hero-title {
-            font-size: 3.5rem;
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(1.2);
+            }
+        }
+
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 4rem;
             font-weight: 800;
             line-height: 1.1;
             margin-bottom: 1.5rem;
-            color: #ffffff;
-        }
-
-        .highlight {
-            background: linear-gradient(135deg, #c9a055, #d4af37);
+            background: linear-gradient(135deg, #ffffff 0%, #e4e7eb 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .hero-subtitle {
-            font-size: 1.25rem;
-            line-height: 1.6;
-            color: #94a3b8;
-            margin-bottom: 2.5rem;
-            max-width: 600px;
+        .gradient-text {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-glow) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .hero-cta {
+        .hero-description {
+            font-size: 1.25rem;
+            color: var(--text-dim);
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+        }
+
+        .hero-actions {
             display: flex;
             gap: 1rem;
             margin-bottom: 3rem;
-            flex-wrap: wrap;
         }
 
-        .btn-hero-primary {
+        .btn-primary {
             padding: 1rem 2rem;
-            background: linear-gradient(135deg, #c9a055, #d4af37);
-            color: #0f172a;
-            border: none;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            background: linear-gradient(135deg, var(--accent), var(--accent-glow));
+            color: var(--primary);
             text-decoration: none;
+            font-weight: 700;
+            border-radius: 14px;
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 30px rgba(255, 184, 0, 0.4);
+            font-size: 1.0625rem;
         }
 
-        .btn-hero-primary:hover {
+        .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 12px 32px rgba(201, 160, 85, 0.4);
+            box-shadow: 0 12px 40px rgba(255, 184, 0, 0.6);
         }
 
-        .btn-hero-secondary {
+        .btn-secondary {
             padding: 1rem 2rem;
-            background: transparent;
-            color: #cbd5e1;
-            border: 2px solid rgba(201, 160, 85, 0.3);
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            color: var(--text);
             text-decoration: none;
-            display: inline-block;
+            font-weight: 600;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            font-size: 1.0625rem;
         }
 
-        .btn-hero-secondary:hover {
-            background: rgba(201, 160, 85, 0.1);
-            border-color: #c9a055;
-            color: #c9a055;
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
         }
 
         .hero-stats {
             display: flex;
             gap: 2rem;
-            align-items: center;
         }
 
-        .stat-item {
-            text-align: center;
+        .stat {
+            flex: 1;
         }
 
         .stat-number {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #c9a055;
-            margin-bottom: 0.25rem;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            font-family: 'Space Grotesk', sans-serif;
         }
 
         .stat-label {
-            font-size: 0.875rem;
-            color: #64748b;
-        }
-
-        .stat-divider {
-            width: 1px;
-            height: 40px;
-            background: rgba(148, 163, 184, 0.2);
+            color: var(--text-dim);
+            font-size: 0.938rem;
         }
 
         /* Hero Visual */
         .hero-visual {
             position: relative;
-            height: 500px;
-            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s backwards;
+            height: 600px;
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s backwards;
         }
 
-        .visual-card {
+        .floating-card {
             position: absolute;
-            background: rgba(30, 41, 59, 0.6);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(201, 160, 85, 0.1);
-            border-radius: 16px;
-            padding: 1.5rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            background: linear-gradient(135deg, rgba(26, 31, 58, 0.8), rgba(10, 14, 39, 0.8));
+            backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 1.75rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .visual-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 16px 48px rgba(201, 160, 85, 0.2);
-            border-color: rgba(201, 160, 85, 0.3);
+        .floating-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 80px rgba(255, 184, 0, 0.2);
+            border-color: rgba(255, 184, 0, 0.3);
         }
 
-        .visual-card.card-1 {
-            top: 20px;
-            left: 20px;
-            width: 200px;
+        .card-1 {
+            top: 40px;
+            left: 40px;
+            width: 280px;
             animation: float 6s infinite ease-in-out;
         }
 
-        .visual-card.card-2 {
-            top: 120px;
-            right: 40px;
-            width: 220px;
-            animation: float 8s infinite ease-in-out 1s;
+        .card-2 {
+            top: 180px;
+            right: 20px;
+            width: 300px;
+            animation: float 8s infinite ease-in-out 2s;
         }
 
-        .visual-card.card-3 {
-            bottom: 60px;
-            left: 60px;
-            width: 190px;
-            animation: float 7s infinite ease-in-out 2s;
+        .card-3 {
+            bottom: 80px;
+            left: 80px;
+            width: 260px;
+            animation: float 7s infinite ease-in-out 4s;
         }
 
         .card-icon {
-            font-size: 2.5rem;
-            margin-bottom: 0.75rem;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, rgba(255, 184, 0, 0.2), rgba(255, 165, 0, 0.1));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
         }
 
-        .card-text {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #e2e8f0;
+        .card-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: #fff;
             margin-bottom: 0.5rem;
         }
 
-        .card-status {
+        .card-desc {
             font-size: 0.875rem;
-            color: #94a3b8;
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+
+        .card-status {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 8px;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 10px #10b981;
+        }
+
+        .status-text {
+            font-size: 0.813rem;
+            color: #10b981;
+            font-weight: 500;
         }
 
         /* Features Section */
         .features {
-            padding: 100px 2rem;
             position: relative;
-            z-index: 1;
+            z-index: 10;
+            padding: 8rem 2rem;
+            background: linear-gradient(180deg, transparent 0%, rgba(10, 14, 39, 0.5) 100%);
         }
 
         .section-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 1rem;
+            margin-bottom: 5rem;
         }
 
         .section-subtitle {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.938rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .section-description {
             font-size: 1.125rem;
-            color: #94a3b8;
+            color: var(--text-dim);
             max-width: 700px;
             margin: 0 auto;
         }
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
             gap: 2rem;
         }
 
         .feature-card {
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.6) 0%, rgba(15, 23, 42, 0.5) 100%);
-            backdrop-filter: blur(20px);
-            border: 2px solid rgba(201, 160, 85, 0.15);
-            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(26, 31, 58, 0.6), rgba(10, 14, 39, 0.6));
+            backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
             padding: 2.5rem;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
         .feature-card::before {
@@ -433,395 +526,231 @@
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #c9a055, #d4af37);
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-glow));
             transform: scaleX(0);
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 60px rgba(201, 160, 85, 0.25), 0 0 30px rgba(201, 160, 85, 0.1);
-            border-color: rgba(201, 160, 85, 0.4);
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.7) 100%);
+            transform-origin: left;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .feature-card:hover::before {
             transform: scaleX(1);
         }
 
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 184, 0, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
         .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, rgba(255, 184, 0, 0.15), rgba(255, 165, 0, 0.05));
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, rgba(201, 160, 85, 0.1), rgba(212, 175, 55, 0.05));
-            border-radius: 16px;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            margin-bottom: 1.5rem;
+            transition: all 0.4s ease;
         }
 
         .feature-card:hover .feature-icon {
             transform: scale(1.1) rotate(5deg);
-            background: linear-gradient(135deg, rgba(201, 160, 85, 0.2), rgba(212, 175, 55, 0.1));
+            background: linear-gradient(135deg, rgba(255, 184, 0, 0.25), rgba(255, 165, 0, 0.15));
         }
 
-        .feature-title {
-            font-size: 1.35rem;
+        h3 {
+            font-size: 1.375rem;
             font-weight: 700;
-            color: #ffffff;
+            color: #fff;
             margin-bottom: 1rem;
-            letter-spacing: -0.02em;
-            transition: color 0.3s ease;
         }
 
-        .feature-card:hover .feature-title {
-            color: #c9a055;
-        }
-
-        .feature-description {
-            font-size: 0.9375rem;
+        .feature-desc {
+            color: var(--text-dim);
             line-height: 1.7;
-            color: #94a3b8;
-            transition: color 0.3s ease;
-        }
-
-        .feature-card:hover .feature-description {
-            color: #cbd5e1;
-        }
-
-        /* Benefits Section */
-        .benefits {
-            padding: 100px 2rem;
-            background: rgba(30, 41, 59, 0.3);
-            position: relative;
-            z-index: 1;
-        }
-
-        .benefits-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .benefit-list {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .benefit-item {
-            display: flex;
-            gap: 1.5rem;
-            align-items: flex-start;
-        }
-
-        .benefit-icon {
-            font-size: 2rem;
-            flex-shrink: 0;
-        }
-
-        .benefit-content h4 {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: #ffffff;
-            margin-bottom: 0.5rem;
-        }
-
-        .benefit-content p {
-            font-size: 0.9375rem;
-            line-height: 1.6;
-            color: #94a3b8;
-        }
-
-        .benefits-visual {
-            position: relative;
-        }
-
-        .stats-card {
-            background: rgba(30, 41, 59, 0.6);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(201, 160, 85, 0.2);
-            border-radius: 20px;
-            padding: 3rem;
-            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
-        }
-
-        .stats-item {
-            padding: 2rem 0;
-            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
-        }
-
-        .stats-item:last-child {
-            border-bottom: none;
-            padding-bottom: 0;
-        }
-
-        .stats-item:first-child {
-            padding-top: 0;
-        }
-
-        .stats-number {
-            font-size: 3rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #c9a055, #d4af37);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-        }
-
-        .stats-label {
-            font-size: 1rem;
-            color: #cbd5e1;
-            line-height: 1.5;
         }
 
         /* CTA Section */
         .cta-section {
-            padding: 100px 2rem;
             position: relative;
-            z-index: 1;
+            z-index: 10;
+            padding: 8rem 2rem;
         }
 
         .cta-container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
+            background: linear-gradient(135deg, rgba(26, 31, 58, 0.8), rgba(10, 14, 39, 0.8));
+            backdrop-filter: blur(30px) saturate(180%);
+            border: 2px solid rgba(255, 184, 0, 0.2);
+            border-radius: 32px;
+            padding: 5rem 3rem;
             text-align: center;
-            background: rgba(30, 41, 59, 0.4);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(201, 160, 85, 0.2);
-            border-radius: 24px;
-            padding: 4rem 3rem;
-            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: radial-gradient(circle at 50% 0%, rgba(255, 184, 0, 0.1), transparent);
+            pointer-events: none;
         }
 
         .cta-title {
             font-size: 2.5rem;
-            font-weight: 700;
-            color: #ffffff;
+            font-weight: 800;
+            color: #fff;
             margin-bottom: 1rem;
         }
 
-        .cta-subtitle {
+        .cta-desc {
             font-size: 1.125rem;
-            color: #94a3b8;
+            color: var(--text-dim);
             margin-bottom: 2.5rem;
-            line-height: 1.6;
-        }
-
-        .btn-cta {
-            padding: 1.25rem 2.5rem;
-            background: linear-gradient(135deg, #c9a055, #d4af37);
-            color: #0f172a;
-            border: none;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 1.125rem;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .btn-cta:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 16px 48px rgba(201, 160, 85, 0.4);
         }
 
         /* Footer */
-        .footer {
-            background: rgba(15, 23, 42, 0.8);
-            border-top: 1px solid rgba(201, 160, 85, 0.1);
-            padding: 4rem 2rem 2rem;
+        footer {
             position: relative;
-            z-index: 1;
+            z-index: 10;
+            background: rgba(10, 14, 39, 0.8);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 4rem 2rem 2rem;
         }
 
         .footer-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
-        .footer-content {
+        .footer-grid {
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1fr;
             gap: 3rem;
             margin-bottom: 3rem;
         }
 
-        .footer-brand {
-            max-width: 300px;
-        }
-
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
+        .footer-brand h4 {
             font-size: 1.5rem;
-            font-weight: 700;
-            color: #ffffff;
             margin-bottom: 1rem;
         }
 
-        .footer-tagline {
-            font-size: 0.9375rem;
-            color: #94a3b8;
-            line-height: 1.6;
+        .footer-desc {
+            color: var(--text-dim);
+            line-height: 1.7;
         }
 
-        .footer-column h4 {
+        .footer-column h5 {
             font-size: 1rem;
-            font-weight: 600;
-            color: #ffffff;
+            color: #fff;
             margin-bottom: 1rem;
         }
 
-        .footer-column a {
-            display: block;
-            color: #94a3b8;
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-link {
+            color: var(--text-dim);
             text-decoration: none;
-            font-size: 0.9375rem;
-            margin-bottom: 0.75rem;
             transition: color 0.3s ease;
         }
 
-        .footer-column a:hover {
-            color: #c9a055;
+        .footer-link:hover {
+            color: var(--accent);
         }
 
         .footer-bottom {
             padding-top: 2rem;
-            border-top: 1px solid rgba(148, 163, 184, 0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
             text-align: center;
-        }
-
-        .footer-bottom p {
-            color: #64748b;
+            color: var(--text-dim);
             font-size: 0.875rem;
         }
 
-        /* Responsive Design */
+        /* Responsive */
         @media (max-width: 968px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
             .hero-container {
                 grid-template-columns: 1fr;
-                gap: 3rem;
             }
 
             .hero-visual {
-                height: 400px;
+                height: 500px;
             }
 
-            .hero-title {
-                font-size: 2.5rem;
-            }
-
-            .benefits-content {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-content {
+            .footer-grid {
                 grid-template-columns: 1fr 1fr;
-                gap: 2rem;
             }
 
-            .footer-brand {
-                grid-column: 1 / -1;
+            .nav-links {
+                display: none;
             }
         }
 
         @media (max-width: 640px) {
-            .nav-links {
-                gap: 1rem;
-            }
-
-            .nav-link {
-                display: none;
-            }
-
-            .hero {
-                padding: 100px 1.5rem 60px;
-            }
-
-            .hero-title {
+            h1 {
                 font-size: 2rem;
             }
 
-            .hero-subtitle {
-                font-size: 1rem;
+            h2 {
+                font-size: 2rem;
             }
 
-            .hero-cta {
+            .hero-actions {
                 flex-direction: column;
             }
 
             .hero-stats {
-                flex-wrap: wrap;
+                flex-direction: column;
                 gap: 1.5rem;
             }
 
-            .features, .benefits, .cta-section {
-                padding: 60px 1.5rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .cta-container {
-                padding: 3rem 2rem;
-            }
-
-            .footer-content {
+            .footer-grid {
                 grid-template-columns: 1fr;
             }
-        }
-
-        /* SVG Icons */
-        .icon {
-            width: 20px;
-            height: 20px;
-            stroke: currentColor;
-            fill: none;
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-
-        /* Smooth Scroll */
-        html {
-            scroll-behavior: smooth;
         }
     </style>
 </head>
 <body>
-    <!-- Background Shapes -->
-    <div class="bg-shapes">
-        <div class="bg-shape"></div>
-        <div class="bg-shape"></div>
-        <div class="bg-shape"></div>
+    <!-- Background -->
+    <div class="gradient-bg"></div>
+    <div class="gradient-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
     </div>
 
-    <!-- Navigation Bar -->
-    <nav class="landing-nav" id="mainNav">
+    <!-- Navigation -->
+    <nav id="mainNav">
         <div class="nav-container">
-            <a href="index.html" class="logo">
-                <svg class="icon logo-icon" viewBox="0 0 24 24">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                </svg>
-                <span class="logo-text">CyberCare</span>
+            <a href="/" class="logo">
+                <div class="logo-icon">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
+                </div>
+                <span>CyberCare</span>
             </a>
             <div class="nav-links">
                 <a href="#features" class="nav-link">Fitur</a>
                 <a href="#benefits" class="nav-link">Manfaat</a>
                 <a href="#about" class="nav-link">Tentang</a>
-                <a href="login.html" class="btn-nav-primary">Mulai Belajar</a>
+                <a href="/frontend/login.html" class="cta-btn">Mulai Sekarang</a>
             </div>
         </div>
     </nav>
@@ -831,95 +760,84 @@
         <div class="hero-container">
             <div class="hero-content">
                 <div class="hero-badge">
-                    <svg class="icon badge-icon" viewBox="0 0 24 24">
-                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-                    </svg>
-                    <span>Platform Edukasi Keamanan Siber #1 untuk UMKM</span>
+                    <span class="badge-dot"></span>
+                    <span>Platform #1 Keamanan Siber UMKM Indonesia</span>
                 </div>
-                <h1 class="hero-title">
-                    Lindungi Bisnis UMKM Anda dari<br>
-                    <span class="highlight">Ancaman Siber</span>
+                <h1>
+                    Lindungi Bisnis<br>
+                    <span class="gradient-text">UMKM Anda</span><br>
+                    dari Ancaman Siber
                 </h1>
-                <p class="hero-subtitle">
-                    Pelajari keamanan siber dengan cara yang mudah dipahami. 
-                    Materi praktis, kuis interaktif, dan simulasi ancaman nyata 
-                    untuk melindungi bisnis digital Anda.
+                <p class="hero-description">
+                    Platform edukasi keamanan siber terlengkap dengan materi interaktif, 
+                    kuis, dan simulasi ancaman nyata. Dibuat khusus untuk pelaku UMKM Indonesia.
                 </p>
-                <div class="hero-cta">
-                    <a href="login.html" class="btn-hero-primary">
+                <div class="hero-actions">
+                    <a href="/frontend/login.html" class="btn-primary">
                         Mulai Belajar Gratis
-                        <svg class="icon" viewBox="0 0 24 24">
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                            <polyline points="12 5 19 12 12 19"></polyline>
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M5 12h14m-7-7l7 7-7 7"/>
                         </svg>
                     </a>
-                    <a href="#features" class="btn-hero-secondary">
-                        Pelajari Lebih Lanjut
-                    </a>
+                    <a href="#features" class="btn-secondary">Pelajari Lebih Lanjut</a>
                 </div>
                 <div class="hero-stats">
-                    <div class="stat-item">
-                        <div class="stat-number">1,500+</div>
+                    <div class="stat">
+                        <div class="stat-number">2,500+</div>
                         <div class="stat-label">UMKM Terlindungi</div>
                     </div>
-                    <div class="stat-divider"></div>
-                    <div class="stat-item">
-                        <div class="stat-number">5</div>
-                        <div class="stat-label">Materi Lengkap</div>
+                    <div class="stat">
+                        <div class="stat-number">5+</div>
+                        <div class="stat-label">Modul Lengkap</div>
                     </div>
-                    <div class="stat-divider"></div>
-                    <div class="stat-item">
-                        <div class="stat-number">20+</div>
+                    <div class="stat">
+                        <div class="stat-number">30+</div>
                         <div class="stat-label">Tips Keamanan</div>
                     </div>
                 </div>
             </div>
             <div class="hero-visual">
-                <div class="visual-card card-1">
+                <div class="floating-card card-1">
                     <div class="card-icon">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#c9a055" stroke-width="2">
-                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        <svg width="32" height="32" fill="none" stroke="#FFB800" stroke-width="2.5">
+                            <rect x="3" y="11" width="18" height="11" rx="2"/>
+                            <path d="M7 11V7a5 5 0 0110 0v4"/>
                         </svg>
                     </div>
-                    <div class="card-text">Password Aman</div>
+                    <div class="card-title">Password Terlindungi</div>
+                    <div class="card-desc">Sistem keamanan berlapis dengan enkripsi tingkat tinggi</div>
                     <div class="card-status">
-                        <svg class="icon" viewBox="0 0 24 24" style="width: 16px; height: 16px; stroke: #10b981;">
-                            <polyline points="20 6 9 17 4 12"></polyline>
-                        </svg>
-                        Dipelajari
+                        <span class="status-dot"></span>
+                        <span class="status-text">Aktif & Aman</span>
                     </div>
                 </div>
-                <div class="visual-card card-2">
+
+                <div class="floating-card card-2">
                     <div class="card-icon">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#c9a055" stroke-width="2">
-                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                            <polyline points="22,6 12,13 2,6"></polyline>
+                        <svg width="32" height="32" fill="none" stroke="#FFB800" stroke-width="2.5">
+                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
                         </svg>
                     </div>
-                    <div class="card-text">Deteksi Phishing</div>
+                    <div class="card-title">Monitoring Real-time</div>
+                    <div class="card-desc">Deteksi ancaman dan aktivitas mencurigakan secara langsung</div>
                     <div class="card-status">
-                        <svg class="icon" viewBox="0 0 24 24" style="width: 16px; height: 16px; stroke: #f59e0b;">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <polyline points="12 6 12 12 16 14"></polyline>
-                        </svg>
-                        Sedang Belajar
+                        <span class="status-dot"></span>
+                        <span class="status-text">Online</span>
                     </div>
                 </div>
-                <div class="visual-card card-3">
+
+                <div class="floating-card card-3">
                     <div class="card-icon">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#c9a055" stroke-width="2">
-                            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
-                            <line x1="1" y1="10" x2="23" y2="10"></line>
+                        <svg width="32" height="32" fill="none" stroke="#FFB800" stroke-width="2.5">
+                            <path d="M12 22s-8-4-8-10V5l8-3 8 3v7c0 6-8 10-8 10z"/>
+                            <path d="M9 12l2 2 4-4"/>
                         </svg>
                     </div>
-                    <div class="card-text">Transaksi Aman</div>
+                    <div class="card-title">Verified & Trusted</div>
+                    <div class="card-desc">Dipercaya oleh ribuan UMKM di seluruh Indonesia</div>
                     <div class="card-status">
-                        <svg class="icon" viewBox="0 0 24 24" style="width: 16px; height: 16px; stroke: #64748b;">
-                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                        </svg>
-                        Belum Dimulai
+                        <span class="status-dot"></span>
+                        <span class="status-text">Terverifikasi</span>
                     </div>
                 </div>
             </div>
@@ -927,171 +845,101 @@
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="features">
+    <section class="features" id="features">
         <div class="section-container">
             <div class="section-header">
-                <h2 class="section-title">Fitur Unggulan CyberCare</h2>
-                <p class="section-subtitle">
-                    Platform lengkap dengan berbagai fitur untuk membantu UMKM belajar keamanan siber
+                <div class="section-subtitle">FITUR UNGGULAN</div>
+                <h2>Semua Yang Anda Butuhkan</h2>
+                <p class="section-description">
+                    Platform lengkap dengan berbagai fitur untuk melindungi bisnis UMKM Anda
                 </p>
             </div>
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#c9a055" stroke-width="2">
-                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                        <svg width="40" height="40" fill="none" stroke="#FFB800" stroke-width="2.5">
+                            <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/>
+                            <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>
                         </svg>
                     </div>
-                    <h3 class="feature-title">Materi Edukasi</h3>
-                    <p class="feature-description">
-                        5 modul pembelajaran lengkap tentang phishing, password, transaksi digital, 
-                        privasi data, dan keamanan perangkat.
+                    <h3>Materi Edukasi Lengkap</h3>
+                    <p class="feature-desc">
+                        5 modul pembelajaran komprehensif tentang keamanan siber, 
+                        dari dasar hingga lanjutan, khusus untuk UMKM.
                     </p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#c9a055" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
-                        </svg>
-                    </div>
-                    <h3 class="feature-title">Kuis Interaktif</h3>
-                    <p class="feature-description">
-                        Uji pemahaman Anda dengan kuis interaktif setelah setiap materi. 
-                        Dapatkan feedback langsung dan skor akhir.
-                    </p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#c9a055" stroke-width="2">
-                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
-                            <line x1="12" y1="9" x2="12" y2="13"></line>
-                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
-                        </svg>
-                    </div>
-                    <h3 class="feature-title">Simulasi Ancaman</h3>
-                    <p class="feature-description">
-                        Latih kemampuan mengenali ancaman dengan simulasi email phishing, 
-                        WhatsApp penipuan, dan website palsu.
-                    </p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#c9a055" stroke-width="2">
-                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                        </svg>
-                    </div>
-                    <h3 class="feature-title">Tips Harian</h3>
-                    <p class="feature-description">
-                        20+ tips keamanan siber yang bisa langsung diterapkan untuk 
-                        melindungi bisnis Anda sehari-hari.
-                    </p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#c9a055" stroke-width="2">
-                            <line x1="18" y1="20" x2="18" y2="10"></line>
-                            <line x1="12" y1="20" x2="12" y2="4"></line>
-                            <line x1="6" y1="20" x2="6" y2="14"></line>
-                        </svg>
-                    </div>
-                    <h3 class="feature-title">Tracking Progress</h3>
-                    <p class="feature-description">
-                        Pantau progres belajar Anda dengan dashboard yang menampilkan 
-                        materi selesai, skor kuis, dan pencapaian.
-                    </p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#c9a055" stroke-width="2">
-                            <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
-                            <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
-                        </svg>
-                    </div>
-                    <h3 class="feature-title">Konten Praktis</h3>
-                    <p class="feature-description">
-                        Semua materi dirancang khusus untuk UMKM dengan bahasa yang mudah 
-                        dipahami dan contoh kasus nyata.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Benefits Section -->
-    <section id="benefits" class="benefits">
-        <div class="section-container">
-            <div class="benefits-content">
-                <div class="benefits-text">
-                    <h2 class="section-title">Mengapa UMKM Perlu Belajar Keamanan Siber?</h2>
-                    <div class="benefit-list">
-                        <div class="benefit-item">
-                            <div class="benefit-icon">
-                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c9a055" stroke-width="2">
-                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                                </svg>
-                            </div>
-                            <div class="benefit-content">
-                                <h4>Lindungi Data Pelanggan</h4>
-                                <p>Jaga kepercayaan pelanggan dengan melindungi data pribadi dan transaksi mereka dari pencurian.</p>
-                            </div>
-                        </div>
-                        <div class="benefit-item">
-                            <div class="benefit-icon">
-                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c9a055" stroke-width="2">
-                                    <line x1="12" y1="1" x2="12" y2="23"></line>
-                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                                </svg>
-                            </div>
-                            <div class="benefit-content">
-                                <h4>Hindari Kerugian Finansial</h4>
-                                <p>Cegah penipuan online, pembobolan rekening, dan kerugian akibat serangan siber.</p>
-                            </div>
-                        </div>
-                        <div class="benefit-item">
-                            <div class="benefit-icon">
-                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c9a055" stroke-width="2">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                                </svg>
-                            </div>
-                            <div class="benefit-content">
-                                <h4>Tingkatkan Reputasi Bisnis</h4>
-                                <p>UMKM yang aman dan terpercaya akan lebih dipilih oleh pelanggan dalam berbelanja online.</p>
-                            </div>
-                        </div>
-                        <div class="benefit-item">
-                            <div class="benefit-icon">
-                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c9a055" stroke-width="2">
-                                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                                    <polyline points="19 12 12 19 5 12"></polyline>
-                                </svg>
-                            </div>
-                            <div class="benefit-content">
-                                <h4>Berkembang dengan Aman</h4>
-                                <p>Fokus mengembangkan bisnis tanpa khawatir dengan ancaman keamanan siber.</p>
-                            </div>
-                        </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="40" height="40" fill="none" stroke="#FFB800" stroke-width="2.5">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/>
+                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
                     </div>
+                    <h3>Kuis Interaktif</h3>
+                    <p class="feature-desc">
+                        Uji pemahaman Anda dengan kuis interaktif yang memberikan 
+                        feedback langsung dan skor real-time.
+                    </p>
                 </div>
-                <div class="benefits-visual">
-                    <div class="stats-card">
-                        <div class="stats-item">
-                            <div class="stats-number">43%</div>
-                            <div class="stats-label">Serangan siber menargetkan UMKM</div>
-                        </div>
-                        <div class="stats-item">
-                            <div class="stats-number">60%</div>
-                            <div class="stats-label">UMKM tutup setelah serangan siber</div>
-                        </div>
-                        <div class="stats-item">
-                            <div class="stats-number">3.2M</div>
-                            <div class="stats-label">Kerugian rata-rata per insiden</div>
-                        </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="40" height="40" fill="none" stroke="#FFB800" stroke-width="2.5">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                            <line x1="12" y1="9" x2="12" y2="13"/>
+                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
                     </div>
+                    <h3>Simulasi Ancaman</h3>
+                    <p class="feature-desc">
+                        Latih kemampuan mendeteksi ancaman dengan simulasi 
+                        phishing, malware, dan serangan cyber nyata.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="40" height="40" fill="none" stroke="#FFB800" stroke-width="2.5">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                        </svg>
+                    </div>
+                    <h3>Progress Tracking</h3>
+                    <p class="feature-desc">
+                        Monitor perkembangan belajar Anda dengan dashboard 
+                        analytics yang detail dan mudah dipahami.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="40" height="40" fill="none" stroke="#FFB800" stroke-width="2.5">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                    </div>
+                    <h3>Badge & Achievement</h3>
+                    <p class="feature-desc">
+                        Kumpulkan badge dan pencapaian untuk memotivasi 
+                        pembelajaran Anda tentang keamanan siber.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="40" height="40" fill="none" stroke="#FFB800" stroke-width="2.5">
+                            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10 9 9 9 8 9"/>
+                        </svg>
+                    </div>
+                    <h3>Tips & Best Practices</h3>
+                    <p class="feature-desc">
+                        30+ tips keamanan praktis yang dapat langsung 
+                        diterapkan untuk melindungi bisnis Anda.
+                    </p>
                 </div>
             </div>
         </div>
@@ -1101,61 +949,66 @@
     <section class="cta-section">
         <div class="cta-container">
             <h2 class="cta-title">Siap Melindungi Bisnis Anda?</h2>
-            <p class="cta-subtitle">
-                Mulai belajar keamanan siber hari ini dan lindungi bisnis UMKM Anda dari ancaman digital
+            <p class="cta-desc">
+                Bergabunglah dengan ribuan UMKM Indonesia yang sudah melindungi 
+                bisnis mereka dengan CyberCare. Mulai belajar gratis hari ini!
             </p>
-            <a href="login.html" class="btn-cta">
-                Mulai Belajar Sekarang
-                <svg class="icon" viewBox="0 0 24 24">
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                    <polyline points="12 5 19 12 12 19"></polyline>
+            <a href="/frontend/login.html" class="btn-primary">
+                Mulai Sekarang - Gratis
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M5 12h14m-7-7l7 7-7 7"/>
                 </svg>
             </a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer id="about" class="footer">
+    <footer id="about">
         <div class="footer-container">
-            <div class="footer-content">
+            <div class="footer-grid">
                 <div class="footer-brand">
-                    <div class="footer-logo">
-                        <svg class="icon logo-icon" viewBox="0 0 24 24">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                        </svg>
-                        <span class="logo-text">CyberCare</span>
-                    </div>
-                    <p class="footer-tagline">
-                        Platform edukasi keamanan siber terpercaya untuk UMKM Indonesia
+                    <h4>🛡️ CyberCare</h4>
+                    <p class="footer-desc">
+                        Platform edukasi keamanan siber terpercaya untuk UMKM Indonesia. 
+                        Melindungi bisnis digital Anda dari ancaman cyber.
                     </p>
                 </div>
                 <div class="footer-column">
-                    <h4>Platform</h4>
-                    <a href="login.html">Login</a>
-                    <a href="register.html">Register</a>
-                    <a href="#features">Fitur</a>
-                    <a href="#benefits">Manfaat</a>
+                    <h5>Platform</h5>
+                    <div class="footer-links">
+                        <a href="/frontend/login.html" class="footer-link">Login</a>
+                        <a href="/frontend/register.html" class="footer-link">Register</a>
+                        <a href="#features" class="footer-link">Fitur</a>
+                        <a href="#benefits" class="footer-link">Manfaat</a>
+                    </div>
                 </div>
                 <div class="footer-column">
-                    <h4>Sumber Daya</h4>
-                    <a href="tips.html">Tips Keamanan</a>
-                    <a href="#about">Tentang Kami</a>
-                    <a href="#contact">Kontak</a>
+                    <h5>Sumber Daya</h5>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">Dokumentasi</a>
+                        <a href="#" class="footer-link">Tutorial</a>
+                        <a href="#" class="footer-link">Blog</a>
+                        <a href="#" class="footer-link">FAQ</a>
+                    </div>
                 </div>
                 <div class="footer-column">
-                    <h4>Legal</h4>
-                    <a href="#privacy">Kebijakan Privasi</a>
-                    <a href="#terms">Syarat & Ketentuan</a>
+                    <h5>Legal</h5>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">Privasi</a>
+                        <a href="#" class="footer-link">Syarat & Ketentuan</a>
+                        <a href="#" class="footer-link">Kontak</a>
+                    </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 CyberCare. Platform Edukasi Keamanan Siber untuk UMKM Indonesia.</p>
+                <p>&copy; 2025 CyberCare. Platform Keamanan Siber UMKM Indonesia. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
+    <script src="js/auth.js"></script>
     <script>
-        // Navbar scroll effect
+        // Navigation scroll effect
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('mainNav');
             if (window.scrollY > 50) {
@@ -1165,19 +1018,25 @@
             }
         });
 
-        // Smooth scroll for anchor links
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
+
+        // Redirect if logged in
+        (async function redirectIfLoggedIn() {
+            const hasSession = initAuth();
+            if (hasSession && checkSessionTimeout()) {
+                console.log('✅ User logged in, redirecting to dashboard...');
+                window.location.replace('/frontend/dashboard.html');
+            }
+        })();
     </script>
 </body>
 </html>

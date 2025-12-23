@@ -58,7 +58,8 @@ func main() {
 		MaxAge:   86400 * 7, // 7 days
 		HttpOnly: true,
 		Secure:   false, // Set to true in production with HTTPS
-		SameSite: 2,     // SameSiteDefaultMode
+		SameSite: 0,     // SameSiteDefaultMode - Allow cross-origin
+		Domain:   "",    // Empty for localhost
 	})
 	r.Use(sessions.Sessions("cybercare_session", store))
 
@@ -90,10 +91,60 @@ func main() {
 		})
 	})
 
-	// Serve frontend static files
-	r.Static("/frontend", "../frontend")
+	// Serve static assets (CSS, JS, images, data) - always accessible
+	r.Static("/frontend/css", "../frontend/css")
+	r.Static("/frontend/js", "../frontend/js")
+	r.Static("/frontend/data", "../frontend/data")
+
+	// Public HTML pages (no authentication required)
+	r.GET("/frontend/login.html", func(c *gin.Context) {
+		// Check if already logged in
+		session := sessions.Default(c)
+		if userID := session.Get("user_id"); userID != nil {
+			c.Redirect(302, "/frontend/dashboard.html")
+			return
+		}
+		c.File("../frontend/login.html")
+	})
+
+	r.GET("/frontend/register.html", func(c *gin.Context) {
+		// Check if already logged in
+		session := sessions.Default(c)
+		if userID := session.Get("user_id"); userID != nil {
+			c.Redirect(302, "/frontend/dashboard.html")
+			return
+		}
+		c.File("../frontend/register.html")
+	})
+
+	r.GET("/frontend/index.html", func(c *gin.Context) {
+		// Check if logged in, redirect to dashboard
+		session := sessions.Default(c)
+		if userID := session.Get("user_id"); userID != nil {
+			c.Redirect(302, "/frontend/dashboard.html")
+			return
+		}
+		c.File("../frontend/index.html")
+	})
+
+	// Protected HTML pages (authentication required)
+	r.GET("/frontend/dashboard.html", func(c *gin.Context) {
+		session := sessions.Default(c)
+		if userID := session.Get("user_id"); userID == nil {
+			c.Redirect(302, "/frontend/login.html")
+			return
+		}
+		c.File("../frontend/dashboard.html")
+	})
+
+	// Root redirect
 	r.GET("/", func(c *gin.Context) {
-		c.Redirect(302, "/frontend/index.html")
+		session := sessions.Default(c)
+		if userID := session.Get("user_id"); userID != nil {
+			c.Redirect(302, "/frontend/dashboard.html")
+		} else {
+			c.Redirect(302, "/frontend/index.html")
+		}
 	})
 
 	// Start server
