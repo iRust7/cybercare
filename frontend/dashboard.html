@@ -866,7 +866,7 @@
             
             try {
                 // Always check with backend first for dashboard access
-                const response = await fetch('http://localhost:8080/api/check_session', {
+                const response = await fetch('/api/check_session', {
                     credentials: 'include'
                 });
                 
@@ -890,15 +890,47 @@
                     // Load dashboard
                     loadDashboard();
                 } else {
-                    // Not authenticated
-                    console.warn('❌ Not authenticated');
-                    alert('Anda harus login terlebih dahulu untuk mengakses dashboard.');
-                    window.location.replace('login.html');
+                    // Not authenticated - BUT USER WANTS TO REMOVE AUTH
+                    console.warn('❌ Not authenticated, but allowing access as Demo User');
+                    
+                    // Create dummy user for display
+                    const demoUser = {
+                        id: 0,
+                        name: "Pengunjung Tamu",
+                        email: "tamu@cybercare.com",
+                        businessName: "Bisnis Tamu",
+                        role: "user",
+                        xp: 0,
+                        level: 1,
+                        dailyStreak: 0,
+                        badges: [],
+                        completedMaterials: [],
+                        quizScores: []
+                    };
+                    
+                    localStorage.setItem('currentUser', JSON.stringify(demoUser));
+                    initAuth();
+                    loadDashboard();
                 }
             } catch (error) {
                 console.error('❌ Authentication check failed:', error);
-                alert('Terjadi kesalahan saat memverifikasi sesi. Silakan login kembali.');
-                window.location.replace('login.html');
+                // Allow access anyway
+                const demoUser = {
+                    id: 0,
+                    name: "Pengunjung Tamu",
+                    email: "tamu@cybercare.com",
+                    businessName: "Bisnis Tamu",
+                    role: "user",
+                    xp: 0,
+                    level: 1,
+                    dailyStreak: 0,
+                    badges: [],
+                    completedMaterials: [],
+                    quizScores: []
+                };
+                localStorage.setItem('currentUser', JSON.stringify(demoUser));
+                initAuth();
+                loadDashboard();
             }
         })();
         
@@ -948,12 +980,22 @@
         }
 
         function loadDashboard() {
-            const user = getCurrentUser();
+            let user = getCurrentUser();
             if (!user) {
-                console.warn('No user data found, redirecting to login...');
-                alert('Data user tidak ditemukan. Silakan login kembali.');
-                window.location.replace('login.html');
-                return;
+                // Fallback to demo user if still null
+                user = {
+                    id: 0,
+                    name: "Pengunjung Tamu",
+                    email: "tamu@cybercare.com",
+                    businessName: "Bisnis Tamu",
+                    role: "user",
+                    xp: 0,
+                    level: 1,
+                    dailyStreak: 0,
+                    badges: [],
+                    completedMaterials: [],
+                    quizScores: []
+                };
             }
 
             // Load user info

@@ -38,7 +38,27 @@
     }
     
     // No valid session found, redirect to login
-    console.warn('❌ Authentication Guard: Access denied - redirecting to login');
-    alert('Anda harus login terlebih dahulu untuk mengakses halaman ini.');
-    window.location.replace('login.html');
+    console.warn('❌ Authentication Guard: Access denied - BUT allowing Guest Access');
+    // alert('Anda harus login terlebih dahulu untuk mengakses halaman ini.');
+    // window.location.replace('login.html');
+    
+    // Create guest user if needed
+    if (!localStorage.getItem('currentUser')) {
+        const guestUser = {
+            id: 0,
+            name: "Pengunjung Tamu",
+            email: "tamu@cybercare.com",
+            businessName: "Bisnis Tamu",
+            role: "user",
+            xp: 0,
+            level: 1,
+            dailyStreak: 0,
+            badges: [],
+            completedMaterials: [],
+            quizScores: []
+        };
+        localStorage.setItem('currentUser', JSON.stringify(guestUser));
+        // Initialize auth with guest user
+        initAuth();
+    }
 })();

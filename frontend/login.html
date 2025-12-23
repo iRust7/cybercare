@@ -739,7 +739,7 @@
         (async function checkIfAlreadyLoggedIn() {
             // Check if user is already logged in with backend
             try {
-                const response = await fetch('http://localhost:8080/api/check_session', {
+                const response = await fetch('/api/check_session', {
                     credentials: 'include'
                 });
                 const result = await response.json();

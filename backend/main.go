@@ -58,7 +58,7 @@ func main() {
 		MaxAge:   86400 * 7, // 7 days
 		HttpOnly: true,
 		Secure:   false, // Set to true in production with HTTPS
-		SameSite: 0,     // SameSiteDefaultMode - Allow cross-origin
+		SameSite: 2,     // SameSiteLaxMode (2) - Better for localhost than 0
 		Domain:   "",    // Empty for localhost
 	})
 	r.Use(sessions.Sessions("cybercare_session", store))
@@ -121,13 +121,17 @@ func main() {
 		c.File("../frontend/clear-session.html")
 	})
 
+	// Handle /frontend and /frontend/ redirects
+	r.GET("/frontend", func(c *gin.Context) {
+		c.Redirect(302, "/frontend/index.html")
+	})
+	r.GET("/frontend/", func(c *gin.Context) {
+		c.Redirect(302, "/frontend/index.html")
+	})
+
 	// Protected HTML pages (authentication required)
 	r.GET("/frontend/dashboard.html", func(c *gin.Context) {
-		session := sessions.Default(c)
-		if userID := session.Get("user_id"); userID == nil {
-			c.Redirect(302, "/frontend/login.html")
-			return
-		}
+		// Allow access without login (Frontend handles demo user)
 		c.File("../frontend/dashboard.html")
 	})
 

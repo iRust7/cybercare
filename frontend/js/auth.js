@@ -11,7 +11,8 @@ let authToken = null;
 let sessionExpiry = null;
 
 // API Base URL - Points to Go backend server
-const API_BASE_URL = 'http://localhost:8080/api';
+// Use relative path to avoid CORS/Origin issues
+const API_BASE_URL = '/api';
 
 // Session timeout duration (30 minutes)
 const SESSION_TIMEOUT = 30 * 60 * 1000;

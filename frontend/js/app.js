@@ -21,12 +21,40 @@ document.addEventListener('DOMContentLoaded', async function() {
             currentUser = result.data.user;
             initializeApp();
         } else {
-            // Not logged in, redirect to login
-            window.location.href = 'login.html';
+            // Not logged in, but allow guest access
+            console.log('Guest access enabled');
+            currentUser = {
+                id: 0,
+                name: "Pengunjung Tamu",
+                email: "tamu@cybercare.com",
+                businessName: "Bisnis Tamu",
+                role: "user",
+                xp: 0,
+                level: 1,
+                dailyStreak: 0,
+                badges: [],
+                completedMaterials: [],
+                quizScores: []
+            };
+            initializeApp();
         }
     } catch (error) {
         console.error('Session check error:', error);
-        window.location.href = 'login.html';
+        // Allow guest access on error too
+        currentUser = {
+            id: 0,
+            name: "Pengunjung Tamu",
+            email: "tamu@cybercare.com",
+            businessName: "Bisnis Tamu",
+            role: "user",
+            xp: 0,
+            level: 1,
+            dailyStreak: 0,
+            badges: [],
+            completedMaterials: [],
+            quizScores: []
+        };
+        initializeApp();
     }
 });
 
