@@ -11,6 +11,9 @@ import (
 )
 
 func main() {
+	r.GET("/frontend/admin.html", func(c *gin.Context) {
+		c.File("../frontend/admin.html")
+	})
 	// Initialize database
 	config.InitDB()
 	defer config.CloseDB()
