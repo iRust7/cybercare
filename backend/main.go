@@ -96,35 +96,29 @@ func main() {
 	r.Static("/frontend/js", "../frontend/js")
 	r.Static("/frontend/data", "../frontend/data")
 
+	// Root redirect - redirect to index first
+	r.GET("/", func(c *gin.Context) {
+		c.File("../frontend/index.html")
+	})
+
 	// Public HTML pages (no authentication required)
 	r.GET("/frontend/login.html", func(c *gin.Context) {
-		// Check if already logged in
-		session := sessions.Default(c)
-		if userID := session.Get("user_id"); userID != nil {
-			c.Redirect(302, "/frontend/dashboard.html")
-			return
-		}
+		// Always serve login page, let frontend JavaScript handle redirect if already logged in
 		c.File("../frontend/login.html")
 	})
 
 	r.GET("/frontend/register.html", func(c *gin.Context) {
-		// Check if already logged in
-		session := sessions.Default(c)
-		if userID := session.Get("user_id"); userID != nil {
-			c.Redirect(302, "/frontend/dashboard.html")
-			return
-		}
+		// Always serve register page, let frontend JavaScript handle redirect if already logged in
 		c.File("../frontend/register.html")
 	})
 
 	r.GET("/frontend/index.html", func(c *gin.Context) {
-		// Check if logged in, redirect to dashboard
-		session := sessions.Default(c)
-		if userID := session.Get("user_id"); userID != nil {
-			c.Redirect(302, "/frontend/dashboard.html")
-			return
-		}
+		// Always serve index.html, let frontend handle "Go to Dashboard" button if logged in
 		c.File("../frontend/index.html")
+	})
+
+	r.GET("/frontend/clear-session.html", func(c *gin.Context) {
+		c.File("../frontend/clear-session.html")
 	})
 
 	// Protected HTML pages (authentication required)
@@ -135,16 +129,6 @@ func main() {
 			return
 		}
 		c.File("../frontend/dashboard.html")
-	})
-
-	// Root redirect
-	r.GET("/", func(c *gin.Context) {
-		session := sessions.Default(c)
-		if userID := session.Get("user_id"); userID != nil {
-			c.Redirect(302, "/frontend/dashboard.html")
-		} else {
-			c.Redirect(302, "/frontend/index.html")
-		}
 	})
 
 	// Start server

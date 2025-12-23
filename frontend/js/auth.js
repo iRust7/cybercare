@@ -234,10 +234,8 @@ async function handleLogout() {
 
 // Check if user is logged in (async)
 async function isLoggedIn() {
-    // First check local session
-    if (!initAuth()) {
-        return false;
-    }
+    // Check local session first
+    const localValid = initAuth();
     
     try {
         // Verify session with backend
@@ -254,21 +252,27 @@ async function isLoggedIn() {
             if (result.data.user) {
                 currentUserData = result.data.user;
                 localStorage.setItem('currentUser', JSON.stringify(currentUserData));
+                
+                // Ensure we have a token marker for initAuth
+                if (!localStorage.getItem('authToken')) {
+                    localStorage.setItem('authToken', 'cookie-session');
+                }
+                
+                resetSessionTimeout();
             }
-            
-            // Reset session timeout on activity
-            resetSessionTimeout();
             
             return true;
         }
         
         // Session invalid, clear data
-        clearAuthData();
+        if (localValid) {
+            clearAuthData();
+        }
         return false;
     } catch (error) {
         console.error('Session check error:', error);
         // On error, trust local session if not expired
-        if (sessionExpiry && Date.now() < sessionExpiry) {
+        if (localValid) {
             return true;
         }
         return false;

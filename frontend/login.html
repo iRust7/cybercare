@@ -737,18 +737,20 @@
         // CHECK IF ALREADY LOGGED IN
         // ============================================
         (async function checkIfAlreadyLoggedIn() {
-            // Initialize auth
-            const hasSession = initAuth();
-            
-            if (hasSession) {
-                // User already logged in, check with backend
-                const loggedIn = await isLoggedIn();
+            // Check if user is already logged in with backend
+            try {
+                const response = await fetch('http://localhost:8080/api/check_session', {
+                    credentials: 'include'
+                });
+                const result = await response.json();
                 
-                if (loggedIn) {
+                if (result.success && result.data.isLoggedIn) {
                     console.log('User already logged in, redirecting to dashboard...');
                     window.location.replace('dashboard.html');
                     return;
                 }
+            } catch (e) {
+                console.log('Session check error:', e);
             }
             
             // User not logged in, initialize login page

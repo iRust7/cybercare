@@ -1029,12 +1029,60 @@
             });
         });
 
-        // Redirect if logged in
-        (async function redirectIfLoggedIn() {
-            const hasSession = initAuth();
-            if (hasSession && checkSessionTimeout()) {
-                console.log('✅ User logged in, redirecting to dashboard...');
-                window.location.replace('/frontend/dashboard.html');
+        // Check login status and update UI
+        (async function checkLoginStatus() {
+            // Check local session first
+            let isLoggedIn = initAuth() && checkSessionTimeout();
+            
+            // If not local, check backend (since we removed auto-redirect from backend)
+            if (!isLoggedIn) {
+                try {
+                    const response = await fetch('http://localhost:8080/api/check_session', {
+                        credentials: 'include'
+                    });
+                    const data = await response.json();
+                    if (data.success && data.data.isLoggedIn) {
+                        isLoggedIn = true;
+                        // Update local storage if needed (optional here, dashboard will handle it)
+                    }
+                } catch (e) {
+                    console.log("Session check failed", e);
+                }
+            }
+
+            if (isLoggedIn) {
+                console.log('✅ User logged in, updating UI...');
+                
+                // Update Nav Button
+                const navBtn = document.querySelector('.nav-links .cta-btn');
+                if (navBtn) {
+                    navBtn.textContent = 'Dashboard';
+                    navBtn.href = '/frontend/dashboard.html';
+                }
+                
+                // Update Hero Button
+                const heroBtn = document.querySelector('.hero-actions .btn-primary');
+                if (heroBtn) {
+                    heroBtn.innerHTML = `
+                        Ke Dashboard
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M5 12h14m-7-7l7 7-7 7"/>
+                        </svg>
+                    `;
+                    heroBtn.href = '/frontend/dashboard.html';
+                }
+                
+                // Update CTA Button
+                const ctaBtn = document.querySelector('.cta-container .btn-primary');
+                if (ctaBtn) {
+                    ctaBtn.innerHTML = `
+                        Ke Dashboard
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M5 12h14m-7-7l7 7-7 7"/>
+                        </svg>
+                    `;
+                    ctaBtn.href = '/frontend/dashboard.html';
+                }
             }
         })();
     </script>

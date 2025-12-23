@@ -864,59 +864,40 @@
         (async function checkAuthentication() {
             console.log('🔐 Starting authentication check...');
             
-            // Initialize auth first - this loads from localStorage
-            const hasLocalSession = initAuth();
-            console.log('📦 Local session exists:', hasLocalSession);
-            
-            // If we have a valid local session, trust it first
-            if (hasLocalSession) {
-                console.log('✅ Valid local session found');
-                
-                // Check if session is not expired
-                const sessionValid = checkSessionTimeout();
-                console.log('⏰ Session timeout valid:', sessionValid);
-                
-                if (sessionValid) {
-                    console.log('✅ Session valid, loading dashboard...');
-                    // Load dashboard immediately with local data
-                    loadDashboard();
-                    
-                    // Optionally verify with backend in background (non-blocking)
-                    isLoggedIn().then(backendValid => {
-                        console.log('🔄 Backend verification:', backendValid);
-                        if (!backendValid) {
-                            console.warn('⚠️ Backend verification failed, but local session is valid');
-                        }
-                    }).catch(err => {
-                        console.warn('⚠️ Backend check failed, but continuing with local session:', err);
-                    });
-                    return;
-                } else {
-                    // Session expired
-                    console.warn('❌ Session expired');
-                    alert('Sesi Anda telah berakhir. Silakan login kembali.');
-                    window.location.replace('login.html');
-                    return;
-                }
-            }
-            
-            // No local session, try backend check
-            console.log('🔄 No local session, checking with backend...');
             try {
-                const loggedIn = await isLoggedIn();
+                // Always check with backend first for dashboard access
+                const response = await fetch('http://localhost:8080/api/check_session', {
+                    credentials: 'include'
+                });
                 
-                if (loggedIn) {
-                    console.log('✅ Backend auth successful');
+                const result = await response.json();
+                
+                if (result.success && result.data.isLoggedIn) {
+                    console.log('✅ Backend session valid');
+                    
+                    // Update localStorage with backend data
+                    if (result.data.user) {
+                        localStorage.setItem('currentUser', JSON.stringify(result.data.user));
+                        localStorage.setItem('authToken', 'cookie-session');
+                        
+                        const expiry = Date.now() + (30 * 60 * 1000); // 30 minutes
+                        localStorage.setItem('sessionExpiry', expiry.toString());
+                        
+                        // Re-initialize auth with synced data
+                        initAuth();
+                    }
+                    
+                    // Load dashboard
                     loadDashboard();
                 } else {
-                    // Not authenticated at all
+                    // Not authenticated
                     console.warn('❌ Not authenticated');
                     alert('Anda harus login terlebih dahulu untuk mengakses dashboard.');
                     window.location.replace('login.html');
                 }
             } catch (error) {
                 console.error('❌ Authentication check failed:', error);
-                alert('Terjadi kesalahan. Silakan login kembali.');
+                alert('Terjadi kesalahan saat memverifikasi sesi. Silakan login kembali.');
                 window.location.replace('login.html');
             }
         })();

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clear Session - CyberCare</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0f172a;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            max-width: 500px;
+        }
+        h1 {
+            color: #FFB800;
+            margin-bottom: 1rem;
+        }
+        .btn {
+            padding: 1rem 2rem;
+            background: #FFB800;
+            color: #0f172a;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 0.5rem;
+        }
+        .btn:hover {
+            background: #FFA500;
+        }
+        .status {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Clear Session</h1>
+        <p>Click the button below to clear your current session and reset all cookies/localStorage.</p>
+        <button class="btn" onclick="clearSession()">Clear Session & Logout</button>
+        <div class="status" id="status" style="display: none;"></div>
+    </div>
+
+    <script>
+        async function clearSession() {
+            const statusEl = document.getElementById('status');
+            statusEl.style.display = 'block';
+            statusEl.textContent = '🔄 Clearing session...';
+            
+            try {
+                // 1. Call backend logout
+                await fetch('http://localhost:8080/api/logout', {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+                
+                // 2. Clear all localStorage
+                localStorage.clear();
+                
+                // 3. Clear sessionStorage
+                sessionStorage.clear();
+                
+                statusEl.textContent = '✅ Session cleared! Redirecting to login page...';
+                statusEl.style.background = 'rgba(34, 197, 94, 0.2)';
+                
+                // 4. Redirect to login after 1 second
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1000);
+                
+            } catch (error) {
+                statusEl.textContent = '⚠️ Error clearing session: ' + error.message;
+                statusEl.style.background = 'rgba(239, 68, 68, 0.2)';
+            }
+        }
+    </script>
+</body>
+</html>
