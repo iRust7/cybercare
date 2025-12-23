@@ -11,21 +11,22 @@ import (
 )
 
 func main() {
+	// Set Gin to release mode
+	gin.SetMode(gin.ReleaseMode)
+
+	// Create Gin router
+	r := gin.Default()
+
 	r.GET("/frontend/admin.html", func(c *gin.Context) {
 		c.File("../frontend/admin.html")
 	})
+
 	// Initialize database
 	config.InitDB()
 	defer config.CloseDB()
 
 	// Seed database with demo accounts
 	config.SeedDatabase()
-
-	// Set Gin to release mode
-	gin.SetMode(gin.ReleaseMode)
-
-	// Create Gin router
-	r := gin.Default()
 
 	// CORS middleware - Allow all origins for development
 	r.Use(func(c *gin.Context) {
