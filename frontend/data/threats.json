@@ -1,0 +1,148 @@
+[
+  {
+    "id": 1,
+    "type": "email",
+    "title": "Email Phishing: Verifikasi Akun Bank",
+    "from": "security-bankmandiri@securemail.net",
+    "subject": "URGENT: Verifikasi Akun Anda Segera!",
+    "content": "Kepada Nasabah Yang Terhormat,\n\nKami mendeteksi aktivitas mencurigakan pada akun Anda. Untuk keamanan akun, silakan verifikasi data Anda dengan mengklik link di bawah ini dalam 24 jam, atau akun akan diblokir.\n\nKlik di sini untuk verifikasi: http://bankmandiri-verify.net/login\n\nMasukkan User ID, Password, dan PIN Anda untuk verifikasi.\n\nTerima kasih,\nTim Keamanan Bank Mandiri",
+    "redFlags": [
+      "Alamat email pengirim tidak resmi (bukan @bankmandiri.co.id)",
+      "Bahasa yang mendesak dan mengancam",
+      "Meminta password dan PIN (bank tidak pernah meminta ini)",
+      "Link mengarah ke domain yang berbeda dari bank resmi",
+      "Ada batas waktu yang menekan (24 jam)"
+    ],
+    "explanation": "Ini adalah email phishing klasik. Bank tidak akan pernah meminta Anda memasukkan password atau PIN melalui email. Ciri khas: alamat pengirim palsu, bahasa mendesak, dan link mencurigakan.",
+    "correctAnswer": "threat"
+  },
+  {
+    "id": 2,
+    "type": "whatsapp",
+    "title": "Pesan WhatsApp: Pemenang Undian",
+    "from": "+62 813-xxxx-9876",
+    "sender": "Tim Shopee Official",
+    "content": "🎉 SELAMAT! 🎉\n\nAnda terpilih sebagai pemenang GRAND PRIZE Shopee Anniversary!\n\nHadiah: iPhone 15 Pro Max + Uang Tunai 50 Juta\n\nUntuk klaim hadiah, transfer biaya admin Rp 500.000 ke:\nBCA 1234567890 a/n PT Shopee Digital\n\nSetelah transfer, kirim bukti transfer ke nomor ini.\n\nBerlaku sampai hari ini!",
+    "redFlags": [
+      "Nomor tidak terverifikasi (bukan akun bisnis resmi)",
+      "Meminta transfer uang untuk klaim hadiah",
+      "Tidak ada kode verifikasi atau email resmi",
+      "Tekanan waktu (hari ini saja)",
+      "Hadiah yang terlalu fantastis tanpa partisipasi sebelumnya"
+    ],
+    "explanation": "Ini adalah penipuan berkedok undian. Shopee atau perusahaan resmi tidak akan meminta transfer biaya admin untuk klaim hadiah. Selalu verifikasi melalui channel resmi.",
+    "correctAnswer": "threat"
+  },
+  {
+    "id": 3,
+    "type": "website",
+    "title": "Website Login Palsu: Tokopedia",
+    "url": "tokopedia-login.com",
+    "screenshot": "Website dengan tampilan sangat mirip Tokopedia, meminta username dan password",
+    "details": {
+      "visualSimilarity": "Tampilan 90% mirip website asli",
+      "url": "tokopedia-login.com (bukan tokopedia.com)",
+      "https": "Tidak ada ikon gembok HTTPS",
+      "fields": "Meminta username, password, dan PIN"
+    },
+    "redFlags": [
+      "Domain tidak sesuai (tokopedia-login.com, bukan tokopedia.com)",
+      "Tidak ada HTTPS (tidak aman)",
+      "Meminta PIN (website resmi tidak meminta PIN saat login)",
+      "URL mencurigakan di address bar"
+    ],
+    "explanation": "Ini adalah website phishing yang meniru tampilan Tokopedia. Selalu cek URL dengan teliti - website asli Tokopedia adalah tokopedia.com dengan HTTPS.",
+    "correctAnswer": "threat"
+  },
+  {
+    "id": 4,
+    "type": "email",
+    "title": "Email Resmi: Notifikasi Transaksi",
+    "from": "noreply@tokopedia.com",
+    "subject": "Pesanan Anda Telah Diterima - Order #INV/20241218/XXX",
+    "content": "Halo Budi,\n\nTerima kasih telah berbelanja di Tokopedia!\n\nDetail Pesanan:\n- Nomor Invoice: INV/20241218/XXX\n- Produk: Samsung Galaxy A54 (1x)\n- Total: Rp 5.499.000\n- Status: Menunggu Pembayaran\n\nSilakan selesaikan pembayaran melalui aplikasi Tokopedia Anda.\n\nPunya pertanyaan? Hubungi Customer Service kami melalui aplikasi Tokopedia atau email help@tokopedia.com\n\nSalam,\nTim Tokopedia",
+    "greenFlags": [
+      "Alamat email resmi (@tokopedia.com)",
+      "Tidak meminta informasi sensitif",
+      "Mengarahkan ke aplikasi untuk pembayaran, bukan link eksternal",
+      "Format email profesional dan konsisten",
+      "Ada kontak customer service resmi"
+    ],
+    "explanation": "Ini adalah email resmi dari Tokopedia. Email ini tidak meminta informasi sensitif dan mengarahkan pengguna ke aplikasi resmi untuk menyelesaikan pembayaran.",
+    "correctAnswer": "safe"
+  },
+  {
+    "id": 5,
+    "type": "sms",
+    "title": "SMS OTP Resmi dari Bank",
+    "from": "BCA",
+    "content": "Kode OTP BCA Anda: 478392\n\nGunakan kode ini untuk transaksi transfer sebesar Rp 2.500.000 ke 1234567890.\n\nJANGAN BERIKAN KODE INI KE SIAPAPUN termasuk petugas BCA.\n\nHubungi Halo BCA 1500888 jika bukan Anda yang melakukan transaksi.",
+    "greenFlags": [
+      "Dari nomor resmi BCA",
+      "Memberikan detail transaksi yang spesifik",
+      "Ada peringatan untuk tidak membagikan kode",
+      "Menyediakan nomor customer service resmi",
+      "Tidak ada link atau permintaan data tambahan"
+    ],
+    "explanation": "Ini adalah SMS OTP resmi dari BCA. SMS ini memberikan informasi detail transaksi dan peringatan keamanan. Selalu verifikasi detail transaksi sebelum memasukkan OTP.",
+    "correctAnswer": "safe"
+  },
+  {
+    "id": 6,
+    "type": "email",
+    "title": "Email Phishing: Invoice Palsu",
+    "from": "billing@goog1e-services.com",
+    "subject": "Invoice #2024-G-12345 - Payment Required",
+    "content": "Dear Customer,\n\nYour Google Ads account has been charged $250 for December advertising services.\n\nInvoice: See attached PDF\n\nIf you did not authorize this charge, please click here to dispute: http://google-billing-support.net/dispute\n\nDownload attachment to view full invoice details.\n\nGoogle Billing Team",
+    "redFlags": [
+      "Alamat email mencurigakan (goog1e dengan angka 1, bukan google.com)",
+      "Lampiran yang tidak diminta (could be malware)",
+      "Link eksternal untuk 'dispute' bukan ke website Google resmi",
+      "Bahasa Inggris padahal akun lokal biasanya dalam bahasa Indonesia",
+      "Tagihan yang tidak diharapkan"
+    ],
+    "explanation": "Email phishing yang menggunakan tagihan palsu. Lampiran bisa berisi malware. Google menggunakan email @google.com, bukan @goog1e-services.com.",
+    "correctAnswer": "threat"
+  },
+  {
+    "id": 7,
+    "type": "whatsapp",
+    "title": "Pesan WhatsApp: Konfirmasi Pesanan GoFood",
+    "from": "+62 21-xxxx-xxxx",
+    "sender": "GoFood",
+    "verified": true,
+    "content": "Hai, Kak!\n\nPesanan GoFood Kamu sedang disiapkan:\n\n📦 Nasi Goreng Spesial x2\n📍 Warung Sedap, Jakarta\n🏠 Dikirim ke: Jl. Sudirman No.123\n💰 Total: Rp 50.000 (Sudah dibayar via GoPay)\n\nDriver akan tiba dalam 25 menit.\n\nLacak pesanan di aplikasi Gojek.\n\nTerima kasih! 🙏",
+    "greenFlags": [
+      "Dari nomor bisnis terverifikasi (centang hijau)",
+      "Memberikan detail pesanan yang spesifik",
+      "Tidak meminta informasi tambahan atau pembayaran",
+      "Mengarahkan ke aplikasi resmi untuk tracking",
+      "Format pesan konsisten dengan notifikasi GoFood"
+    ],
+    "explanation": "Ini adalah pesan resmi dari GoFood. Pesan dari nomor bisnis terverifikasi (ada centang hijau), berisi detail lengkap, dan tidak meminta data atau pembayaran tambahan.",
+    "correctAnswer": "safe"
+  },
+  {
+    "id": 8,
+    "type": "website",
+    "title": "Website Resmi: Tokopedia Seller Center",
+    "url": "https://seller.tokopedia.com",
+    "screenshot": "Halaman login Tokopedia Seller Center dengan HTTPS",
+    "details": {
+      "url": "https://seller.tokopedia.com",
+      "https": "Ada ikon gembok (HTTPS aktif)",
+      "ssl": "Sertifikat SSL valid dari Tokopedia",
+      "fields": "Meminta email/username dan password saja",
+      "options": "Login dengan Google / Email"
+    },
+    "greenFlags": [
+      "Domain resmi (seller.tokopedia.com)",
+      "HTTPS aktif dengan sertifikat valid",
+      "Hanya meminta credentials yang wajar (username & password)",
+      "Ada opsi login dengan Google (OAuth secure)",
+      "Tidak ada popup atau redirect mencurigakan"
+    ],
+    "explanation": "Ini adalah website resmi Tokopedia Seller Center. URL sesuai, HTTPS aktif, dan hanya meminta informasi login yang wajar tanpa PIN atau OTP di tahap awal.",
+    "correctAnswer": "safe"
+  }
+]

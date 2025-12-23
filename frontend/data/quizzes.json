@@ -1,0 +1,412 @@
+[
+  {
+    "id": 1,
+    "materialId": 1,
+    "title": "Kuis: Mengenal Phishing",
+    "description": "Uji pemahaman Anda tentang phishing dan cara menghindarinya",
+    "duration": 5,
+    "passingScore": 70,
+    "questions": [
+      {
+        "id": 1,
+        "question": "Apa yang dimaksud dengan phishing?",
+        "options": [
+          "Teknik memancing ikan menggunakan internet",
+          "Teknik penipuan untuk mencuri informasi pribadi dengan menyamar sebagai entitas terpercaya",
+          "Program untuk menangkap virus komputer",
+          "Aplikasi untuk mengirim email massal"
+        ],
+        "correctAnswer": 1,
+        "explanation": "Phishing adalah teknik penipuan di mana penyerang berpura-pura menjadi entitas terpercaya untuk mencuri informasi sensitif seperti password, data rekening, atau informasi pribadi lainnya."
+      },
+      {
+        "id": 2,
+        "question": "Manakah yang BUKAN merupakan tanda-tanda email phishing?",
+        "options": [
+          "Alamat email pengirim mencurigakan",
+          "Bahasa yang mendesak atau mengancam",
+          "Email berisi logo perusahaan resmi",
+          "Permintaan untuk memberikan password atau PIN"
+        ],
+        "correctAnswer": 2,
+        "explanation": "Logo perusahaan dapat dengan mudah dicopy oleh penipu. Tanda-tanda phishing yang lebih akurat adalah alamat pengirim mencurigakan, bahasa mendesak, dan permintaan informasi sensitif."
+      },
+      {
+        "id": 3,
+        "question": "Anda menerima email dari 'bank' yang meminta Anda mengklik link untuk memverifikasi akun. Apa yang seharusnya Anda lakukan?",
+        "options": [
+          "Langsung klik link dan masukkan data yang diminta",
+          "Balas email tersebut dan tanyakan apakah itu benar",
+          "Abaikan email dan hubungi bank melalui nomor resmi untuk verifikasi",
+          "Forward email ke teman untuk meminta pendapat"
+        ],
+        "correctAnswer": 2,
+        "explanation": "Cara teraman adalah mengabaikan email mencurigakan dan menghubungi bank melalui nomor resmi yang tertera di website atau kartu ATM untuk memverifikasi apakah email tersebut asli."
+      },
+      {
+        "id": 4,
+        "question": "Mengapa verifikasi dua faktor (2FA) penting untuk melindungi dari phishing?",
+        "options": [
+          "Karena membuat password lebih panjang",
+          "Karena mengirimkan email notifikasi setiap login",
+          "Karena memerlukan konfirmasi tambahan selain password, sehingga lebih sulit diretas",
+          "Karena otomatis mendeteksi email phishing"
+        ],
+        "correctAnswer": 2,
+        "explanation": "Verifikasi dua faktor menambahkan lapisan keamanan ekstra dengan memerlukan konfirmasi tambahan (seperti kode SMS atau aplikasi authenticator) selain password, membuat akun tetap aman meski password tercuri."
+      },
+      {
+        "id": 5,
+        "question": "Sebelum mengklik link di email, apa yang sebaiknya Anda lakukan?",
+        "options": [
+          "Langsung klik jika emailnya terlihat penting",
+          "Arahkan kursor mouse ke link untuk melihat URL sebenarnya",
+          "Klik link hanya jika ada logo perusahaan",
+          "Copy-paste link ke browser"
+        ],
+        "correctAnswer": 1,
+        "explanation": "Mengarahkan kursor ke link (hover) akan menampilkan URL sebenarnya, membantu Anda mengidentifikasi apakah link tersebut mengarah ke website resmi atau website palsu."
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "materialId": 2,
+    "title": "Kuis: Password yang Kuat",
+    "description": "Uji pemahaman Anda tentang pembuatan dan pengelolaan password",
+    "duration": 5,
+    "passingScore": 70,
+    "questions": [
+      {
+        "id": 1,
+        "question": "Berapa panjang minimum password yang direkomendasikan?",
+        "options": [
+          "6 karakter",
+          "8 karakter",
+          "12 karakter",
+          "16 karakter"
+        ],
+        "correctAnswer": 2,
+        "explanation": "Password minimal 12 karakter direkomendasikan untuk keamanan optimal. Semakin panjang password, semakin sulit diretas menggunakan brute force attack."
+      },
+      {
+        "id": 2,
+        "question": "Manakah contoh password yang PALING LEMAH?",
+        "options": [
+          "M3r@hPut!h#2024",
+          "K0p!-Kuc!ng-M3r4h-24",
+          "123456",
+          "J@k4rt@S3l@t@n99"
+        ],
+        "correctAnswer": 2,
+        "explanation": "'123456' adalah salah satu password terlemah dan paling umum digunakan. Password seperti ini dapat diretas dalam hitungan detik."
+      },
+      {
+        "id": 3,
+        "question": "Apa yang dimaksud dengan password manager?",
+        "options": [
+          "Orang yang mengelola password di perusahaan",
+          "Aplikasi yang menyimpan dan mengenkripsi semua password Anda dengan aman",
+          "Fitur browser untuk mengingat password",
+          "Metode untuk membuat password yang kuat"
+        ],
+        "correctAnswer": 1,
+        "explanation": "Password manager adalah aplikasi khusus yang menyimpan semua password Anda dengan enkripsi kuat, sehingga Anda hanya perlu mengingat satu master password."
+      },
+      {
+        "id": 4,
+        "question": "Seberapa sering Anda sebaiknya mengganti password?",
+        "options": [
+          "Setiap hari",
+          "Setiap minggu",
+          "Setiap 3-6 bulan atau jika ada indikasi pelanggaran keamanan",
+          "Tidak perlu diganti selama password kuat"
+        ],
+        "correctAnswer": 2,
+        "explanation": "Password sebaiknya diganti setiap 3-6 bulan secara rutin, atau segera jika ada indikasi akun Anda mungkin diretas atau terjadi pelanggaran data."
+      },
+      {
+        "id": 5,
+        "question": "Mengapa menggunakan password yang sama untuk semua akun berbahaya?",
+        "options": [
+          "Karena mudah lupa",
+          "Karena melanggar hukum",
+          "Karena jika satu akun diretas, semua akun lain juga terancam",
+          "Karena website tidak mengizinkannya"
+        ],
+        "correctAnswer": 2,
+        "explanation": "Jika Anda menggunakan password yang sama di semua akun dan satu akun diretas, peretas dapat mengakses semua akun lainnya. Ini disebut 'credential stuffing attack'."
+      },
+      {
+        "id": 6,
+        "question": "Manakah yang merupakan praktik TERBAIK untuk password?",
+        "options": [
+          "Tulis password di notes HP agar tidak lupa",
+          "Gunakan tanggal lahir agar mudah diingat",
+          "Gunakan kombinasi huruf besar-kecil, angka, dan simbol dengan panjang minimal 12 karakter",
+          "Gunakan nama anak atau pasangan"
+        ],
+        "correctAnswer": 2,
+        "explanation": "Password terbaik menggunakan kombinasi huruf besar-kecil, angka, dan simbol dengan panjang minimal 12 karakter, serta tidak menggunakan informasi pribadi yang mudah ditebak."
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "materialId": 3,
+    "title": "Kuis: Keamanan Transaksi Digital",
+    "description": "Uji pengetahuan Anda tentang keamanan dalam transaksi digital",
+    "duration": 7,
+    "passingScore": 70,
+    "questions": [
+      {
+        "id": 1,
+        "question": "Apa itu payment gateway?",
+        "options": [
+          "Aplikasi untuk mengirim pesan",
+          "Platform yang memproses pembayaran online dengan aman",
+          "Website untuk berbelanja online",
+          "Aplikasi untuk mengelola keuangan"
+        ],
+        "correctAnswer": 1,
+        "explanation": "Payment gateway adalah platform yang memfasilitasi dan memproses transaksi pembayaran online dengan aman antara pembeli dan penjual."
+      },
+      {
+        "id": 2,
+        "question": "Apa yang dimaksud dengan HTTPS pada website?",
+        "options": [
+          "Kecepatan internet yang tinggi",
+          "Protokol yang mengenkripsi data antara browser dan server",
+          "Jenis website e-commerce",
+          "Format alamat website"
+        ],
+        "correctAnswer": 1,
+        "explanation": "HTTPS (Hypertext Transfer Protocol Secure) adalah protokol yang mengenkripsi komunikasi antara browser Anda dan server website, melindungi data sensitif dari penyadapan."
+      },
+      {
+        "id": 3,
+        "question": "Apa yang harus dilakukan jika menerima notifikasi transaksi yang tidak Anda lakukan?",
+        "options": [
+          "Abaikan saja, mungkin kesalahan sistem",
+          "Tunggu 24 jam untuk melihat perkembangannya",
+          "Segera hubungi bank dan blokir akun/kartu",
+          "Tanyakan ke teman apakah mereka mengalami hal serupa"
+        ],
+        "correctAnswer": 2,
+        "explanation": "Notifikasi transaksi yang tidak Anda lakukan bisa menjadi indikasi akun Anda diretas. Segera hubungi bank dan blokir akun/kartu untuk mencegah kerugian lebih lanjut."
+      },
+      {
+        "id": 4,
+        "question": "Mengapa OTP (One Time Password) tidak boleh dibagikan kepada siapapun?",
+        "options": [
+          "Karena melanggar privasi",
+          "Karena OTP adalah kode verifikasi untuk konfirmasi transaksi - membagikannya sama dengan memberi akses ke akun Anda",
+          "Karena OTP akan expired",
+          "Karena bank akan marah"
+        ],
+        "correctAnswer": 1,
+        "explanation": "OTP adalah kode verifikasi untuk mengkonfirmasi transaksi atau akses. Membagikan OTP kepada orang lain sama dengan memberikan izin untuk mengakses atau bertransaksi menggunakan akun Anda."
+      },
+      {
+        "id": 5,
+        "question": "Apa yang harus diperiksa sebelum mengirim barang kepada pelanggan?",
+        "options": [
+          "Hanya screenshot bukti transfer",
+          "Mutasi rekening untuk memastikan uang benar-benar masuk",
+          "Chat dari pelanggan saja sudah cukup",
+          "Email konfirmasi pembayaran"
+        ],
+        "correctAnswer": 1,
+        "explanation": "Screenshot bukti transfer dapat dipalsukan. Selalu cek mutasi rekening di mobile banking atau internet banking untuk memastikan pembayaran benar-benar diterima sebelum mengirim barang."
+      },
+      {
+        "id": 6,
+        "question": "Manakah yang merupakan praktik keamanan terbaik untuk rekening bisnis?",
+        "options": [
+          "Menggunakan satu rekening untuk bisnis dan pribadi",
+          "Tidak perlu limit transaksi agar fleksibel",
+          "Pisahkan rekening bisnis dan pribadi, aktifkan notifikasi, dan atur limit transaksi",
+          "Share akses mobile banking dengan karyawan"
+        ],
+        "correctAnswer": 2,
+        "explanation": "Praktik terbaik adalah memisahkan rekening bisnis dan pribadi, mengaktifkan notifikasi real-time, dan mengatur limit transaksi untuk mengurangi risiko kerugian besar jika terjadi fraud."
+      },
+      {
+        "id": 7,
+        "question": "Apa yang dimaksud dengan man-in-the-middle attack?",
+        "options": [
+          "Pencurian fisik perangkat di tempat umum",
+          "Penyadapan komunikasi antara dua pihak yang bertransaksi",
+          "Virus yang merusak perangkat",
+          "Email phishing yang mengatasnamakan pihak ketiga"
+        ],
+        "correctAnswer": 1,
+        "explanation": "Man-in-the-middle attack adalah serangan di mana penyerang menyadap komunikasi antara dua pihak (misalnya pembeli dan toko online) untuk mencuri data atau memanipulasi transaksi."
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "materialId": 4,
+    "title": "Kuis: Privasi Data Pelanggan",
+    "description": "Uji pemahaman Anda tentang perlindungan data pribadi pelanggan",
+    "duration": 6,
+    "passingScore": 70,
+    "questions": [
+      {
+        "id": 1,
+        "question": "Apa itu UU PDP (Undang-Undang Perlindungan Data Pribadi)?",
+        "options": [
+          "Undang-undang tentang perdagangan online",
+          "Undang-undang yang mengatur perlindungan data pribadi di Indonesia",
+          "Undang-undang tentang pajak digital",
+          "Undang-undang tentang e-commerce"
+        ],
+        "correctAnswer": 1,
+        "explanation": "UU PDP adalah undang-undang yang disahkan tahun 2022 untuk mengatur perlindungan data pribadi di Indonesia, termasuk kewajiban bisnis dalam melindungi data pelanggan."
+      },
+      {
+        "id": 2,
+        "question": "Manakah yang termasuk data pribadi yang perlu dilindungi?",
+        "options": [
+          "Hanya nama dan alamat",
+          "Hanya nomor telepon",
+          "Nama, alamat, nomor telepon, email, data finansial, dan data identitas",
+          "Hanya data kartu kredit"
+        ],
+        "correctAnswer": 2,
+        "explanation": "Data pribadi mencakup semua informasi yang dapat mengidentifikasi seseorang: nama, alamat, kontak, data finansial, identitas, riwayat pembelian, dan data lokasi."
+      },
+      {
+        "id": 3,
+        "question": "Apa yang dimaksud dengan prinsip 'minimalisasi data'?",
+        "options": [
+          "Mengumpulkan data sebanyak mungkin untuk keperluan masa depan",
+          "Mengumpulkan hanya data yang benar-benar diperlukan untuk tujuan tertentu",
+          "Menghapus semua data setelah transaksi selesai",
+          "Tidak mengumpulkan data sama sekali"
+        ],
+        "correctAnswer": 1,
+        "explanation": "Prinsip minimalisasi data berarti bisnis hanya boleh mengumpulkan data yang benar-benar diperlukan untuk tujuan yang spesifik, tidak berlebihan."
+      },
+      {
+        "id": 4,
+        "question": "Apa itu 'right to be forgotten' (hak untuk dilupakan)?",
+        "options": [
+          "Hak pelanggan untuk lupa password",
+          "Hak pelanggan untuk meminta penghapusan data pribadi mereka",
+          "Hak bisnis untuk melupakan pelanggan yang bermasalah",
+          "Hak untuk tidak menggunakan layanan digital"
+        ],
+        "correctAnswer": 1,
+        "explanation": "'Right to be forgotten' adalah hak pelanggan untuk meminta bisnis menghapus semua data pribadi mereka jika tidak lagi diperlukan atau jika mereka mencabut persetujuan."
+      },
+      {
+        "id": 5,
+        "question": "Mengapa bisnis perlu memiliki kebijakan privasi?",
+        "options": [
+          "Untuk memenuhi persyaratan hukum dan transparansi kepada pelanggan tentang penggunaan data mereka",
+          "Hanya untuk formalitas",
+          "Agar website terlihat profesional",
+          "Tidak wajib untuk UMKM"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Kebijakan privasi diperlukan untuk memenuhi persyaratan hukum (UU PDP) dan memberikan transparansi kepada pelanggan tentang data apa yang dikumpulkan dan bagaimana penggunaannya."
+      },
+      {
+        "id": 6,
+        "question": "Apa yang harus dilakukan jika terjadi kebocoran data pelanggan?",
+        "options": [
+          "Diam saja agar reputasi tidak rusak",
+          "Hanya memberitahu pelanggan yang terkena dampak langsung",
+          "Segera laporkan ke otoritas terkait dan informasikan kepada pelanggan yang terdampak",
+          "Tunggu ada yang komplain baru direspons"
+        ],
+        "correctAnswer": 2,
+        "explanation": "Jika terjadi kebocoran data, bisnis wajib segera melaporkan ke otoritas yang berwenang dan menginformasikan kepada pelanggan yang terdampak, sesuai UU PDP."
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "materialId": 5,
+    "title": "Kuis: Keamanan Perangkat",
+    "description": "Uji pengetahuan Anda tentang pengamanan perangkat bisnis",
+    "duration": 6,
+    "passingScore": 70,
+    "questions": [
+      {
+        "id": 1,
+        "question": "Apa fungsi utama dari enkripsi disk?",
+        "options": [
+          "Mempercepat kinerja perangkat",
+          "Melindungi data dengan mengenkripsinya sehingga tidak dapat dibaca jika perangkat dicuri",
+          "Menghemat ruang penyimpanan",
+          "Membuat perangkat lebih ringan"
+        ],
+        "correctAnswer": 1,
+        "explanation": "Enkripsi disk mengenkripsi semua data di perangkat, sehingga jika laptop atau smartphone dicuri, pencuri tidak dapat membaca data tanpa password/PIN dekripsi."
+      },
+      {
+        "id": 2,
+        "question": "Mengapa menggunakan Wi-Fi publik untuk transaksi bisnis berisiko?",
+        "options": [
+          "Karena kecepatannya lambat",
+          "Karena koneksi dapat disadap oleh pihak jahat untuk mencuri data",
+          "Karena Wi-Fi publik akan expired",
+          "Karena hanya bisa digunakan untuk browsing"
+        ],
+        "correctAnswer": 1,
+        "explanation": "Wi-Fi publik tidak terenkripsi dan mudah disadap. Peretas dapat menggunakan teknik 'man-in-the-middle' untuk mencuri data login, password, atau informasi transaksi Anda."
+      },
+      {
+        "id": 3,
+        "question": "Apa itu VPN dan kapan sebaiknya digunakan?",
+        "options": [
+          "Aplikasi untuk download file, tidak perlu untuk bisnis",
+          "Virtual Private Network yang mengenkripsi koneksi internet, sebaiknya digunakan saat mengakses Wi-Fi publik",
+          "Virus Protection Network untuk melindungi dari malware",
+          "Very Private Notification untuk pesan pribadi"
+        ],
+        "correctAnswer": 1,
+        "explanation": "VPN (Virtual Private Network) mengenkripsi semua traffic internet Anda, melindungi data dari penyadapan. Sangat direkomendasikan saat menggunakan Wi-Fi publik."
+      },
+      {
+        "id": 4,
+        "question": "Seberapa sering perangkat bisnis sebaiknya di-backup?",
+        "options": [
+          "Setahun sekali",
+          "Hanya jika perangkat rusak",
+          "Minimal seminggu sekali atau setiap hari untuk data kritis",
+          "Tidak perlu backup jika menggunakan antivirus"
+        ],
+        "correctAnswer": 2,
+        "explanation": "Data bisnis harus di-backup secara teratur - minimal seminggu sekali atau bahkan setiap hari untuk data kritis, untuk mencegah kehilangan data akibat kerusakan, pencurian, atau ransomware."
+      },
+      {
+        "id": 5,
+        "question": "Apa yang harus dilakukan pertama kali jika smartphone bisnis hilang?",
+        "options": [
+          "Beli smartphone baru",
+          "Tunggu ada yang mengembalikan",
+          "Segera ubah semua password akun penting dan aktifkan remote wipe",
+          "Posting di media sosial"
+        ],
+        "correctAnswer": 2,
+        "explanation": "Langkah pertama jika smartphone hilang adalah mengubah semua password akun penting untuk mencegah akses tidak sah, kemudian mengaktifkan fitur remote wipe untuk menghapus data dari jarak jauh."
+      },
+      {
+        "id": 6,
+        "question": "Mengapa update sistem operasi dan aplikasi penting untuk keamanan?",
+        "options": [
+          "Untuk mendapatkan fitur baru yang menarik",
+          "Untuk memperbaiki bug dan menambal celah keamanan yang bisa dieksploitasi peretas",
+          "Agar perangkat terlihat modern",
+          "Update tidak penting untuk UMKM"
+        ],
+        "correctAnswer": 1,
+        "explanation": "Update software biasanya berisi patch keamanan untuk menutup celah yang dapat dieksploitasi peretas. Perangkat yang tidak di-update lebih rentan terhadap serangan."
+      }
+    ]
+  }
+]

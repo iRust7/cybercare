@@ -1,0 +1,341 @@
+[
+  {
+    "id": 1,
+    "title": "Mengenal Phishing dan Cara Menghindarinya",
+    "category": "Keamanan Email",
+    "duration": "10 menit",
+    "level": "Pemula",
+    "icon": "🎣",
+    "summary": "Pelajari cara mengenali dan menghindari serangan phishing yang mengancam bisnis UMKM Anda.",
+    "content": {
+      "introduction": "Phishing adalah salah satu ancaman siber paling umum yang menargetkan UMKM. Serangan ini menggunakan email, pesan, atau website palsu untuk mencuri informasi sensitif seperti password, data rekening, atau informasi pelanggan.",
+      "sections": [
+        {
+          "heading": "Apa itu Phishing?",
+          "text": "Phishing adalah teknik penipuan di mana penyerang berpura-pura menjadi entitas terpercaya (seperti bank, perusahaan teknologi, atau instansi pemerintah) untuk menipu korban agar memberikan informasi pribadi atau keuangan."
+        },
+        {
+          "heading": "Tanda-tanda Email Phishing",
+          "points": [
+            "Alamat pengirim mencurigakan atau tidak sesuai dengan perusahaan resmi",
+            "Bahasa yang mendesak atau mengancam (misalnya: 'Akun Anda akan diblokir!')",
+            "Permintaan informasi sensitif seperti password atau PIN",
+            "Link yang mengarah ke website mencurigakan",
+            "Lampiran yang tidak diharapkan",
+            "Kesalahan tata bahasa atau ejaan yang mencolok"
+          ]
+        },
+        {
+          "heading": "Cara Melindungi Diri dari Phishing",
+          "points": [
+            "Selalu verifikasi alamat email pengirim dengan teliti",
+            "Jangan klik link mencurigakan - arahkan kursor untuk melihat URL sebenarnya",
+            "Jangan pernah membagikan password atau informasi keuangan melalui email",
+            "Aktifkan verifikasi dua faktor (2FA) untuk semua akun penting",
+            "Gunakan software antivirus yang dapat mendeteksi phishing",
+            "Laporkan email phishing ke penyedia email Anda"
+          ]
+        },
+        {
+          "heading": "Contoh Kasus Nyata",
+          "text": "Seorang pemilik toko online menerima email yang mengaku dari marketplace tempat ia berjualan. Email tersebut meminta verifikasi akun dengan mengklik link dan memasukkan password. Karena waspada, ia mengecek alamat pengirim dan menemukan bahwa email tersebut palsu. Dengan tidak mengklik link tersebut, ia berhasil menghindari pencurian akun yang bisa merugikan bisnisnya."
+        }
+      ],
+      "keyTakeaways": [
+        "Phishing adalah ancaman serius bagi UMKM",
+        "Waspadai tanda-tanda email atau pesan mencurigakan",
+        "Jangan pernah membagikan informasi sensitif melalui email",
+        "Gunakan verifikasi dua faktor untuk perlindungan ekstra"
+      ]
+    }
+  },
+  {
+    "id": 2,
+    "title": "Membuat Password yang Kuat dan Aman",
+    "category": "Keamanan Akun",
+    "duration": "8 menit",
+    "level": "Pemula",
+    "icon": "🔐",
+    "summary": "Panduan lengkap membuat dan mengelola password yang kuat untuk melindungi akun bisnis Anda.",
+    "content": {
+      "introduction": "Password adalah garis pertahanan pertama untuk melindungi akun bisnis Anda. Password yang lemah dapat dengan mudah diretas, membahayakan data pelanggan, transaksi, dan reputasi bisnis UMKM Anda.",
+      "sections": [
+        {
+          "heading": "Mengapa Password Kuat Penting?",
+          "text": "Menurut statistik, 81% pelanggaran data terjadi karena password yang lemah atau dicuri. Untuk UMKM, ini bisa berarti kehilangan data pelanggan, kerugian finansial, dan kepercayaan pelanggan yang hancur."
+        },
+        {
+          "heading": "Karakteristik Password yang Kuat",
+          "points": [
+            "Minimal 12 karakter panjangnya",
+            "Kombinasi huruf besar dan kecil",
+            "Mengandung angka dan simbol khusus (@, #, $, dll)",
+            "Tidak menggunakan informasi pribadi (nama, tanggal lahir, dll)",
+            "Tidak menggunakan kata-kata umum atau pola keyboard (seperti '123456' atau 'qwerty')",
+            "Unik untuk setiap akun - jangan gunakan password yang sama"
+          ]
+        },
+        {
+          "heading": "Teknik Membuat Password yang Mudah Diingat",
+          "points": [
+            "Gunakan passphrase: gabungkan 4-5 kata acak (contoh: 'Kopi-Kucing-Merah-2024!')",
+            "Metode akronim: ambil huruf pertama dari kalimat yang mudah diingat (contoh: 'Saya membuka toko di tahun 2020' menjadi 'Smtdt2020!')",
+            "Substitusi karakter: ganti huruf dengan angka atau simbol (contoh: 'Password' menjadi 'P@ssw0rd!')",
+            "Gunakan password manager untuk menyimpan password yang rumit"
+          ]
+        },
+        {
+          "heading": "Password Manager: Solusi Terbaik",
+          "text": "Password manager adalah aplikasi yang menyimpan semua password Anda dengan aman dan terenkripsi. Anda hanya perlu mengingat satu master password. Beberapa password manager yang direkomendasikan: LastPass, 1Password, Bitwarden, atau Google Password Manager (gratis)."
+        },
+        {
+          "heading": "Praktik Terbaik Pengelolaan Password",
+          "points": [
+            "Ubah password secara berkala (minimal setiap 3-6 bulan)",
+            "Jangan pernah berbagi password dengan orang lain",
+            "Jangan simpan password di notes HP atau kertas yang mudah hilang",
+            "Aktifkan verifikasi dua faktor untuk perlindungan tambahan",
+            "Segera ubah password jika ada indikasi akun Anda diretas"
+          ]
+        }
+      ],
+      "keyTakeaways": [
+        "Password kuat adalah minimal 12 karakter dengan kombinasi huruf, angka, dan simbol",
+        "Gunakan password unik untuk setiap akun",
+        "Pertimbangkan menggunakan password manager",
+        "Aktifkan verifikasi dua faktor untuk keamanan ekstra"
+      ]
+    }
+  },
+  {
+    "id": 3,
+    "title": "Keamanan Transaksi Digital untuk UMKM",
+    "category": "Keamanan Transaksi",
+    "duration": "12 menit",
+    "level": "Menengah",
+    "icon": "💳",
+    "summary": "Pelajari cara melindungi transaksi digital bisnis Anda dari penipuan dan pencurian data.",
+    "content": {
+      "introduction": "Dengan meningkatnya transaksi digital, UMKM perlu memahami cara melindungi transaksi online dari berbagai ancaman seperti penipuan kartu kredit, pembobolan rekening, dan pencurian data pelanggan.",
+      "sections": [
+        {
+          "heading": "Ancaman dalam Transaksi Digital",
+          "points": [
+            "Pencurian data kartu kredit/debit",
+            "Penipuan melalui transfer bank palsu",
+            "Man-in-the-middle attack (penyadapan transaksi)",
+            "Skimming (pencurian data kartu melalui perangkat ilegal)",
+            "Social engineering untuk mendapatkan OTP atau PIN"
+          ]
+        },
+        {
+          "heading": "Cara Mengamankan Penerimaan Pembayaran",
+          "points": [
+            "Gunakan payment gateway resmi dan terpercaya (GoPay, OVO, QRIS, dll)",
+            "Pastikan website toko online menggunakan HTTPS (ada ikon gembok)",
+            "Jangan simpan data kartu kredit pelanggan secara manual",
+            "Gunakan sistem pembayaran yang memiliki sertifikasi keamanan (PCI-DSS)",
+            "Edukasi karyawan tentang prosedur pembayaran yang aman"
+          ]
+        },
+        {
+          "heading": "Melindungi Akun Bank Bisnis",
+          "points": [
+            "Aktifkan notifikasi transaksi real-time",
+            "Gunakan rekening terpisah untuk bisnis dan pribadi",
+            "Atur limit transaksi harian sesuai kebutuhan bisnis",
+            "Aktifkan autentikasi biometrik atau token banking",
+            "Rajin cek mutasi rekening untuk mendeteksi transaksi mencurigakan",
+            "Jangan pernah membagikan OTP, PIN, atau CVV kepada siapapun"
+          ]
+        },
+        {
+          "heading": "Verifikasi Pembayaran Pelanggan",
+          "points": [
+            "Konfirmasi pembayaran melalui email atau WhatsApp resmi",
+            "Cek mutasi rekening sebelum mengirim barang",
+            "Waspadai bukti transfer palsu (screenshot yang diedit)",
+            "Gunakan sistem otomatis untuk verifikasi pembayaran jika memungkinkan"
+          ]
+        },
+        {
+          "heading": "Apa yang Harus Dilakukan Jika Terjadi Penipuan",
+          "points": [
+            "Segera hubungi bank untuk memblokir rekening",
+            "Laporkan ke pihak berwajib (polisi)",
+            "Dokumentasikan semua bukti (chat, transfer, dll)",
+            "Informasikan kepada pelanggan jika data mereka terpengaruh",
+            "Evaluasi sistem keamanan dan perbaiki celah yang ada"
+          ]
+        }
+      ],
+      "keyTakeaways": [
+        "Gunakan payment gateway resmi dan terpercaya",
+        "Aktifkan notifikasi transaksi dan autentikasi berlapis",
+        "Jangan pernah membagikan OTP atau PIN",
+        "Verifikasi setiap pembayaran sebelum mengirim barang"
+      ]
+    }
+  },
+  {
+    "id": 4,
+    "title": "Privasi Data Pelanggan: Tanggung Jawab UMKM",
+    "category": "Privasi Data",
+    "duration": "15 menit",
+    "level": "Menengah",
+    "icon": "🔒",
+    "summary": "Memahami pentingnya privasi data pelanggan dan kewajiban UMKM dalam melindunginya.",
+    "content": {
+      "introduction": "Data pelanggan adalah aset berharga sekaligus tanggung jawab besar. UMKM yang tidak melindungi data pelanggan dengan baik dapat menghadapi tuntutan hukum, kehilangan kepercayaan, dan kerugian reputasi.",
+      "sections": [
+        {
+          "heading": "Jenis Data Pelanggan yang Perlu Dilindungi",
+          "points": [
+            "Data pribadi: nama, alamat, nomor telepon, email",
+            "Data finansial: nomor rekening, riwayat transaksi",
+            "Data identitas: KTP, NPWP, data paspor",
+            "Data perilaku: riwayat pembelian, preferensi produk",
+            "Data lokasi: alamat pengiriman, GPS"
+          ]
+        },
+        {
+          "heading": "Regulasi Privasi Data di Indonesia",
+          "text": "Undang-Undang Perlindungan Data Pribadi (UU PDP) yang disahkan tahun 2022 mewajibkan semua bisnis, termasuk UMKM, untuk melindungi data pribadi pelanggan. Pelanggaran dapat dikenai sanksi administratif hingga pidana."
+        },
+        {
+          "heading": "Prinsip Perlindungan Data",
+          "points": [
+            "Transparansi: Beri tahu pelanggan data apa yang dikumpulkan dan untuk apa",
+            "Persetujuan: Dapatkan izin eksplisit sebelum mengumpulkan data",
+            "Minimalisasi: Kumpulkan hanya data yang benar-benar diperlukan",
+            "Akurasi: Pastikan data selalu akurat dan up-to-date",
+            "Keamanan: Lindungi data dengan enkripsi dan akses terbatas",
+            "Akuntabilitas: Bertanggung jawab atas data yang dikumpulkan"
+          ]
+        },
+        {
+          "heading": "Cara Melindungi Data Pelanggan",
+          "points": [
+            "Enkripsi database dan sistem penyimpanan",
+            "Batasi akses data hanya untuk karyawan yang membutuhkan",
+            "Gunakan password kuat dan verifikasi dua faktor",
+            "Backup data secara teratur ke lokasi yang aman",
+            "Hapus data pelanggan yang tidak lagi diperlukan",
+            "Gunakan platform yang memiliki sertifikasi keamanan"
+          ]
+        },
+        {
+          "heading": "Hak Pelanggan atas Datanya",
+          "points": [
+            "Hak mengetahui data apa yang dikumpulkan",
+            "Hak mengakses dan mendapatkan salinan data mereka",
+            "Hak memperbaiki data yang tidak akurat",
+            "Hak menghapus data (right to be forgotten)",
+            "Hak menolak penggunaan data untuk tujuan tertentu"
+          ]
+        },
+        {
+          "heading": "Langkah-langkah Praktis untuk UMKM",
+          "points": [
+            "Buat kebijakan privasi yang jelas dan mudah dipahami",
+            "Tampilkan kebijakan privasi di website/toko online",
+            "Latih karyawan tentang pentingnya privasi data",
+            "Audit sistem keamanan secara berkala",
+            "Siapkan prosedur tanggap insiden jika terjadi kebocoran data"
+          ]
+        }
+      ],
+      "keyTakeaways": [
+        "Privasi data adalah hak pelanggan dan kewajiban bisnis",
+        "UU PDP mengatur perlindungan data pribadi di Indonesia",
+        "Kumpulkan hanya data yang diperlukan dan lindungi dengan baik",
+        "Buat kebijakan privasi yang transparan dan mudah dipahami"
+      ]
+    }
+  },
+  {
+    "id": 5,
+    "title": "Mengamankan Perangkat Bisnis Anda",
+    "category": "Keamanan Perangkat",
+    "duration": "10 menit",
+    "level": "Pemula",
+    "icon": "📱",
+    "summary": "Tips praktis mengamankan laptop, smartphone, dan perangkat lain yang digunakan untuk bisnis.",
+    "content": {
+      "introduction": "Perangkat yang Anda gunakan untuk menjalankan bisnis - laptop, smartphone, tablet - adalah pintu gerbang ke semua data bisnis Anda. Perangkat yang tidak aman dapat disusupi malware, dicuri, atau disalahgunakan.",
+      "sections": [
+        {
+          "heading": "Ancaman terhadap Perangkat Bisnis",
+          "points": [
+            "Malware dan virus yang mencuri data",
+            "Pencurian perangkat fisik",
+            "Akses tidak sah oleh orang lain",
+            "Perangkat lunak yang tidak ter-update dengan kerentanan keamanan",
+            "Wi-Fi publik yang tidak aman"
+          ]
+        },
+        {
+          "heading": "Mengamankan Smartphone Bisnis",
+          "points": [
+            "Aktifkan kunci layar dengan PIN, pola, atau biometrik",
+            "Enkripsi data di smartphone",
+            "Install aplikasi hanya dari toko resmi (Play Store/App Store)",
+            "Aktifkan fitur 'Find My Device' untuk melacak jika hilang",
+            "Update sistem operasi dan aplikasi secara berkala",
+            "Jangan root/jailbreak smartphone",
+            "Gunakan aplikasi antivirus mobile yang terpercaya"
+          ]
+        },
+        {
+          "heading": "Mengamankan Laptop/Komputer",
+          "points": [
+            "Gunakan password yang kuat untuk login",
+            "Aktifkan fitur enkripsi disk (BitLocker untuk Windows, FileVault untuk Mac)",
+            "Install dan update antivirus secara teratur",
+            "Aktifkan firewall",
+            "Backup data penting secara berkala",
+            "Gunakan screensaver dengan password jika meninggalkan perangkat",
+            "Update sistem operasi dan software secara rutin"
+          ]
+        },
+        {
+          "heading": "Keamanan saat Menggunakan Wi-Fi Publik",
+          "points": [
+            "Hindari mengakses akun sensitif (bank, email bisnis) di Wi-Fi publik",
+            "Gunakan VPN (Virtual Private Network) untuk enkripsi koneksi",
+            "Matikan file sharing dan AirDrop",
+            "Pastikan HTTPS aktif saat browsing (ada ikon gembok di browser)",
+            "Jangan melakukan transaksi keuangan di Wi-Fi publik"
+          ]
+        },
+        {
+          "heading": "Perawatan dan Maintenance Rutin",
+          "points": [
+            "Scan virus secara berkala",
+            "Hapus aplikasi yang tidak digunakan",
+            "Clear cache dan temporary files",
+            "Cek izin aplikasi - hapus yang tidak perlu",
+            "Backup data minimal seminggu sekali",
+            "Ganti password perangkat setiap 3 bulan"
+          ]
+        },
+        {
+          "heading": "Apa yang Harus Dilakukan Jika Perangkat Hilang/Dicuri",
+          "points": [
+            "Segera ubah semua password akun penting",
+            "Aktifkan fitur 'remote wipe' untuk menghapus data dari jarak jauh",
+            "Laporkan kehilangan ke pihak berwajib",
+            "Blokir kartu SIM dan layanan mobile banking",
+            "Informasikan ke tim dan pelanggan jika data mereka terpengaruh"
+          ]
+        }
+      ],
+      "keyTakeaways": [
+        "Selalu kunci perangkat dengan password atau biometrik",
+        "Update sistem operasi dan aplikasi secara rutin",
+        "Hindari Wi-Fi publik untuk transaksi sensitif",
+        "Backup data secara berkala dan aktifkan enkripsi"
+      ]
+    }
+  }
+]

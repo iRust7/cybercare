@@ -1,0 +1,581 @@
+/* CyberCare - Advanced Animations & Transitions */
+/* Smooth morphing effects, loading animations, micro-interactions */
+
+/* ============================================
+   PAGE TRANSITIONS
+   ============================================ */
+
+@keyframes pageEnter {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pageFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.page-transition {
+    animation: pageEnter 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ============================================
+   MORPH ANIMATIONS
+   ============================================ */
+
+.morph-card {
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.morph-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.morph-button {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.morph-button::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.morph-button:hover::before {
+    width: 400px;
+    height: 400px;
+}
+
+/* ============================================
+   SMOOTH LOADING STATES
+   ============================================ */
+
+/* ============================================
+   SKELETON LOADERS - Premium UX
+   ============================================ */
+
+@keyframes shimmer {
+    0% { 
+        background-position: -1000px 0; 
+    }
+    100% { 
+        background-position: 1000px 0; 
+    }
+}
+
+.skeleton {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(
+        90deg,
+        #f1f5f9 0%,
+        #e2e8f0 20%,
+        #f1f5f9 40%,
+        #f1f5f9 100%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite linear;
+    border-radius: 0.5rem;
+}
+
+.skeleton-text {
+    height: 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 0.25rem;
+}
+
+.skeleton-title {
+    height: 1.5rem;
+    width: 60%;
+    margin-bottom: 1rem;
+    border-radius: 0.375rem;
+}
+
+.skeleton-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.skeleton-avatar {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+}
+
+.skeleton-button {
+    height: 2.5rem;
+    width: 8rem;
+    border-radius: 0.5rem;
+}
+
+/* Loading Spinner - Elegant */
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(201, 160, 85, 0.1);
+    border-top-color: #c9a055;
+    border-radius: 50%;
+    animation: spin 0.8s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+
+.loading-spinner-small {
+    width: 20px;
+    height: 20px;
+    border-width: 2px;
+}
+
+.loading-spinner-large {
+    width: 60px;
+    height: 60px;
+    border-width: 4px;
+}
+
+@keyframes spin {
+    to { 
+        transform: rotate(360deg); 
+    }
+}
+
+/* Pulse loading */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.6;
+        transform: scale(0.95);
+    }
+}
+
+.pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Fade animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fade-in-down {
+    animation: fadeInDown 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+    50% {
+        opacity: 0.5;
+        transform: scale(0.95);
+    }
+}
+
+.pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* ============================================
+   MICRO-INTERACTIONS
+   ============================================ */
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.bounce {
+    animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+.shake {
+    animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+
+@keyframes wiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-3deg); }
+    75% { transform: rotate(3deg); }
+}
+
+.wiggle:hover {
+    animation: wiggle 0.5s ease-in-out;
+}
+
+/* ============================================
+   HOVER EFFECTS
+   ============================================ */
+
+.hover-lift {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.hover-scale {
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.hover-scale:hover {
+    transform: scale(1.05);
+}
+
+.hover-glow {
+    transition: all 0.3s ease;
+}
+
+.hover-glow:hover {
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+}
+
+/* ============================================
+   PROGRESS ANIMATIONS
+   ============================================ */
+
+@keyframes fillProgress {
+    from { width: 0%; }
+}
+
+.progress-bar {
+    animation: fillProgress 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fillCircle {
+    from {
+        stroke-dashoffset: 283;
+    }
+}
+
+.progress-circle {
+    animation: fillCircle 2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ============================================
+   BADGE ANIMATIONS
+   ============================================ */
+
+@keyframes badgeEarn {
+    0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2) rotate(180deg);
+    }
+    100% {
+        transform: scale(1) rotate(360deg);
+        opacity: 1;
+    }
+}
+
+.badge-earn {
+    animation: badgeEarn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.badge-hover {
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.badge-hover:hover {
+    transform: scale(1.15) rotate(5deg);
+}
+
+/* ============================================
+   NOTIFICATION ANIMATIONS
+   ============================================ */
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+.notification-enter {
+    animation: slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.notification-exit {
+    animation: slideOutRight 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ============================================
+   XP GAIN ANIMATION
+   ============================================ */
+
+@keyframes xpGain {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(-30px) scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-60px) scale(0.8);
+        opacity: 0;
+    }
+}
+
+.xp-popup {
+    position: absolute;
+    font-weight: bold;
+    color: #d4af37;
+    pointer-events: none;
+    animation: xpGain 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ============================================
+   LEVEL UP ANIMATION
+   ============================================ */
+
+@keyframes levelUp {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.level-up-badge {
+    animation: levelUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ============================================
+   STREAK FLAME ANIMATION
+   ============================================ */
+
+@keyframes flame {
+    0%, 100% {
+        transform: scale(1) translateY(0);
+    }
+    50% {
+        transform: scale(1.1) translateY(-3px);
+    }
+}
+
+.streak-flame {
+    display: inline-block;
+    animation: flame 1s ease-in-out infinite;
+}
+
+/* ============================================
+   SMOOTH SCROLLBAR
+   ============================================ */
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #1e40af, #1e3a8a);
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #1e3a8a, #1e40af);
+}
+
+/* ============================================
+   GLASSMORPHISM EFFECT
+   ============================================ */
+
+.glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-strong {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+/* ============================================
+   GRADIENT ANIMATIONS
+   ============================================ */
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.animated-gradient {
+    background: linear-gradient(270deg, #1e40af, #1e3a8a, #d4af37);
+    background-size: 400% 400%;
+    animation: gradientShift 8s ease infinite;
+}
+
+/* ============================================
+   ENTRANCE ANIMATIONS FOR CARDS
+   ============================================ */
+
+@keyframes cardEnter {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.card-enter {
+    animation: cardEnter 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-enter-1 { animation-delay: 0.1s; }
+.card-enter-2 { animation-delay: 0.2s; }
+.card-enter-3 { animation-delay: 0.3s; }
+.card-enter-4 { animation-delay: 0.4s; }
+
+/* ============================================
+   FOCUS STATES
+   ============================================ */
+
+.focus-ring:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(30, 64, 175, 0.2);
+    border-color: #1e40af;
+}
+
+/* ============================================
+   TOOLTIP ANIMATIONS
+   ============================================ */
+
+@keyframes tooltipFade {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tooltip {
+    animation: tooltipFade 0.2s ease;
+}
+
+/* ============================================
+   RIPPLE EFFECT
+   ============================================ */
+
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+.ripple-effect::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+    background-repeat: no-repeat;
+    background-position: 50%;
+    transform: scale(0);
+    opacity: 0;
+    transition: transform 0.5s, opacity 1s;
+}
+
+.ripple-effect:active::after {
+    transform: scale(4);
+    opacity: 0.3;
+    transition: 0s;
+}

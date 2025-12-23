@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberCare - Platform Edukasi Keamanan Siber untuk UMKM Indonesia</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="landing-page">
+    <!-- Navigation Bar -->
+    <nav class="landing-nav">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">🛡️</span>
+                <span class="logo-text">CyberCare</span>
+            </div>
+            <div class="nav-links">
+                <a href="#features" class="nav-link">Fitur</a>
+                <a href="#benefits" class="nav-link">Manfaat</a>
+                <a href="#about" class="nav-link">Tentang</a>
+                <a href="login.html" class="btn-primary">Mulai Belajar</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="badge-icon">⚡</span>
+                    <span>Platform Edukasi Keamanan Siber #1 untuk UMKM</span>
+                </div>
+                <h1 class="hero-title">
+                    Lindungi Bisnis UMKM Anda dari<br>
+                    <span class="highlight">Ancaman Siber</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Pelajari keamanan siber dengan cara yang mudah dipahami. 
+                    Materi praktis, kuis interaktif, dan simulasi ancaman nyata 
+                    untuk melindungi bisnis digital Anda.
+                </p>
+                <div class="hero-cta">
+                    <a href="login.html" class="btn-hero-primary">
+                        Mulai Belajar Gratis
+                        <span class="btn-arrow">→</span>
+                    </a>
+                    <a href="#features" class="btn-hero-secondary">
+                        Pelajari Lebih Lanjut
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">1,500+</div>
+                        <div class="stat-label">UMKM Terlindungi</div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">Materi Lengkap</div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-number">20+</div>
+                        <div class="stat-label">Tips Keamanan</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="visual-card card-1">
+                    <div class="card-icon">🔐</div>
+                    <div class="card-text">Password Aman</div>
+                    <div class="card-status">✓ Dipelajari</div>
+                </div>
+                <div class="visual-card card-2">
+                    <div class="card-icon">🎣</div>
+                    <div class="card-text">Deteksi Phishing</div>
+                    <div class="card-status">⚡ Sedang Belajar</div>
+                </div>
+                <div class="visual-card card-3">
+                    <div class="card-icon">💳</div>
+                    <div class="card-text">Transaksi Aman</div>
+                    <div class="card-status">📚 Belum Dimulai</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Fitur Unggulan CyberCare</h2>
+                <p class="section-subtitle">
+                    Platform lengkap dengan berbagai fitur untuk membantu UMKM belajar keamanan siber
+                </p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3 class="feature-title">Materi Edukasi</h3>
+                    <p class="feature-description">
+                        5 modul pembelajaran lengkap tentang phishing, password, transaksi digital, 
+                        privasi data, dan keamanan perangkat.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">Kuis Interaktif</h3>
+                    <p class="feature-description">
+                        Uji pemahaman Anda dengan kuis interaktif setelah setiap materi. 
+                        Dapatkan feedback langsung dan skor akhir.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚠️</div>
+                    <h3 class="feature-title">Simulasi Ancaman</h3>
+                    <p class="feature-description">
+                        Latih kemampuan mengenali ancaman dengan simulasi email phishing, 
+                        WhatsApp penipuan, dan website palsu.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💡</div>
+                    <h3 class="feature-title">Tips Harian</h3>
+                    <p class="feature-description">
+                        20+ tips keamanan siber yang bisa langsung diterapkan untuk 
+                        melindungi bisnis Anda sehari-hari.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="feature-title">Tracking Progress</h3>
+                    <p class="feature-description">
+                        Pantau progres belajar Anda dengan dashboard yang menampilkan 
+                        materi selesai, skor kuis, dan pencapaian.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎓</div>
+                    <h3 class="feature-title">Konten Praktis</h3>
+                    <p class="feature-description">
+                        Semua materi dirancang khusus untuk UMKM dengan bahasa yang mudah 
+                        dipahami dan contoh kasus nyata.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="benefits" class="benefits">
+        <div class="section-container">
+            <div class="benefits-content">
+                <div class="benefits-text">
+                    <h2 class="section-title">Mengapa UMKM Perlu Belajar Keamanan Siber?</h2>
+                    <div class="benefit-list">
+                        <div class="benefit-item">
+                            <div class="benefit-icon">🔒</div>
+                            <div class="benefit-content">
+                                <h4>Lindungi Data Pelanggan</h4>
+                                <p>Jaga kepercayaan pelanggan dengan melindungi data pribadi dan transaksi mereka dari pencurian.</p>
+                            </div>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">💰</div>
+                            <div class="benefit-content">
+                                <h4>Hindari Kerugian Finansial</h4>
+                                <p>Cegah penipuan online, pembobolan rekening, dan kerugian akibat serangan siber.</p>
+                            </div>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">⭐</div>
+                            <div class="benefit-content">
+                                <h4>Tingkatkan Reputasi Bisnis</h4>
+                                <p>UMKM yang aman dan terpercaya akan lebih dipilih oleh pelanggan dalam berbelanja online.</p>
+                            </div>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">📈</div>
+                            <div class="benefit-content">
+                                <h4>Berkembang dengan Aman</h4>
+                                <p>Fokus mengembangkan bisnis tanpa khawatir dengan ancaman keamanan siber.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="benefits-visual">
+                    <div class="stats-card">
+                        <div class="stats-item">
+                            <div class="stats-number">43%</div>
+                            <div class="stats-label">Serangan siber menargetkan UMKM</div>
+                        </div>
+                        <div class="stats-item">
+                            <div class="stats-number">60%</div>
+                            <div class="stats-label">UMKM tutup setelah serangan siber</div>
+                        </div>
+                        <div class="stats-item">
+                            <div class="stats-number">3.2M</div>
+                            <div class="stats-label">Kerugian rata-rata per insiden</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-container">
+            <h2 class="cta-title">Siap Melindungi Bisnis Anda?</h2>
+            <p class="cta-subtitle">
+                Mulai belajar keamanan siber hari ini dan lindungi bisnis UMKM Anda dari ancaman digital
+            </p>
+            <a href="login.html" class="btn-cta">
+                Mulai Belajar Sekarang
+                <span class="btn-arrow">→</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <span class="logo-icon">🛡️</span>
+                        <span class="logo-text">CyberCare</span>
+                    </div>
+                    <p class="footer-tagline">
+                        Platform edukasi keamanan siber terpercaya untuk UMKM Indonesia
+                    </p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Platform</h4>
+                        <a href="login.html">Login</a>
+                        <a href="register.html">Register</a>
+                        <a href="#features">Fitur</a>
+                        <a href="#benefits">Manfaat</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Sumber Daya</h4>
+                        <a href="tips.html">Tips Keamanan</a>
+                        <a href="#about">Tentang Kami</a>
+                        <a href="#contact">Kontak</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <a href="#privacy">Kebijakan Privasi</a>
+                        <a href="#terms">Syarat & Ketentuan</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 CyberCare. Platform Edukasi Keamanan Siber untuk UMKM Indonesia.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+                            <div class="stat">
+                                <span class="stat-label">Materi Selesai</span>
+                                <span class="stat-value" id="completedMaterials">0</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Total Materi</span>
+                                <span class="stat-value" id="totalMaterials">0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="card activity-card">
+                        <h3>📝 Aktivitas Terbaru</h3>
+                        <div id="recentActivity">
+                            <p class="placeholder">Tidak ada aktivitas</p>
+                        </div>
+                    </div>
+
+                    <!-- Quick Access -->
+                    <div class="card quick-access">
+                        <h3>⚡ Akses Cepat</h3>
+                        <button class="btn btn-primary" onclick="navigateTo('materials')">Mulai Belajar</button>
+                        <button class="btn btn-secondary" onclick="navigateTo('tips')">Lihat Tips</button>
+                        <button class="btn btn-secondary" onclick="navigateTo('simulasi')">Coba Simulasi</button>
+                    </div>
+
+                    <!-- Statistics -->
+                    <div class="card stats-card">
+                        <h3>📈 Statistik</h3>
+                        <div class="stats-list">
+                            <div class="stat-item">
+                                <span>Kuis Dikerjakan</span>
+                                <span id="quizzesCompleted">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span>Rata-rata Nilai</span>
+                                <span id="averageScore">0%</span>
+                            </div>
+                            <div class="stat-item">
+                                <span>Notifikasi</span>
+                                <span id="notificationCount">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Materials Section -->
+            <section id="materials" class="page-section hidden">
+                <div class="section-header">
+                    <h2>📚 Materi Edukasi Keamanan Siber</h2>
+                    <input type="text" id="searchMaterial" placeholder="Cari materi..." class="search-input">
+                </div>
+
+                <div class="materials-container" id="materialsContainer">
+                    <p>Memuat materi...</p>
+                </div>
+            </section>
+
+            <!-- Material Detail Section -->
+            <section id="material-detail" class="page-section hidden">
+                <button class="btn-back" onclick="navigateTo('materials')">← Kembali ke Materi</button>
+                <div class="material-content" id="materialContent">
+                    <h2 id="materialTitle"></h2>
+                    <div id="materialBody"></div>
+                    <div class="material-footer">
+                        <button class="btn btn-primary" id="startQuizBtn" onclick="startQuiz()">Mulai Kuis</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quizzes Section -->
+            <section id="quiz" class="page-section hidden">
+                <div class="quiz-container">
+                    <div class="quiz-header">
+                        <h2 id="quizTitle"></h2>
+                        <div class="quiz-timer" id="quizTimer"></div>
+                    </div>
+
+                    <div class="quiz-content" id="quizContent">
+                        <!-- Questions will be loaded here -->
+                    </div>
+
+                    <div class="quiz-footer">
+                        <button class="btn btn-secondary" onclick="navigateTo('materials')">Batal</button>
+                        <button class="btn btn-primary" onclick="submitQuiz()">Selesai</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quiz Results Section -->
+            <section id="quiz-results" class="page-section hidden">
+                <div class="results-container">
+                    <h2>📊 Hasil Kuis</h2>
+                    <div class="result-score" id="resultScore"></div>
+                    <div class="result-details" id="resultDetails"></div>
+                    <button class="btn btn-primary" onclick="navigateTo('materials')">Kembali ke Materi</button>
+                </div>
+            </section>
+
+            <!-- Tips Section -->
+            <section id="tips" class="page-section hidden">
+                <div class="section-header">
+                    <h2>💡 Tips Keamanan Harian</h2>
+                    <select id="tipsCategory" class="filter-select" onchange="filterTips()">
+                        <option value="">Semua Kategori</option>
+                        <option value="Keamanan Password">Keamanan Password</option>
+                        <option value="Phishing">Phishing</option>
+                        <option value="Transaksi">Transaksi</option>
+                    </select>
+                </div>
+
+                <div class="tips-container" id="tipsContainer">
+                    <p>Memuat tips...</p>
+                </div>
+            </section>
+
+            <!-- Simulasi Ancaman Section -->
+            <section id="simulasi" class="page-section hidden">
+                <div class="section-header">
+                    <h2>🎯 Simulasi Ancaman Keamanan</h2>
+                </div>
+
+                <div class="simulasi-container" id="simulasiContainer">
+                    <p>Memuat simulasi...</p>
+                </div>
+            </section>
+
+            <!-- Progress Section -->
+            <section id="progress" class="page-section hidden">
+                <div class="section-header">
+                    <h2>📊 Perkembangan Belajar</h2>
+                </div>
+
+                <div class="progress-detailed" id="progressDetailed">
+                    <p>Memuat progres...</p>
+                </div>
+            </section>
+
+            <!-- Notifications Section -->
+            <section id="notifications" class="page-section hidden">
+                <div class="section-header">
+                    <h2>🔔 Notifikasi</h2>
+                </div>
+
+                <div class="notifications-list" id="notificationsList">
+                    <p>Tidak ada notifikasi</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 CyberCare. Platform Edukasi Keamanan Siber untuk UMKM</p>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+</body>
+</html>

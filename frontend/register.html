@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar - CyberCare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Background */
+        .bg-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 50%;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .particle:nth-child(1) { width: 80px; height: 80px; top: 10%; left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { width: 120px; height: 120px; top: 70%; left: 80%; animation-delay: 4s; }
+        .particle:nth-child(3) { width: 60px; height: 60px; top: 40%; left: 85%; animation-delay: 8s; }
+        .particle:nth-child(4) { width: 100px; height: 100px; top: 80%; left: 15%; animation-delay: 12s; }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+            25% { transform: translate(30px, -30px) scale(1.1); opacity: 0.5; }
+            50% { transform: translate(-20px, 20px) scale(0.9); opacity: 0.4; }
+            75% { transform: translate(20px, 30px) scale(1.05); opacity: 0.6; }
+        }
+
+        .auth-container {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 520px;
+            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .auth-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 48px 40px;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .auth-card:hover {
+            box-shadow: 
+                0 30px 80px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.2);
+        }
+
+        .auth-logo {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .auth-logo-icon {
+            font-size: 56px;
+            display: inline-block;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .auth-logo h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin: 12px 0 6px;
+            letter-spacing: -0.5px;
+        }
+
+        .auth-logo p {
+            color: #64748b;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .auth-header h2 {
+            font-size: 26px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .auth-header p {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 8px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
+            opacity: 0.6;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 13px 14px 13px 44px;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            color: #0f172a;
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            outline: none;
+        }
+
+        .form-input:focus {
+            background: #ffffff;
+            border-color: #1e40af;
+            box-shadow: 0 0 0 4px rgba(30, 64, 175, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .form-input:focus ~ .input-icon {
+            opacity: 1;
+            color: #1e40af;
+        }
+
+        .form-input.error {
+            border-color: #ef4444;
+            background: #fef2f2;
+        }
+
+        .form-input.success {
+            border-color: #10b981;
+            background: #f0fdf4;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+            padding: 4px;
+        }
+
+        .password-toggle:hover {
+            opacity: 1;
+        }
+
+        /* Password Strength Meter */
+        .password-strength {
+            margin-top: 8px;
+            display: none;
+        }
+
+        .password-strength.show {
+            display: block;
+        }
+
+        .strength-bars {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 6px;
+        }
+
+        .strength-bar {
+            flex: 1;
+            height: 4px;
+            background: #e2e8f0;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .strength-bar.active {
+            background: #ef4444;
+        }
+
+        .strength-bar.active.medium {
+            background: #f59e0b;
+        }
+
+        .strength-bar.active.strong {
+            background: #10b981;
+        }
+
+        .strength-text {
+            font-size: 12px;
+            font-weight: 500;
+            color: #64748b;
+        }
+
+        .strength-text.weak { color: #ef4444; }
+        .strength-text.medium { color: #f59e0b; }
+        .strength-text.strong { color: #10b981; }
+
+        /* Validation Messages */
+        .validation-message {
+            font-size: 12px;
+            margin-top: 6px;
+            display: none;
+        }
+
+        .validation-message.show {
+            display: block;
+        }
+
+        .validation-message.error {
+            color: #ef4444;
+        }
+
+        .validation-message.success {
+            color: #10b981;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin: 24px 0;
+        }
+
+        .custom-checkbox {
+            position: relative;
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .custom-checkbox input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 20px;
+            height: 20px;
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .custom-checkbox input:checked ~ .checkmark {
+            background: #1e40af;
+            border-color: #1e40af;
+        }
+
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+            left: 6px;
+            top: 2px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        .custom-checkbox input:checked ~ .checkmark:after {
+            display: block;
+        }
+
+        .checkbox-label {
+            font-size: 13px;
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+        .checkbox-label a {
+            color: #1e40af;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .checkbox-label a:hover {
+            text-decoration: underline;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            font-size: 15px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 8px 24px rgba(30, 64, 175, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn-primary:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-text {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 28px 0;
+        }
+
+        .divider-line {
+            flex: 1;
+            height: 1px;
+            background: #e2e8f0;
+        }
+
+        .divider-text {
+            font-size: 13px;
+            color: #94a3b8;
+            font-weight: 500;
+        }
+
+        .social-login {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .btn-social {
+            padding: 11px;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #334155;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-social:hover {
+            border-color: #cbd5e1;
+            background: #f8fafc;
+            transform: translateY(-2px);
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 28px;
+            padding-top: 24px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .auth-footer p {
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        .auth-footer a {
+            color: #1e40af;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .auth-footer a:hover {
+            color: #1e3a8a;
+            text-decoration: underline;
+        }
+
+        .message {
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-size: 13px;
+            margin-bottom: 20px;
+            display: none;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.error {
+            background: #fef2f2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+
+        .message.success {
+            background: #f0fdf4;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+
+        .message.show {
+            display: block;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 20px;
+            }
+
+            .auth-card {
+                padding: 32px 24px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .social-login {
+                grid-template-columns: 1fr;
+            }
+
+            .auth-logo-icon {
+                font-size: 48px;
+            }
+
+            .auth-header h2 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-logo">
+                <div class="auth-logo-icon">🛡️</div>
+                <h1>CyberCare</h1>
+                <p>Edukasi Keamanan Siber untuk UMKM</p>
+            </div>
+
+            <div class="auth-header">
+                <h2>Buat Akun Baru</h2>
+                <p>Mulai perjalanan belajar keamanan siber Anda</p>
+            </div>
+
+            <div id="message" class="message"></div>
+
+            <form id="registerForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Nama Lengkap</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon">👤</span>
+                            <input 
+                                type="text" 
+                                id="name" 
+                                name="name"
+                                class="form-input" 
+                                placeholder="Nama Anda"
+                                required
+                                autocomplete="name"
+                            >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Nama Bisnis</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon">🏪</span>
+                            <input 
+                                type="text" 
+                                id="businessName" 
+                                name="businessName"
+                                class="form-input" 
+                                placeholder="Nama UMKM"
+                                required
+                            >
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">📧</span>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email"
+                            class="form-input" 
+                            placeholder="nama@email.com"
+                            required
+                            autocomplete="email"
+                        >
+                    </div>
+                    <div id="emailValidation" class="validation-message"></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">🔒</span>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password"
+                            class="form-input" 
+                            placeholder="Minimal 8 karakter"
+                            required
+                            autocomplete="new-password"
+                            minlength="8"
+                        >
+                        <button type="button" class="password-toggle" onclick="togglePassword('password')">👁️</button>
+                    </div>
+                    <div id="passwordStrength" class="password-strength">
+                        <div class="strength-bars">
+                            <div class="strength-bar"></div>
+                            <div class="strength-bar"></div>
+                            <div class="strength-bar"></div>
+                            <div class="strength-bar"></div>
+                        </div>
+                        <div class="strength-text"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Konfirmasi Password</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">🔐</span>
+                        <input 
+                            type="password" 
+                            id="confirmPassword" 
+                            name="confirmPassword"
+                            class="form-input" 
+                            placeholder="Ulangi password"
+                            required
+                            autocomplete="new-password"
+                        >
+                        <button type="button" class="password-toggle" onclick="togglePassword('confirmPassword')">👁️</button>
+                    </div>
+                    <div id="confirmValidation" class="validation-message"></div>
+                </div>
+
+                <div class="checkbox-group">
+                    <label class="custom-checkbox">
+                        <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+                        <span class="checkmark"></span>
+                    </label>
+                    <label for="agreeTerms" class="checkbox-label">
+                        Saya setuju dengan <a href="#" onclick="alert('Syarat & Ketentuan akan segera tersedia'); return false;">Syarat & Ketentuan</a> dan <a href="#" onclick="alert('Kebijakan Privasi akan segera tersedia'); return false;">Kebijakan Privasi</a>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary" id="submitBtn">
+                    <span class="btn-text">Daftar Sekarang</span>
+                </button>
+            </form>
+
+            <div class="divider">
+                <div class="divider-line"></div>
+                <span class="divider-text">Atau daftar dengan</span>
+                <div class="divider-line"></div>
+            </div>
+
+            <div class="social-login">
+                <button type="button" class="btn-social" onclick="alert('Daftar Google akan segera tersedia!')">
+                    <span>🔍</span> Google
+                </button>
+                <button type="button" class="btn-social" onclick="alert('Daftar Facebook akan segera tersedia!')">
+                    <span>📘</span> Facebook
+                </button>
+            </div>
+
+            <div class="auth-footer">
+                <p>Sudah punya akun? <a href="login.html">Masuk di sini</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        function togglePassword(fieldId) {
+            const input = document.getElementById(fieldId);
+            const btn = input.nextElementSibling;
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                btn.textContent = '🙈';
+            } else {
+                input.type = 'password';
+                btn.textContent = '👁️';
+            }
+        }
+
+        // Password strength checker
+        document.getElementById('password').addEventListener('input', function() {
+            const password = this.value;
+            const strengthDiv = document.getElementById('passwordStrength');
+            const bars = strengthDiv.querySelectorAll('.strength-bar');
+            const text = strengthDiv.querySelector('.strength-text');
+            
+            if (password.length === 0) {
+                strengthDiv.classList.remove('show');
+                return;
+            }
+            
+            strengthDiv.classList.add('show');
+            
+            let strength = 0;
+            if (password.length >= 8) strength++;
+            if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strength++;
+            if (password.match(/\d/)) strength++;
+            if (password.match(/[^a-zA-Z\d]/)) strength++;
+            
+            bars.forEach((bar, index) => {
+                bar.classList.remove('active', 'medium', 'strong');
+                if (index < strength) {
+                    bar.classList.add('active');
+                    if (strength >= 3) bar.classList.add('medium');
+                    if (strength === 4) bar.classList.add('strong');
+                }
+            });
+            
+            if (strength <= 1) {
+                text.textContent = 'Lemah';
+                text.className = 'strength-text weak';
+            } else if (strength <= 2) {
+                text.textContent = 'Sedang';
+                text.className = 'strength-text medium';
+            } else {
+                text.textContent = 'Kuat';
+                text.className = 'strength-text strong';
+            }
+        });
+
+        // Confirm password validation
+        document.getElementById('confirmPassword').addEventListener('input', function() {
+            const password = document.getElementById('password').value;
+            const confirm = this.value;
+            const validation = document.getElementById('confirmValidation');
+            
+            if (confirm.length === 0) {
+                validation.classList.remove('show');
+                this.classList.remove('error', 'success');
+                return;
+            }
+            
+            validation.classList.add('show');
+            
+            if (password === confirm) {
+                validation.textContent = '✓ Password cocok';
+                validation.className = 'validation-message success show';
+                this.classList.remove('error');
+                this.classList.add('success');
+            } else {
+                validation.textContent = '✗ Password tidak cocok';
+                validation.className = 'validation-message error show';
+                this.classList.remove('success');
+                this.classList.add('error');
+            }
+        });
+
+        // Form submission
+        document.getElementById('registerForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = submitBtn.querySelector('.btn-text');
+            
+            const formData = {
+                name: document.getElementById('name').value,
+                businessName: document.getElementById('businessName').value,
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value,
+                confirmPassword: document.getElementById('confirmPassword').value
+            };
+            
+            // Validate
+            if (formData.password !== formData.confirmPassword) {
+                showMessage('error', '✗ Password tidak cocok!');
+                return;
+            }
+            
+            if (formData.password.length < 8) {
+                showMessage('error', '✗ Password minimal 8 karakter!');
+                return;
+            }
+            
+            if (!document.getElementById('agreeTerms').checked) {
+                showMessage('error', '✗ Anda harus menyetujui syarat & ketentuan!');
+                return;
+            }
+            
+            // Disable button and show loading
+            submitBtn.disabled = true;
+            btnText.innerHTML = '<span class="spinner"></span> Mendaftarkan...';
+            
+            // Attempt registration
+            const result = await handleRegister(formData);
+            
+            if (result.success) {
+                showMessage('success', '✓ Pendaftaran berhasil! Mengalihkan...');
+                
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 1500);
+            } else {
+                showMessage('error', '✗ ' + result.message);
+                submitBtn.disabled = false;
+                btnText.textContent = 'Daftar Sekarang';
+            }
+        });
+
+        function showMessage(type, text) {
+            const messageEl = document.getElementById('message');
+            messageEl.className = `message ${type} show`;
+            messageEl.textContent = text;
+        }
+
+        // Check if already logged in
+        (async function() {
+            if (await checkSession()) {
+                window.location.href = 'dashboard.html';
+            }
+        })();
+    </script>
+</body>
+</html>

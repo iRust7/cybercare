@@ -1,0 +1,142 @@
+[
+  {
+    "id": 1,
+    "icon": "🔐",
+    "title": "Gunakan Password Unik untuk Setiap Akun",
+    "description": "Jangan gunakan password yang sama di berbagai platform. Jika satu akun diretas, akun lainnya tetap aman.",
+    "category": "Password"
+  },
+  {
+    "id": 2,
+    "icon": "🔄",
+    "title": "Aktifkan Verifikasi Dua Faktor (2FA)",
+    "description": "Tambahkan lapisan keamanan ekstra dengan mengaktifkan 2FA di semua akun bisnis penting Anda.",
+    "category": "Autentikasi"
+  },
+  {
+    "id": 3,
+    "icon": "🔗",
+    "title": "Hati-hati Mengklik Link Mencurigakan",
+    "description": "Arahkan kursor ke link sebelum diklik untuk melihat URL sebenarnya. Jangan klik link dari sumber yang tidak dikenal.",
+    "category": "Phishing"
+  },
+  {
+    "id": 4,
+    "icon": "📱",
+    "title": "Selalu Update Perangkat dan Aplikasi",
+    "description": "Update software berisi patch keamanan penting. Aktifkan auto-update untuk perlindungan optimal.",
+    "category": "Perangkat"
+  },
+  {
+    "id": 5,
+    "icon": "📧",
+    "title": "Waspadai Email dan Pesan Mencurigakan",
+    "description": "Bank atau marketplace tidak akan pernah meminta password atau OTP melalui email atau pesan.",
+    "category": "Phishing"
+  },
+  {
+    "id": 6,
+    "icon": "💾",
+    "title": "Backup Data Secara Berkala",
+    "description": "Lakukan backup data penting minimal seminggu sekali ke cloud storage atau hard disk eksternal.",
+    "category": "Data"
+  },
+  {
+    "id": 7,
+    "icon": "🔒",
+    "title": "Gunakan HTTPS untuk Transaksi",
+    "description": "Pastikan website memiliki ikon gembok (HTTPS) sebelum melakukan transaksi atau memasukkan data sensitif.",
+    "category": "Transaksi"
+  },
+  {
+    "id": 8,
+    "icon": "📵",
+    "title": "Hindari Wi-Fi Publik untuk Transaksi Sensitif",
+    "description": "Wi-Fi publik tidak aman dan dapat disadap. Gunakan VPN jika harus mengaksesnya.",
+    "category": "Jaringan"
+  },
+  {
+    "id": 9,
+    "icon": "🔑",
+    "title": "Jangan Bagikan OTP atau PIN",
+    "description": "OTP dan PIN bersifat rahasia. Pihak bank atau marketplace tidak akan pernah memintanya.",
+    "category": "Transaksi"
+  },
+  {
+    "id": 10,
+    "icon": "🛡️",
+    "title": "Install Antivirus Terpercaya",
+    "description": "Gunakan antivirus berbayar atau gratis yang terpercaya dan lakukan scan rutin.",
+    "category": "Perangkat"
+  },
+  {
+    "id": 11,
+    "icon": "📲",
+    "title": "Aktifkan Kunci Layar di Semua Perangkat",
+    "description": "Gunakan PIN, pola, atau biometrik untuk mengamankan smartphone dan laptop bisnis Anda.",
+    "category": "Perangkat"
+  },
+  {
+    "id": 12,
+    "icon": "👥",
+    "title": "Batasi Akses Karyawan ke Data Sensitif",
+    "description": "Berikan akses data hanya kepada karyawan yang benar-benar membutuhkan.",
+    "category": "Data"
+  },
+  {
+    "id": 13,
+    "icon": "🔍",
+    "title": "Cek Mutasi Rekening Secara Rutin",
+    "description": "Periksa mutasi rekening bisnis setiap hari untuk mendeteksi transaksi yang mencurigakan.",
+    "category": "Transaksi"
+  },
+  {
+    "id": 14,
+    "icon": "🚫",
+    "title": "Jangan Download dari Sumber Tidak Resmi",
+    "description": "Download aplikasi hanya dari Play Store, App Store, atau website resmi pengembang.",
+    "category": "Perangkat"
+  },
+  {
+    "id": 15,
+    "icon": "📝",
+    "title": "Buat Kebijakan Privasi yang Jelas",
+    "description": "Informasikan kepada pelanggan bagaimana data mereka dikumpulkan dan digunakan.",
+    "category": "Data"
+  },
+  {
+    "id": 16,
+    "icon": "⚠️",
+    "title": "Laporkan Aktivitas Mencurigakan",
+    "description": "Jika ada email phishing atau transaksi mencurigakan, segera laporkan ke pihak terkait.",
+    "category": "Phishing"
+  },
+  {
+    "id": 17,
+    "icon": "🔐",
+    "title": "Enkripsi Data Sensitif",
+    "description": "Gunakan enkripsi untuk melindungi data pelanggan dan data bisnis yang sensitif.",
+    "category": "Data"
+  },
+  {
+    "id": 18,
+    "icon": "🔄",
+    "title": "Ganti Password Secara Berkala",
+    "description": "Ubah password akun penting setiap 3-6 bulan untuk mengurangi risiko peretasan.",
+    "category": "Password"
+  },
+  {
+    "id": 19,
+    "icon": "📞",
+    "title": "Verifikasi Identitas Pelanggan",
+    "description": "Untuk transaksi besar, verifikasi identitas pelanggan melalui telepon atau video call.",
+    "category": "Transaksi"
+  },
+  {
+    "id": 20,
+    "icon": "🎓",
+    "title": "Edukasi Karyawan tentang Keamanan Siber",
+    "description": "Latih karyawan untuk mengenali ancaman siber dan menerapkan praktik keamanan yang baik.",
+    "category": "Edukasi"
+  }
+]
