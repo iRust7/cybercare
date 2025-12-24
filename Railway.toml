@@ -1,0 +1,7 @@
+[build]
+# Railway will use this command to build your Go backend
+command = "cd backend && go build -o app ."
+
+[start]
+# Railway will use this command to start your Go backend
+command = "cd backend && ./app"
